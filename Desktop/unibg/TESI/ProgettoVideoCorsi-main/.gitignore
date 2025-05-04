@@ -1,0 +1,46 @@
+# IDE specific files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+
+# Build files
+target/
+build/
+out/
+bin/
+*.class
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+logs/
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Eclipse
+.metadata/
+tmp/
+temp/
+
+# Database
+*.db
+*.sqlite
+
+# Application specific
+src/main/webapp/assets/
+src/main/webapp/WEB-INF/lib/

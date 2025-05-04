@@ -1,0 +1,170 @@
+PROGETTO VIDEO CORSI - STRUTTURA E MODIFICHE
+===========================================
+
+Ultimo aggiornamento: [Data corrente]
+
+1. STRUTTURA DEL PROGETTO
+------------------------
+
+1.1 Directory Principali
+-----------------------
+/ (root)
+├── src/                    # Codice sorgente principale
+│   ├── main/
+│   │   ├── java/          # Codice Java
+│   │   │   ├── beans/     # JavaBeans
+│   │   │   ├── controller/# Controller MVC
+│   │   │   ├── dao/       # Data Access Objects
+│   │   │   ├── immutablebeans/ # Bean immutabili
+│   │   │   └── utils/     # Utility classes
+│   │   └── webapp/        # File web
+│   │       ├── assets/    # Risorse statiche
+│   │       └── WEB-INF/   # Configurazione web
+│   │           ├── jsp/   # File JSP
+│   │           ├── lib/   # Librerie
+│   │           └── web.xml# Configurazione web
+│   └── test/              # Test
+│       └── java/          # Test unitari
+├── Database/              # Script e configurazioni DB
+├── Documentazione/        # Documentazione progetto
+├── UML_diagrams/         # Diagrammi UML
+└── frontend/             # File frontend
+
+1.2 File di Configurazione
+-------------------------
+├── pom.xml               # Configurazione Maven
+├── .mvn/                 # Configurazione Maven wrapper
+├── mvnw                  # Maven wrapper (Unix)
+├── mvnw.cmd             # Maven wrapper (Windows)
+├── .classpath           # Configurazione Eclipse
+├── .project             # Configurazione Eclipse
+└── .gitignore           # Configurazione Git
+
+2. MODIFICHE EFFETTUATE
+----------------------
+
+2.1 Pulizia Struttura
+--------------------
+- Rimosso la directory `ing_sw/` che conteneva:
+  * Una directory `src/` vuota
+  * Una directory `WebContent/` con solo il driver PostgreSQL
+  * File di configurazione Eclipse ridondanti
+  * Una directory `build/` non necessaria
+
+2.2 Miglioramenti Strutturali
+---------------------------
+- Spostato il driver PostgreSQL nella posizione corretta:
+  * Da: `ing_sw/WebContent/WEB-INF/lib/postgresql-42.7.1.jar`
+  * A: `src/main/webapp/WEB-INF/lib/postgresql-42.7.1.jar`
+
+2.3 Organizzazione Codice
+------------------------
+- Implementata struttura Maven standard
+- Separati chiaramente:
+  * Codice sorgente (`src/main/java/`)
+  * File web (`src/main/webapp/`)
+  * Test (`src/test/java/`)
+  * Documentazione (`Documentazione/`)
+  * Diagrammi (`UML_diagrams/`)
+
+3. STRUTTURA DETTAGLIATA DEI COMPONENTI
+-------------------------------------
+
+3.1 Java Beans
+-------------
+- `beans/User.java`: Implementazione mutabile dell'utente
+- `immutablebeans/ImmutableUser.java`: Implementazione immutabile dell'utente
+- Validazione dei parametri
+- Gestione corretta dei valori null
+- Documentazione JavaDoc completa
+
+3.2 Controller
+-------------
+- Implementazione del pattern MVC
+- Gestione delle richieste HTTP
+- Validazione degli input
+- Gestione degli errori
+
+3.3 DAO
+-------
+- Pattern Data Access Object
+- Gestione connessioni al database
+- Transazioni atomiche
+- Gestione errori SQL
+
+3.4 Utils
+---------
+- Gestione connessioni
+- Logging
+- Gestione transazioni
+- Utility varie
+
+3.5 Web
+-------
+- File JSP organizzati
+- Assets statici
+- Configurazione web.xml
+- Librerie esterne
+
+4. BEST PRACTICES IMPLEMENTATE
+----------------------------
+
+4.1 Gestione Codice
+------------------
+- Documentazione JavaDoc completa
+- Validazione dei parametri
+- Gestione corretta delle eccezioni
+- Pattern immutabile dove appropriato
+
+4.2 Sicurezza
+------------
+- Validazione input
+- Gestione sicura delle password
+- Protezione contro SQL injection
+- Gestione sicura delle sessioni
+
+4.3 Performance
+--------------
+- Connection pooling
+- Gestione efficiente delle risorse
+- Cache dove appropriato
+- Query ottimizzate
+
+5. NOTE PER GLI SVILUPPATORI
+---------------------------
+
+5.1 Struttura Nuova
+------------------
+- Seguire la struttura Maven standard
+- Mantenere la separazione dei componenti
+- Utilizzare i package corretti
+- Seguire le convenzioni di naming
+
+5.2 Documentazione
+----------------
+- Mantenere aggiornata la documentazione JavaDoc
+- Documentare le modifiche significative
+- Aggiornare questo file per modifiche strutturali
+
+5.3 Test
+--------
+- Scrivere test unitari per nuovo codice
+- Mantenere la copertura dei test
+- Eseguire test prima del commit
+
+6. PROSSIMI PASSI
+----------------
+
+6.1 Miglioramenti Pianificati
+---------------------------
+- Implementazione pattern Builder
+- Validazione formato skillscard
+- Aggiunta test per casi limite
+- Sistema di logging per modifiche utenti
+
+6.2 Manutenzione
+---------------
+- Monitorare performance
+- Aggiornare dipendenze
+- Revisione periodica del codice
+- Aggiornamento documentazione 
