@@ -45,49 +45,65 @@ public class CheckQuiz extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
+		// Verifica se l'utente è loggato
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
-		QuizDAO quizDao = new QuizDAO(connection);
-		List<ImmutableQuiz> reply = new ArrayList<ImmutableQuiz>();
-		// get the list of quiz desired
-		try {
-
-			reply = quizDao.quiz_by_chapter_and_course(Integer.parseInt(request.getParameter("CourseId")),
-					Integer.parseInt(request.getParameter("ChapterId")));
-			if (reply == null) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
-				return;
-			}
-		} catch (NumberFormatException | NullPointerException | SQLException e) {
-			// only for debugging e.printStackTrace();
-
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "db error");
+		if (user == null) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User not logged in");
 			return;
 		}
-		// check the number of right results
-		int right = 0;
-		for (ImmutableQuiz quiz : reply) {
-			if (quiz.getRisposta() == Integer.parseInt(request.getParameter(quiz.getIds()))) {
-				right++;
-			}
-		}
-		// check if has passed the test
-		if (((float) right / reply.size()) >= 0.75) {
-			try {
-				quizDao.setpassed(user.getId(), Integer.parseInt(request.getParameter("CourseId")),
-						Integer.parseInt(request.getParameter("ChapterId")));
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-		}
-		request.setAttribute("right", right);
-		request.getRequestDispatcher("WEB-INF/risultato.jsp").forward(request, response);
 
+		// Verifica i parametri richiesti
+		String courseIdStr = request.getParameter("CourseId");
+		String chapterIdStr = request.getParameter("ChapterId");
+		if (courseIdStr == null || chapterIdStr == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing required parameters");
+			return;
+		}
+
+		try {
+			int courseId = Integer.parseInt(courseIdStr);
+			int chapterId = Integer.parseInt(chapterIdStr);
+			
+			QuizDAO quizDao = new QuizDAO(connection);
+			List<ImmutableQuiz> questions = quizDao.quiz_by_chapter_and_course(courseId, chapterId);
+			
+			if (questions == null || questions.isEmpty()) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "No quiz found for this chapter");
+				return;
+			}
+
+			// Controlla le risposte
+			int right = 0;
+			for (ImmutableQuiz quiz : questions) {
+				String answer = request.getParameter(quiz.getIds());
+				if (answer != null && Integer.parseInt(answer) == quiz.getRisposta()) {
+					right++;
+				}
+			}
+
+			// Verifica se ha superato il test (75% o più di risposte corrette)
+			if (((float) right / questions.size()) >= 0.75) {
+				quizDao.setpassed(user.getId(), courseId, chapterId);
+			}
+
+			request.setAttribute("right", right);
+			request.setAttribute("total", questions.size());
+			request.getRequestDispatcher("/WEB-INF/jsp/risultato.jsp").forward(request, response);
+
+		} catch (NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid course or chapter ID");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+		}
 	}
 
 	public void destroy() {
 		try {
-			ConnectionHandler.closeConnection(connection);
+			if (connection != null && !connection.isClosed()) {
+				ConnectionHandler.closeConnection(connection);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

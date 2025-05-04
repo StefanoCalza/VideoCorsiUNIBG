@@ -52,11 +52,11 @@ public class ChapterController extends HttpServlet {
 
         try {
             if (courseId == null) {
-                // Caso 1: Recupero corsi seguiti dall'utente
+                // Caso 1: Recupero corsi seguiti e non seguiti dall'utente
                 handleUserCourses(request, response, user);
             } else {
                 // Caso 2: Recupero capitoli di un corso specifico
-                handleCourseChapters(request, response, courseId);
+                handleCourseChapters(request, response, courseId, user);
             }
         } catch (Exception e) {
             Logger.logError("Errore nel ChapterController", e);
@@ -73,19 +73,15 @@ public class ChapterController extends HttpServlet {
     private void handleUserCourses(HttpServletRequest request, HttpServletResponse response,
             ImmutableUser user) 
             throws ServletException, IOException, SQLException {
-        List<ImmutableCourse> courses = new ArrayList<>();
+        List<ImmutableCourse> subscribedCourses = new ArrayList<>();
+        List<ImmutableCourse> notSubscribedCourses = new ArrayList<>();
         
         try {
             TransactionManager.beginTransaction(connection);
             
             Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
-            courses = chapterDao.getCoursesByUserId(user.getId());
-            
-            if (courses == null) {
-                TransactionManager.rollbackTransaction(connection);
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "No courses found");
-                return;
-            }
+            subscribedCourses = chapterDao.getCoursesByUserId(user.getId());
+            notSubscribedCourses = chapterDao.getCoursesNotSubscribedByUserId(user.getId());
             
             TransactionManager.commitTransaction(connection);
         } catch (SQLException e) {
@@ -93,12 +89,13 @@ public class ChapterController extends HttpServlet {
             throw e;
         }
         
-        request.setAttribute("chapter", courses);
+        request.setAttribute("chapter", subscribedCourses);
+        request.setAttribute("coursesnotin", notSubscribedCourses);
         request.getRequestDispatcher("/WEB-INF/jsp/courses.jsp").forward(request, response);
     }
 
     private void handleCourseChapters(HttpServletRequest request, HttpServletResponse response,
-            String courseId) 
+            String courseId, ImmutableUser user) 
             throws ServletException, IOException, SQLException {
         List<ImmutableChapter> chapters = new ArrayList<>();
         ImmutableCourse course;
@@ -108,8 +105,15 @@ public class ChapterController extends HttpServlet {
             
             Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
             int courseIdInt = Integer.parseInt(courseId);
-            chapters = chapterDao.getChaptersByCourseId(courseIdInt);
             
+            // Verifica se lo studente è iscritto al corso
+            if (!chapterDao.isUserSubscribed(user.getId(), courseIdInt)) {
+                TransactionManager.rollbackTransaction(connection);
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "User not subscribed to this course");
+                return;
+            }
+            
+            chapters = chapterDao.getChaptersByCourseId(courseIdInt);
             if (chapters == null) {
                 TransactionManager.rollbackTransaction(connection);
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "No chapters found");
@@ -135,7 +139,7 @@ public class ChapterController extends HttpServlet {
         
         request.setAttribute("namec", course.getName());
         request.setAttribute("chapter", chapters);
-        request.getRequestDispatcher("/WEB-INF/jsp/chapters.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/test4.jsp").forward(request, response);
     }
 
     public void destroy() {

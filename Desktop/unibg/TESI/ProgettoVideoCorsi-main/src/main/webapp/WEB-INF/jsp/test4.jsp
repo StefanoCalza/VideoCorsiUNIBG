@@ -28,55 +28,42 @@
         </div>
     </nav>
 
-
 <section class="clean-block clean-info dark" style="padding: 70px;">
-
-		${charapter}
-		<ul>
-		
-		<div class="block-heading">
-                <h2>${namec}</h2>
-                
-            </div>
-		
-	    <c:forEach items="${chapter}" var="chara">
-        <div class="container">
-            
-            <div class="row align-items-center">  
-                <div class="col-md-6"><img src="${pageContext.request.contextPath}/assets/img/ECDL_logo.png" style="width: 200px;transform: translate(160px);"></div>
-                    <div class="col-md-6">
-                    <h3>${chara.name}</h3>
-                    <div class="getting-started-info">
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>${chara.description}</strong></p>
-                        
-			<form method="post" action="gotovideo" enctype="multipart/form-data">
-				 <input type="hidden" name="CourseId" value="${chara.idCourse}">
-				  <input type="hidden" name="ChapterId" value="${chara.idChapter}">
-				   <input type="hidden" name="coursename" value="${namec}">
-				  <input type="hidden" name="video" value="${chara.video}">
-				    <input type="hidden" name="charaname" value="${chara.name}">
-				  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg"> VAI AL VIDEO </button>
-				</form>
+    <div class="container">
+        <div class="block-heading">
+            <h2>${namec}</h2>
+        </div>
+        <div class="row">
+            <c:forEach items="${chapter}" var="chara">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">${chara.name}</h3>
+                            <p class="card-text"><strong>${chara.description}</strong></p>
+                            <form method="post" action="gotovideo" enctype="multipart/form-data">
+                                <input type="hidden" name="CourseId" value="${chara.idCourse}">
+                                <input type="hidden" name="ChapterId" value="${chara.idChapter}">
+                                <input type="hidden" name="coursename" value="${namec}">
+                                <input type="hidden" name="video" value="${chara.video}">
+                                <input type="hidden" name="charaname" value="${chara.name}">
+                                <button type="submit" value="Submit" class="btn btn-outline-primary">VAI AL VIDEO</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br><br>
             </c:forEach>
-    </section>
-
-<br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+</section>
 
 <footer class="page-footer dark">
-        <div class="footer-copyright">
-            <p>� 2023 Copyright Text</p>
-        </div>
-    </footer>
-    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
-    
-	
-
+    <div class="footer-copyright">
+        <p>© 2023 Copyright Text</p>
+    </div>
+</footer>
+<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 </body>
 </html>

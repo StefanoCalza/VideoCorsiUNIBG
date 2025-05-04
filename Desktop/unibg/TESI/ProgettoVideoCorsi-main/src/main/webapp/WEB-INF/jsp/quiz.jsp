@@ -16,80 +16,93 @@
 <body>
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo">VideoCorsiUNIBG</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-           <%--      	<li > <form action="GetCourse" method="post"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-               		<li > <form action="goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li > <form action="goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li> <a href="index.html"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
-            --%>     </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                        <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                        <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/index.html">
+                        <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
-     
-    <br><br>
-    
-    
-    <section class="clean-block clean-info dark" style="padding: 70px;">
-        
-        <div class="container mt-5">
-        <div class="d-flex justify-content-center row">
-            <div class="col-md-10 col-lg-10">
-                <div class="border">
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                            <h4>Quiz</h4></div>
+    </div>
+</nav>
+
+<section class="clean-block clean-info dark" style="padding: 70px;">
+    <div class="container">
+        <div class="block-heading">
+            <h2>Quiz</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form action="${pageContext.request.contextPath}/CheckQuiz" method="get">
+                            <c:forEach items="${quiz}" var="q" varStatus="status">
+                                <div class="mb-4 p-3 bg-light rounded">
+                                    <h5 class="card-title mb-3">${q.question}</h5>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="${q.ids}" value="1" required="required" id="opt1_${status.index}">
+                                        <label class="form-check-label" for="opt1_${status.index}">${q.first}</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="${q.ids}" value="2" required="required" id="opt2_${status.index}">
+                                        <label class="form-check-label" for="opt2_${status.index}">${q.second}</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="${q.ids}" value="3" required="required" id="opt3_${status.index}">
+                                        <label class="form-check-label" for="opt3_${status.index}">${q.third}</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="${q.ids}" value="4" required="required" id="opt4_${status.index}">
+                                        <label class="form-check-label" for="opt4_${status.index}">${q.fourth}</label>
+                                    </div>
+                                    <input type="hidden" name="CourseId" value="${q.idcourse}">
+                                    <input type="hidden" name="ChapterId" value="${q.idchapter}">
+                                </div>
+                            </c:forEach>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-outline-primary btn-lg">Invia Risposte</button>
+                            </div>
+                        </form>
                     </div>
-                    
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                        </div><div class="ans ml-2">
-<label>
-<form action="CheckQuiz">
-  <fieldset>
-  <c:forEach items="${quiz}" var="q">
-    <div>
-     <legend>${q.question }</legend>
-      <input type="radio"  name="${q.ids }" value="1" required="required" /> <label for="contactChoice1"> ${q.first} </label> <br>
-
-      <input type="radio"  name="${q.ids }" value="2" required="required"/> <label for="contactChoice2">${q.second} </label> <br>
-
-      <input type="radio"  name="${q.ids }" value="3" required="required"/> <label for="contactChoice3"> ${q.third} </label> <br>
-      
-       <input type="radio" id="contactChoice4" name="${q.ids }" value="4" required="required"/> <label for="contactChoice3"> ${q.fourth}  </label>
-      
-      <input type="hidden" name="CourseId" value="${q.idcourse}"><br><br>
-  <input type="hidden" name="ChapterId" value="${q.idchapter}"><br><br>
-    </c:forEach>
-    </div>
-    <div>
-     
-      <button type="submit" class="btn btn-outline-primary btn-lg">Submit</button>
-    </div>
-  </fieldset>
-</form>
-</label>    
-</div></div>
+                </div>
             </div>
         </div>
     </div>
-                                  
-    </section>
-	
-	</ul>
-	
-<br><br><br>
+</section>
 
 <footer class="page-footer dark">
-        <div class="footer-copyright">
-            <p>� 2023 Copyright Text</p>
-        </div>
-    </footer>
-    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
+    <div class="footer-copyright">
+        <p>© 2023 Copyright Text</p>
+    </div>
+</footer>
+
+<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 
 </body>
 </html>

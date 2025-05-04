@@ -15,89 +15,105 @@
 </head>
 <body>
 
-
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo">VideoCorsiUNIBG</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-                	<li > <form action="${pageContext.request.contextPath}/ChapterController" method="get"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> </form> </li>
-               		<li > <form action="${pageContext.request.contextPath}/goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> </form> </li>
-                    <li > <form action="${pageContext.request.contextPath}/goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> </form> </li>
-                     <li > <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET"> <input type="submit" style="border:0px; background:white;" value="ESAMI PASSATI&nbsp&nbsp"> </form> </li>
-                    
-                    <li> <a href="${pageContext.request.contextPath}/index.jsp"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
-                </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/ChapterController" method="get">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI PASSATI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/index.jsp" method="get">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                    </form>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <br><br><br><br><br>
 
 <section class="clean-block clean-info dark" style="padding: 70px;">
-        <div class="container">
-            <div class="block-heading">
-                <h2>CORSI IN CUI SEI ISCRITTO</h2>
-            </div>          
-				<ul>
-				<c:forEach items="${chapter}" var="chara">
-				            
-            <div class="row align-items-center">
-                    <h3>${chara.idCourse}</h3>
-                    <div class="getting-started-info">
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>${chara.description}</strong></p>
+    <div class="container">
+        <div class="block-heading">
+            <h2>CORSI IN CUI SEI ISCRITTO</h2>
+        </div>
+        <div class="row">
+            <c:forEach items="${chapter}" var="chara">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">${chara.idCourse}</h3>
+                            <p class="card-text"><strong>${chara.description}</strong></p>
+                            <form method="get" action="${pageContext.request.contextPath}/ChapterController">
+                                <input type="hidden" name="CourseId" value="${chara.idCourse}">
+                                <button type="submit" class="btn btn-outline-primary">VAI AL CORSO</button>
+                            </form>
+                        </div>
                     </div>
-                    <form method="get" action="${pageContext.request.contextPath}/ChapterController" enctype="multipart/form-data">
-				 <input type="hidden" name="CourseId" value="${chara.idCourse}">
-				  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">VAI AL CORSO </button><br><br><br><br>
-				</form>
-				</c:forEach>
-					</ul>
                 </div>
-                </div>
-                </div>
+            </c:forEach>
+        </div>
+    </div>
 </section>
-
-
-<br><br><br><br>
-
 
 <section class="clean-block clean-info dark" style="padding: 70px;">
-        <div class="container">
-            <div class="block-heading">
-                <h2>CORSI IN CUI NON SEI ISCRITTO</h2>
-            </div>
-                    
-				<ul>
-				<c:forEach items="${coursesnotin}" var="c">
-
-            <div class="row align-items-center">
-                    <h3>${c.idCourse}</h3>
-                    <div class="getting-started-info">
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>${c.description}</strong></p>
+    <div class="container">
+        <div class="block-heading">
+            <h2>CORSI IN CUI NON SEI ISCRITTO</h2>
+        </div>
+        <div class="row">
+            <c:forEach items="${coursesnotin}" var="c">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">${c.idCourse}</h3>
+                            <p class="card-text"><strong>${c.description}</strong></p>
+                            <form method="get" action="${pageContext.request.contextPath}/SubscribeCourse">
+                                <input type="hidden" name="CourseId" value="${c.idCourse}">
+                                <button type="submit" class="btn btn-outline-primary">ISCRIVITI</button>
+                            </form>
+                        </div>
                     </div>
-                    <form method="get" action="${pageContext.request.contextPath}/Iscriviti" enctype="multipart/form-data">
-				 <input type="hidden" name="CourseId" value="${c.idCourse}">
-				  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">ISCRIVITI </button><br><br><br><br>
-				</form>
-				</c:forEach>
-					</ul>
                 </div>
-                </div>
-                </div>
+            </c:forEach>
+        </div>
+    </div>
 </section>
 
-<br><br><br>
-
 <footer class="page-footer dark">
-        <div class="footer-copyright">
-            <p>© 2023 Copyright Text</p>
-        </div>
-    </footer>
-    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
-    	
-	
+    <div class="footer-copyright">
+        <p>© 2023 Copyright Text</p>
+    </div>
+</footer>
+
+<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
+
 </body>
 </html>

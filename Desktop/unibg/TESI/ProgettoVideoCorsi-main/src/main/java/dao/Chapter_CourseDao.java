@@ -336,4 +336,51 @@ public class Chapter_CourseDao {
 		return courses_passed;
 	}
 
+	public List<ImmutableCourse> getCoursesNotSubscribedByUserId(int userId) throws SQLException {
+		String query = "SELECT DISTINCT c.idcourses, c.name, c.description " +
+					  "FROM courses c " +
+					  "WHERE c.idcourses NOT IN " +
+					  "(SELECT DISTINCT i.idCourse FROM iscrizioni i WHERE i.id_User = ?)";
+		
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, userId);
+			try (ResultSet result = pstatement.executeQuery()) {
+				List<ImmutableCourse> courses = new ArrayList<>();
+				while (result.next()) {
+					Course course = new Course();
+					course.setIdCourse(result.getInt("idcourses"));
+					course.setName(result.getString("name"));
+					course.setDescription(result.getString("description"));
+					courses.add(course);
+				}
+				return courses;
+			}
+		}
+	}
+
+	public boolean isUserSubscribed(int userId, int courseId) throws SQLException {
+		String query = "SELECT COUNT(*) as count FROM iscrizioni WHERE id_User = ? AND idCourse = ?";
+		
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, userId);
+			pstatement.setInt(2, courseId);
+			try (ResultSet result = pstatement.executeQuery()) {
+				if (result.next()) {
+					return result.getInt("count") > 0;
+				}
+				return false;
+			}
+		}
+	}
+
+	public void subscribeUserToCourse(int userId, int courseId) throws SQLException {
+		// Ottieni tutti i capitoli del corso
+		List<Integer> chapterIds = getChapterIdsByCourseId(courseId);
+		
+		// Iscrivi lo studente a tutti i capitoli del corso
+		for (Integer chapterId : chapterIds) {
+			subscribeUserToChapter(courseId, userId, chapterId);
+		}
+	}
+
 }

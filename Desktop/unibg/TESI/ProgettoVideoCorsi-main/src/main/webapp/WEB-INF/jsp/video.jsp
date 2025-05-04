@@ -16,74 +16,72 @@
 <body>
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo">VideoCorsiUNIBG</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-                	<li > <form action="GetCourse" method="post"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-               		<li > <form action="goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li > <form action="goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li> <a href="index.html"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
-                </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                        <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                        <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a href="${pageContext.request.contextPath}/index.html">
+                        <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <section class="clean-block clean-info dark" style="padding: 70px;">
-
-		${charapter}
-		<ul>
-		
-		<div class="block-heading">
-                <h2>${namec}</h2>
-                
-            </div>
-		
-	   
-        <div class="container">
-            
-            <div class="row align-items-center">
-              
-                <div class="col-md-6">
-                    <h3>${charaname}</h3>
+    <div class="container">
+        <div class="block-heading">
+            <h2>${namec}</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>${charaname}</h3>
+                <div class="ratio ratio-16x9 mb-4">
+                    <iframe src="https://www.youtube.com/embed/${video}" allowfullscreen=""></iframe>
                 </div>
-                <ul>
-			
-			<div class="ratio ratio-16x9" style="margin-top: 29px;"><iframe src="https://www.youtube.com/embed/${video}" allowfullscreen=""></iframe></div>
-					</ul>
-					
-					<div class="block-heading"></div>
-					
-					
-
-					<ul>
-			<div class="col">
-			<form method="get" action="GetQuiz" enctype="multipart/form-data">
-				 <input type="hidden" name="CourseId" value="${CourseId}">
-				  <input type="hidden" name="ChapterId" value="${ChapterId}">
-				  <div class="row align-items-center">
-				  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg"> Vai al QUIZ </button>
-				  </div>
-				</form>
-					</ul>
-					
-					
-					 </div>
+                <form method="get" action="${pageContext.request.contextPath}/GetQuiz">
+                    <input type="hidden" name="CourseId" value="${CourseId}">
+                    <input type="hidden" name="ChapterId" value="${ChapterId}">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-primary btn-lg">Vai al QUIZ</button>
+                    </div>
+                </form>
             </div>
-          
-            </ul>
-    </section>
+        </div>
+    </div>
+</section>
 
 <footer class="page-footer dark">
-        <div class="footer-copyright">
-            <p>� 2023 Copyright Text</p>
-        </div>
-    </footer>
-    <script src="Graphic/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="Graphic/assets/js/vanilla-zoom.js"></script>
-    <script src="Graphic/assets/js/theme.js"></script>
-    
-	
+    <div class="footer-copyright">
+        <p>© 2023 Copyright Text</p>
+    </div>
+</footer>
+
+<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 
 </body>
 </html>

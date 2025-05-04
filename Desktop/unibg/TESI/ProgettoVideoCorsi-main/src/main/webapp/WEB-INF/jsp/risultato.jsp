@@ -11,6 +11,38 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/vanilla-zoom.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f6f6f6;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .progress {
+            height: 1.5rem;
+            margin-top: 1rem;
+        }
+        .progress-bar {
+            background-color: #4CAF50;
+        }
+        .btn {
+            margin: 0.5rem 0;
+            padding: 0.75rem 1.5rem;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,83 +50,67 @@
         <div class="container"><a class="navbar-brand logo">VideoCorsiUNIBG</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                	<li > <form action="GetCourse" method="post"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-               		<li > <form action="goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li > <form action="goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li> <a href="index.jsp"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
+                	<li class="nav-item"> <form action="${pageContext.request.contextPath}/GetCourse" method="post"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
+               		<li class="nav-item"> <form action="${pageContext.request.contextPath}/goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
+                    <li class="nav-item"> <form action="${pageContext.request.contextPath}/goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
+                    <li class="nav-item"> <a href="${pageContext.request.contextPath}/index.jsp"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
                 </ul>
             </div>
         </div>
     </nav>
-     
-    <br><br>
     
-    
-    <section class="clean-block clean-info dark" style="padding: 70px;">
-        
-        <div class="container mt-5">
-        <div class="d-flex justify-content-center row">
-            <div class="col-md-10 col-lg-10">
-                <div class="border">
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                            <h4>RISULTATO</h4></div>
+    <div class="main-content">
+        <section class="clean-block clean-info dark" style="padding: 70px;">
+            <div class="container">
+                <div class="block-heading text-center mb-5">
+                    <h2>RISULTATO QUIZ</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Punteggio</h5>
+                                <p class="card-text">Hai risposto correttamente a ${right} domande su ${total}</p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: ${(right/total)*100}%" aria-valuenow="${(right/total)*100}" aria-valuemin="0" aria-valuemax="100">${(right/total)*100}%</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                        </div><div class="ans ml-2">
-                        
-                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                            <h4>${right} / 4;</h4></div>
-                            
-<%-- 
-//DA CAMBIARE IL REINDIREZZAMENTO
-
-<div class="col">
-			<form method="get" action="GetQuiz" enctype="multipart/form-data">
-				 <input type="hidden" name="CourseId" value="${CourseId}">
-				  <input type="hidden" name="ChapterId" value="${ChapterId}">
-				  <div class="row align-items-center">
-				  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg"> RIPETI IL TEST </button>
-				  </div>
-		    </form>
-</div>
-
-//DA CAMBIARE IL REINDIREZZAMENTO
-
-<div class="col">
-			<form method="get" action="GetQuiz" enctype="multipart/form-data">
-				 <input type="hidden" name="CourseId" value="${CourseId}">
-				  <input type="hidden" name="ChapterId" value="${ChapterId}">
-				  <div class="row align-items-center">
-				  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg"> PROSSIMO CAPITOLO </button>
-				  </div>
-		    </form>
-		    </div>
-		     --%>
-		    
-		    
-		    
-</div></div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-6 col-lg-4">
+                        <form method="get" action="${pageContext.request.contextPath}/GetQuiz">
+                            <input type="hidden" name="CourseId" value="${CourseId}">
+                            <input type="hidden" name="ChapterId" value="${ChapterId}">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-outline-primary btn-lg">RIPETI IL TEST</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <form method="get" action="${pageContext.request.contextPath}/GetChapters">
+                            <input type="hidden" name="CourseId" value="${CourseId}">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-outline-primary btn-lg">PROSSIMO CAPITOLO</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
-                                  
-    </section>
-	
-<br><br><br>
-					 				 
 
-<footer class="page-footer dark">
-        <div class="footer-copyright">
-            <p>� 2023 Copyright Text</p>
-        </div>
-    </footer>
-    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
+<footer class="page-footer dark mt-auto">
+    <div class="footer-copyright">
+        <p>© 2023 Copyright Text</p>
+    </div>
+</footer>
+
+<script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 
 </body>
 </html>
