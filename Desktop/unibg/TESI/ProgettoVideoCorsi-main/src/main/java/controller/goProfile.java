@@ -39,8 +39,7 @@ public class goProfile extends HttpServlet {
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 		request.setAttribute("me", user);
-		request.getRequestDispatcher("WEB-INF/profilo.jsp").forward(request, response);
-
+		request.getRequestDispatcher("WEB-INF/jsp/profilo.jsp").forward(request, response);
 	}
 
 	public void destroy() {

@@ -81,16 +81,16 @@
                 <div class="row justify-content-center mt-5">
                     <div class="col-md-6 col-lg-4">
                         <form method="get" action="${pageContext.request.contextPath}/GetQuiz">
-                            <input type="hidden" name="CourseId" value="${CourseId}">
-                            <input type="hidden" name="ChapterId" value="${ChapterId}">
+                            <input type="hidden" name="CourseId" value="${param.CourseId}">
+                            <input type="hidden" name="ChapterId" value="${param.ChapterId}">
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-outline-primary btn-lg">RIPETI IL TEST</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <form method="get" action="${pageContext.request.contextPath}/GetChapters">
-                            <input type="hidden" name="CourseId" value="${CourseId}">
+                        <form method="get" action="${pageContext.request.contextPath}/ChapterController">
+                            <input type="hidden" name="CourseId" value="${param.CourseId}">
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-outline-primary btn-lg">PROSSIMO CAPITOLO</button>
                             </div>
