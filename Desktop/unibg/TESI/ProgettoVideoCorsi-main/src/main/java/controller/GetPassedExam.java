@@ -44,28 +44,47 @@ public class GetPassedExam extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-
-		HttpSession session = request.getSession();
-		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
-		
-		Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
-		List<ImmutableCourse> courses = new ArrayList<ImmutableCourse>();
-		//get the list of course followed by the user
 		try {
-			courses = chapterDao.exam_passed(user.getId());
+			HttpSession session = request.getSession();
+			ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 			
-			if (courses == null) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
-				return;
-			}}
-			catch (NumberFormatException | NullPointerException | SQLException e) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "db error");
-				e.printStackTrace();
+			if (user == null) {
+				System.out.println("User not found in session");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User not authenticated");
 				return;
 			}
 			
-		request.setAttribute("passed", courses);
-		request.getRequestDispatcher("WEB-INF/passed_exam.jsp").forward(request, response);
+			System.out.println("Processing request for user ID: " + user.getId());
+			System.out.println("User name: " + user.getName());
+			
+			// Verifica che la connessione sia valida
+			if (connection == null || connection.isClosed()) {
+				System.out.println("Database connection is not valid, reinitializing...");
+				connection = ConnectionHandler.getConnection(getServletContext());
+			}
+			
+			Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
+			List<ImmutableCourse> courses = new ArrayList<ImmutableCourse>();
+			
+			try {
+				courses = chapterDao.exam_passed(user.getId());
+				System.out.println("Retrieved " + courses.size() + " passed courses");
+				
+				request.setAttribute("passed", courses);
+				request.getRequestDispatcher("/WEB-INF/jsp/passed_exam.jsp").forward(request, response);
+			}
+			catch (SQLException e) {
+				System.out.println("Error retrieving passed courses: " + e.getMessage());
+				e.printStackTrace();
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Database error: " + e.getMessage());
+				return;
+			}
+		} catch (Exception e) {
+			System.out.println("Unexpected error: " + e.getMessage());
+			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal server error");
+			return;
+		}
 	}
 
 	public void destroy() {

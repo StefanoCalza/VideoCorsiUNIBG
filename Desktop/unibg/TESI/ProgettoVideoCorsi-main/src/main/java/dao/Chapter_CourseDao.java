@@ -321,19 +321,43 @@ public class Chapter_CourseDao {
 	public List<ImmutableCourse> exam_passed(int id_user) throws SQLException {
 		List<ImmutableCourse> courses_passed = new ArrayList<ImmutableCourse>();
 
-		String query = "SELECT courses.name FROM db_videocorsi.iscrizioni join chapter on chapter.course = iscrizioni.idCourse and chapter.chapter = iscrizioni.idChapter join courses on courses.idcourses = chapter.course and courses.idCourses = iscrizioni.idCourse where is_final = 1 and passed = 2 and id_User = ?;";
-		try (PreparedStatement pstatement = connection.prepareStatement(query);) {
-			pstatement.setInt(1, id_user);
-			try (ResultSet result = pstatement.executeQuery();) {
-				while (result.next()) {
-					Course course = new Course();
-					course.setName(result.getString("name"));
+		try {
+			// Verifica che la connessione sia valida
+			if (connection == null || connection.isClosed()) {
+				System.out.println("Errore: connessione al database non valida");
+				throw new SQLException("Database connection is not valid");
+			}
 
-					courses_passed.add(course);
+			// Query ottimizzata per PostgreSQL con più informazioni
+			String query = "SELECT DISTINCT c.idcourses, c.name, c.description " +
+			              "FROM iscrizioni i " +
+			              "JOIN courses c ON i.idCourse = c.idcourses " +
+			              "JOIN chapter ch ON ch.course = i.idCourse AND ch.chapter = i.idChapter " +
+			              "WHERE i.id_User = ? AND i.passed > 0 AND ch.is_final = 1";
+			
+			System.out.println("Executing query for user ID: " + id_user);
+			System.out.println("Query: " + query);
+			
+			try (PreparedStatement pstatement = connection.prepareStatement(query);) {
+				pstatement.setInt(1, id_user);
+				try (ResultSet result = pstatement.executeQuery();) {
+					while (result.next()) {
+						Course course = new Course();
+						course.setIdCourse(result.getInt("idcourses"));
+						course.setName(result.getString("name"));
+						course.setDescription(result.getString("description"));
+						courses_passed.add(course);
+						System.out.println("Found passed course: " + course.getName() + " (ID: " + course.getIdCourse() + ")");
+					}
 				}
 			}
+			System.out.println("Total passed courses found: " + courses_passed.size());
+			return courses_passed;
+		} catch (SQLException e) {
+			System.out.println("Errore SQL in exam_passed: " + e.getMessage());
+			e.printStackTrace();
+			throw e;
 		}
-		return courses_passed;
 	}
 
 	public List<ImmutableCourse> getCoursesNotSubscribedByUserId(int userId) throws SQLException {
