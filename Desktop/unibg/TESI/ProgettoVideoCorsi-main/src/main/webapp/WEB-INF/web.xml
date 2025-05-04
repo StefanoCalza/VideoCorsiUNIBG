@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
     version="4.0">
     
-    <display-name>ProgettoVideoCorsi</display-name>
+    <display-name>progettovideocorsi</display-name>
     
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -16,15 +16,15 @@
     </context-param>
     <context-param>
         <param-name>dbUrl</param-name>
-        <param-value>jdbc:mysql://localhost:3306/videocorsi?serverTimezone=UTC</param-value>
+        <param-value>jdbc:postgresql://localhost:5432/video_courses</param-value>
     </context-param>
     <context-param>
         <param-name>dbUsername</param-name>
-        <param-value>root</param-value>
+        <param-value>postgres</param-value>
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>root</param-value>
+        <param-value>postgres</param-value>
     </context-param>
 
     <!-- Configurazione dei percorsi JSP -->
