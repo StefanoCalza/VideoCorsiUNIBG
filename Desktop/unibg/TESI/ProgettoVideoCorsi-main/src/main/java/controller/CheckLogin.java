@@ -53,7 +53,8 @@ public class CheckLogin extends HttpServlet {
 			
 			if (user == null) {
 				System.out.println("Login fallito per l'utente: " + username);
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Credenziali non valide");
+				request.setAttribute("errorMsg", "Username o password non validi");
+				request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 				return;
 			}
 			
