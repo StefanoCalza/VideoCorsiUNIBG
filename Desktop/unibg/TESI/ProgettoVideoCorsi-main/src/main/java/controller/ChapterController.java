@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import dao.Chapter_CourseDao;
 import immutablebeans.ImmutableChapter;
@@ -38,8 +38,8 @@ public class ChapterController extends HttpServlet {
         connection = ConnectionHandler.getConnection(getServletContext());
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 
@@ -49,15 +49,14 @@ public class ChapterController extends HttpServlet {
         }
 
         String courseId = request.getParameter("CourseId");
-        Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
 
         try {
             if (courseId == null) {
                 // Caso 1: Recupero corsi seguiti dall'utente
-                handleUserCourses(request, response, user, chapterDao);
+                handleUserCourses(request, response, user);
             } else {
                 // Caso 2: Recupero capitoli di un corso specifico
-                handleCourseChapters(request, response, courseId, chapterDao);
+                handleCourseChapters(request, response, courseId);
             }
         } catch (Exception e) {
             Logger.logError("Errore nel ChapterController", e);
@@ -66,14 +65,20 @@ public class ChapterController extends HttpServlet {
         }
     }
 
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // ... existing code ...
+    }
+
     private void handleUserCourses(HttpServletRequest request, HttpServletResponse response,
-            ImmutableUser user, Chapter_CourseDao chapterDao) 
+            ImmutableUser user) 
             throws ServletException, IOException, SQLException {
         List<ImmutableCourse> courses = new ArrayList<>();
         
         try {
             TransactionManager.beginTransaction(connection);
             
+            Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
             courses = chapterDao.getCoursesByUserId(user.getId());
             
             if (courses == null) {
@@ -93,7 +98,7 @@ public class ChapterController extends HttpServlet {
     }
 
     private void handleCourseChapters(HttpServletRequest request, HttpServletResponse response,
-            String courseId, Chapter_CourseDao chapterDao) 
+            String courseId) 
             throws ServletException, IOException, SQLException {
         List<ImmutableChapter> chapters = new ArrayList<>();
         ImmutableCourse course;
@@ -101,6 +106,7 @@ public class ChapterController extends HttpServlet {
         try {
             TransactionManager.beginTransaction(connection);
             
+            Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
             int courseIdInt = Integer.parseInt(courseId);
             chapters = chapterDao.getChaptersByCourseId(courseIdInt);
             

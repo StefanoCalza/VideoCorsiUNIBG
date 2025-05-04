@@ -16,15 +16,15 @@
     </context-param>
     <context-param>
         <param-name>dbUrl</param-name>
-        <param-value>jdbc:postgresql://localhost:5432/video_courses</param-value>
+        <param-value>jdbc:postgresql://dpg-d08cdi15pdvs739m3fi0-a.frankfurt-postgres.render.com:5432/videocorsi</param-value>
     </context-param>
     <context-param>
         <param-name>dbUsername</param-name>
-        <param-value>postgres</param-value>
+        <param-value>videocorsi_user</param-value>
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>postgres</param-value>
+        <param-value>oX2qyf4O6sgkGQcN0icwSBiMSWsOnEbq</param-value>
     </context-param>
 
     <!-- Configurazione dei percorsi JSP -->

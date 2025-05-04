@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
@@ -7,11 +7,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>PROGETTO VIDEOCORSI</title>
-    <link rel="stylesheet" href="Graphic/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
-    <link rel="stylesheet" href="Graphic/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
-    <link rel="stylesheet" href="Graphic/assets/css/vanilla-zoom.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/vanilla-zoom.min.css">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
                 <div class="col-md-6">
                     <h3>IT SECURITY</h3>
                     <div class="getting-started-info">
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>La sicurezza informatica è un argomento di vasta portata, che tocca molti aspetti dell'attività individuale in ambito ICT. IT Security aiuta a fornire alle persone le competenze necessarie per identificare e trattare le minacce associate all'uso delle tecnologie informatiche, migliorando la loro capacità di gestire in modo sicuro i propri dati ed i dati delle organizzazioni per cui lavorano.</strong></p>
+                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>La sicurezza informatica ï¿½ un argomento di vasta portata, che tocca molti aspetti dell'attivitï¿½ individuale in ambito ICT. IT Security aiuta a fornire alle persone le competenze necessarie per identificare e trattare le minacce associate all'uso delle tecnologie informatiche, migliorando la loro capacitï¿½ di gestire in modo sicuro i propri dati ed i dati delle organizzazioni per cui lavorano.</strong></p>
                     </div>
 					  <ul>
 					  <c:forEach items="${chapter}" var="chara">
@@ -55,13 +55,13 @@
 
 <footer class="page-footer dark">
         <div class="footer-copyright">
-            <p>© 2023 Copyright Text</p>
+            <p>ï¿½ 2023 Copyright Text</p>
         </div>
     </footer>
-    <script src="Graphic/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="Graphic/assets/js/vanilla-zoom.js"></script>
-    <script src="Graphic/assets/js/theme.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
     
 </body>
 </html>

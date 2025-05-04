@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
@@ -54,7 +54,7 @@
 
 <footer class="page-footer dark">
         <div class="footer-copyright">
-            <p>© 2023 Copyright Text</p>
+            <p>ï¿½ 2023 Copyright Text</p>
         </div>
     </footer>
     <script src="Graphic/assets/bootstrap/js/bootstrap.min.js"></script>

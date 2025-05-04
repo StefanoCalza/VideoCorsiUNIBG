@@ -8,14 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.annotation.MultipartConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.MultipartConfig;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.*;
 
@@ -48,23 +48,9 @@ public class ChangePassword extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
-		String pwd = null;
-		byte[] bytesOfMessage = request.getParameter("pwd").getBytes("UTF-8");
+		String pwd = request.getParameter("pwd");
 
-		MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-			byte[] theMD5digest = md.digest(bytesOfMessage);
-			StringBuilder sb = new StringBuilder();
-	        for (byte b : theMD5digest) {
-	            sb.append(String.format("%02x", b));
-	        }
-	        pwd = sb.toString();		
-		} catch (NoSuchAlgorithmException e1) {
-			e1.printStackTrace();
-		}
-
-		if ( pwd == null  || pwd.isEmpty()) {
+		if (pwd == null || pwd.isEmpty()) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			response.getWriter().println("Credentials must be not null");
 			return;

@@ -19,20 +19,24 @@ public class UserDAO {
 	}
 
 	public ImmutableUser checkCredentials(String usrn, String pwd) throws SQLException {
+		System.out.println("UserDAO.checkCredentials - username: " + usrn + ", password: " + pwd);
 		String query = "SELECT  * FROM \"user\"  WHERE username = ? AND password =?";
 		try (PreparedStatement pstatement = con.prepareStatement(query);) {
 			pstatement.setString(1, usrn);
 			pstatement.setString(2, pwd);
 			try (ResultSet result = pstatement.executeQuery();) {
-				if (!result.isBeforeFirst())
+				if (!result.isBeforeFirst()) {
+					System.out.println("Nessun utente trovato con queste credenziali");
 					return null;
+				}
 				else { 
 					result.next();
+					System.out.println("Utente trovato con ID: " + result.getInt("id"));
 					User user = new User(
-						result.getInt("iduser"),
+						result.getInt("id"),
 						result.getString("username"),
 						result.getInt("role"),
-						result.getString("name"),
+						result.getString("nome"),
 						result.getString("cognome"),
 						result.getString("email"),
 						result.getString("skillscard")
