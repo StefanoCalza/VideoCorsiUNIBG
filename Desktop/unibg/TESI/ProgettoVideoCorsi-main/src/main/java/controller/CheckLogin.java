@@ -78,7 +78,8 @@ public class CheckLogin extends HttpServlet {
 				}
 				request.setAttribute("userchapter", u_c);
 				//request.getRequestDispatcher("homeDocente.jsp").forward(request, response);
-				request.getRequestDispatcher("/WEB-INF/jsp/homeDocente.jsp").forward(request, response);
+				//request.getRequestDispatcher("/WEB-INF/jsp/homeDocente.jsp").forward(request, response);
+				request.getRequestDispatcher("GetCourse").forward(request, response);
 			} else {
 				request.getRequestDispatcher("GetCourse").forward(request, response);
 			}

@@ -48,34 +48,9 @@
 </div>
 </div>        
 </section>  
-<section class="clean-block clean-info dark" style="padding: 70px;">
-        <div class="container">
-            <div class="block-heading">
-                <h2>CONVALIDA ESAMI</h2>
-            </div>
-				<ul>
-				<c:forEach items="${userchapter}" var="c">
-
-            <div class="row align-items-center">
-                   
-                    <div class="getting-started-info">
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CORSO:&nbsp&nbsp${c.idcourse}</strong></p>
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CAPITOLO:&nbsp&nbsp${c.idchapter}</strong></p>
-                        <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>UTENTE:&nbsp&nbsp${c.iduser}</strong></p>
-                    
-                   <form method="get" action="${pageContext.request.contextPath}/VerifyQuiz" enctype="multipart/form-data"> 
- <input type="hidden" name="ChapterId" value="${c.idchapter}">
-  <input type="hidden" name="CourseId" value="${c.idcourse}">
-  <input type="hidden" name="UserId" value="${c.iduser}">
-  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">CONVALIDA ESAME </button>
-</form> 
-<br><br><br><br>
-				</c:forEach>
-					</ul>
-                </div>
-                </div>
-                </div>
-</section>
+</div>
+</div>        
+</section>  
 
 
 

@@ -75,66 +75,138 @@
 
 <body>
 
-<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-    <div class="container">
-        <a class="navbar-brand logo" href="#">VideoCorsiUNIBG</a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                        <button type="submit" class="btn btn-link nav-link">HOME</button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                        <button type="submit" class="btn btn-link nav-link">PROFILO</button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <button type="submit" class="btn btn-link nav-link active">ESAMI</button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <button type="submit" class="btn btn-link nav-link">ESAMI PASSATI</button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link">LOGOUT</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<main class="clean-block" style="margin-top: 80px;">
-    <div class="container">
-        <div class="block-heading">
-            <h2>ESAMI</h2>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <img src="${pageContext.request.contextPath}/assets/img/test_ceneter.jpg" class="img-fluid rounded shadow" alt="Test Center">
+<c:choose>
+    <c:when test="${user.role == 1}">
+        <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+            <div class="container">
+                <a class="navbar-brand logo" href="#">VideoCorsiUNIBG</a>
+                <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                    <span class="visually-hidden">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                <button type="submit" class="btn btn-link nav-link">HOME</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                                <button type="submit" class="btn btn-link nav-link">PROFILO</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                                <button type="submit" class="btn btn-link nav-link active">ESAMI</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-6">
-                <div class="getting-started-info">
-                    <h3>ATLAS POSTAZIONE STUDENTE</h3>
-                    <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;">
-                        <strong>Per eseguire l'esame bisogna utilizzare la piattaforma "ATLAS POSTAZIONE STUDENTI" da installare su ogni PC nelle sedi di esame autorizzate e con la certificazione "Test Center ECDL". In questo modo si apre una piattaforma sicura che permette di poter rilasciare la certificazione in caso di superamento dell'esame.</strong>
-                    </p>
-                    <div class="text-center mt-4">
-                        <a href="https://download-atlas.aicanet.it/00home/home.html" class="btn btn-primary btn-lg">SCARICA QUI</a>
+        </nav>
+        <main class="clean-block" style="margin-top: 80px;">
+            <div class="container">
+                <section class="clean-block clean-info dark" style="padding: 70px;">
+                    <div class="container">
+                        <div class="block-heading">
+                            <h2>CONVALIDA ESAMI</h2>
+                        </div>
+                        <c:choose>
+                            <c:when test="${not empty userchapter}">
+                                <ul>
+                                    <c:forEach items="${userchapter}" var="c">
+                                        <div class="row align-items-center">
+                                            <div class="getting-started-info">
+                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CORSO:&nbsp;&nbsp;${c.idcourse}</strong></p>
+                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CAPITOLO:&nbsp;&nbsp;${c.idchapter}</strong></p>
+                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>UTENTE:&nbsp;&nbsp;${c.iduser}</strong></p>
+                                                <form method="get" action="${pageContext.request.contextPath}/VerifyQuiz" enctype="multipart/form-data">
+                                                    <input type="hidden" name="ChapterId" value="${c.idchapter}">
+                                                    <input type="hidden" name="CourseId" value="${c.idcourse}">
+                                                    <input type="hidden" name="UserId" value="${c.iduser}">
+                                                    <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">CONVALIDA ESAME </button>
+                                                </form>
+                                                <br><br><br><br>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </ul>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="alert alert-warning" role="alert">
+                                    Nessun esame da convalidare trovato o errore di caricamento dati.
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </c:when>
+    <c:otherwise>
+        <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+            <div class="container">
+                <a class="navbar-brand logo" href="#">VideoCorsiUNIBG</a>
+                <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                    <span class="visually-hidden">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                <button type="submit" class="btn btn-link nav-link">HOME</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                                <button type="submit" class="btn btn-link nav-link">PROFILO</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                                <button type="submit" class="btn btn-link nav-link active">ESAMI</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                                <button type="submit" class="btn btn-link nav-link">ESAMI PASSATI</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="clean-block" style="margin-top: 80px;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <img src="${pageContext.request.contextPath}/assets/img/test_ceneter.jpg" class="img-fluid rounded shadow" alt="Test Center">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="getting-started-info">
+                            <h3>ATLAS POSTAZIONE STUDENTE</h3>
+                            <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;">
+                                <strong>Per eseguire l'esame bisogna utilizzare la piattaforma "ATLAS POSTAZIONE STUDENTI" da installare su ogni PC nelle sedi di esame autorizzate e con la certificazione "Test Center ECDL". In questo modo si apre una piattaforma sicura che permette di poter rilasciare la certificazione in caso di superamento dell'esame.</strong>
+                            </p>
+                            <div class="text-center mt-4">
+                                <a href="https://download-atlas.aicanet.it/00home/home.html" class="btn btn-primary btn-lg">SCARICA QUI</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</main>
+        </main>
+    </c:otherwise>
+</c:choose>
 
 <footer class="page-footer dark">
     <div class="footer-copyright">

@@ -39,6 +39,22 @@ public class gotoEsami extends HttpServlet {
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 		request.setAttribute("me", user);
+
+		if (user != null && user.getRole() == 1) {
+			QuizDAO quizDao = new QuizDAO(connection);
+			java.util.List<immutablebeans.ImmutableU_C> u_c = new java.util.ArrayList<>();
+			try {
+				u_c = quizDao.quiz_to_verify();
+				if (u_c == null) {
+					request.setAttribute("userchapter", null);
+				} else {
+					request.setAttribute("userchapter", u_c);
+				}
+			} catch (Exception e) {
+				request.setAttribute("userchapter", null);
+			}
+		} 
+
 		request.getRequestDispatcher("/WEB-INF/jsp/esami.jsp").forward(request, response);
 	}
 

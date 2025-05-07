@@ -24,26 +24,47 @@
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <input type="submit" style="border:0px; background:white;" value="ESAMI PASSATI&nbsp&nbsp">
-                    </form>
-                </li>
+                <c:choose>
+                    <c:when test="${user.role == 1}">
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
+                            </form>
+                        </li>
+                    </c:when>
+                    <c:when test="${user.role == 2}">
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                                <input type="submit" style="border:0px; background:white;" value="ESAMI PASSATI&nbsp&nbsp">
+                            </form>
+                        </li>
+                    </c:when>
+                </c:choose>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/index.jsp">
                         <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
