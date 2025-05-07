@@ -37,9 +37,9 @@
                         <div class="container">
                             <div class="block-heading"></div>
                             <h2>CREA CORSO</h2>
-                            <form method="get" action="${pageContext.request.contextPath}/Createcourse" enctype="multipart/form-data">
-                                <div class="mb-3"><label class="form-label" for="name">NOME CORSO:&nbsp&nbsp</label><input type="text" name="name_course" required></div>
-                                <div class="mb-3"><label class="form-label" for="subject">DESCRIZIONE CORSO:&nbsp&nbsp</label><input type="text" name="description_corse" required></div>
+                            <form method="post" action="${pageContext.request.contextPath}/Createcourse" enctype="multipart/form-data">
+                                <div class="mb-3"><label class="form-label" for="name">NOME CORSO:&nbsp&nbsp</label><input type="text" name="Coursename" required></div>
+                                <div class="mb-3"><label class="form-label" for="subject">DESCRIZIONE CORSO:&nbsp&nbsp</label><input type="text" name="Coursedescription" required></div>
                                 <div class="mb-3"></div>
                                 </section>  
 

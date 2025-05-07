@@ -49,13 +49,21 @@ public class createCourse extends HttpServlet {
 			//insert the new course
 			courseDao.insertCourse(maxCourseId + 1, request.getParameter("Coursename"), request.getParameter("Coursedescription"));
 			TransactionManager.commitTransaction(connection);
-			
-			request.getRequestDispatcher("GetCourse").forward(request, response);
+
+			// Passo i dati del nuovo corso al form di creazione capitolo
+			request.setAttribute("id_course", maxCourseId + 1);
+			request.setAttribute("name_course", request.getParameter("Coursename"));
+			request.setAttribute("description_corse", request.getParameter("Coursedescription"));
+			request.getRequestDispatcher("/WEB-INF/jsp/Create_chapter.jsp").forward(request, response);
 		} catch (SQLException e) {
 			TransactionManager.rollbackTransaction(connection);
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
 			return;
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 	public void destroy() {

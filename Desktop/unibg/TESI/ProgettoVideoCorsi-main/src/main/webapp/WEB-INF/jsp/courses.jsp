@@ -83,11 +83,16 @@
             <h2>CORSI IN CUI SEI ISCRITTO</h2>
         </div>
         <div class="row">
+            <c:if test="${empty chapter}">
+                <div class="alert alert-info" role="alert">
+                    Non sei iscritto a nessun corso al momento.
+                </div>
+            </c:if>
             <c:forEach items="${chapter}" var="chara">
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">${chara.idCourse}</h3>
+                            <h3 class="card-title">${chara.name}</h3>
                             <p class="card-text"><strong>${chara.description}</strong></p>
                             <form method="get" action="${pageContext.request.contextPath}/ChapterController">
                                 <input type="hidden" name="CourseId" value="${chara.idCourse}">
@@ -104,14 +109,19 @@
 <section class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
         <div class="block-heading">
-            <h2>CORSI IN CUI NON SEI ISCRITTO</h2>
+            <h2>CORSI DISPONIBILI</h2>
         </div>
         <div class="row">
+            <c:if test="${empty coursesnotin}">
+                <div class="alert alert-info" role="alert">
+                    Non ci sono corsi disponibili a cui iscriverti al momento.
+                </div>
+            </c:if>
             <c:forEach items="${coursesnotin}" var="c">
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">${c.idCourse}</h3>
+                            <h3 class="card-title">${c.name}</h3>
                             <p class="card-text"><strong>${c.description}</strong></p>
                             <form method="get" action="${pageContext.request.contextPath}/SubscribeCourse">
                                 <input type="hidden" name="CourseId" value="${c.idCourse}">
