@@ -21,12 +21,12 @@ import immutablebeans.ImmutableUser;
 import utils.ConnectionHandler;
 import utils.TransactionManager;
 
-@WebServlet("/Createcourse")
-public class createCourse extends HttpServlet {
+@WebServlet("/creaCorso")
+public class creaCorso extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection = null;
 
-	public createCourse() {
+	public creaCorso() {
 		super();
 	}
 
@@ -43,19 +43,32 @@ public class createCourse extends HttpServlet {
 		int maxCourseId;
 		
 		try {
+			System.out.println("[createCourse] Parametri ricevuti: Coursename='" + request.getParameter("Coursename") + "', Coursedescription='" + request.getParameter("Coursedescription") + "'");
 			TransactionManager.beginTransaction(connection);
-			int newCourseId = courseDao.getMaxCourseId();
+			maxCourseId = courseDao.getMaxCourseId();
+			System.out.println("[createCourse] maxCourseId attuale: " + maxCourseId);
 			
 			//insert the new course
-			courseDao.insertCourse(newCourseId, request.getParameter("name_course"), request.getParameter("description_corse"));
+			courseDao.insertCourse(maxCourseId + 1, request.getParameter("Coursename"), request.getParameter("Coursedescription"));
+			System.out.println("[createCourse] Corso inserito con id: " + (maxCourseId + 1));
 			TransactionManager.commitTransaction(connection);
-			
-			request.getRequestDispatcher("GetCourse").forward(request, response);
+
+			// Redirect invece di forward
+			String redirectUrl = request.getContextPath() + "/CreateChapter?id_course=" + (maxCourseId + 1)
+				+ "&name_course=" + java.net.URLEncoder.encode(request.getParameter("Coursename"), "UTF-8")
+				+ "&description_corse=" + java.net.URLEncoder.encode(request.getParameter("Coursedescription"), "UTF-8");
+			response.sendRedirect(redirectUrl);
+			return;
 		} catch (SQLException e) {
+			System.out.println("[createCourse] Errore SQL: " + e.getMessage());
 			TransactionManager.rollbackTransaction(connection);
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
 			return;
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 	public void destroy() {
