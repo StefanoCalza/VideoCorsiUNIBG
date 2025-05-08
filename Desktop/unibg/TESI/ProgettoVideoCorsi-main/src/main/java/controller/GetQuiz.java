@@ -21,6 +21,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import beans.*;
 import dao.QuizDAO;
+import dao.Chapter_CourseDao;
 import immutablebeans.ImmutableQuiz;
 import immutablebeans.ImmutableUser;
 import utils.ConnectionHandler;
@@ -69,10 +70,12 @@ public class GetQuiz extends HttpServlet {
 				return;
 			}
 
+			// Capitolo 1: accesso sempre consentito
 			if (chapterId > 1) {
 				int previousChapterStatus = quizDao.quiz_passed(user.getId(), courseId, chapterId - 1);
 				if (previousChapterStatus != 2) {
-					request.getRequestDispatcher("/GetCourse").forward(request, response);
+					String redirectUrl = request.getContextPath() + "/ChapterController?CourseId=" + courseId + "&errorMessage=" + java.net.URLEncoder.encode("Devi prima superare il quiz del capitolo precedente per accedere a questo quiz.", "UTF-8");
+					response.sendRedirect(redirectUrl);
 					return;
 				}
 			}

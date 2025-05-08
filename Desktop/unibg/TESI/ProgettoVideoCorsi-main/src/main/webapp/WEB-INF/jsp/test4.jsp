@@ -33,6 +33,11 @@
         <div class="block-heading">
             <h2>${namec}</h2>
         </div>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                ${errorMessage}
+            </div>
+        </c:if>
         <div class="row">
             <c:forEach items="${chapter}" var="chara">
                 <div class="col-md-6 mb-4">

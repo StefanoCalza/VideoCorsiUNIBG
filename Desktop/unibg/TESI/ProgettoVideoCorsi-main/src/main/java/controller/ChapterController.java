@@ -49,6 +49,7 @@ public class ChapterController extends HttpServlet {
         }
 
         String courseId = request.getParameter("CourseId");
+        String errorMessage = request.getParameter("errorMessage");
 
         try {
             if (courseId == null) {
@@ -56,7 +57,7 @@ public class ChapterController extends HttpServlet {
                 handleUserCourses(request, response, user);
             } else {
                 // Caso 2: Recupero capitoli di un corso specifico
-                handleCourseChapters(request, response, courseId, user);
+                handleCourseChapters(request, response, courseId, user, errorMessage);
             }
         } catch (Exception e) {
             Logger.logError("Errore nel ChapterController", e);
@@ -95,7 +96,7 @@ public class ChapterController extends HttpServlet {
     }
 
     private void handleCourseChapters(HttpServletRequest request, HttpServletResponse response,
-            String courseId, ImmutableUser user) 
+            String courseId, ImmutableUser user, String errorMessage) 
             throws ServletException, IOException, SQLException {
         List<ImmutableChapter> chapters = new ArrayList<>();
         ImmutableCourse course;
@@ -139,6 +140,9 @@ public class ChapterController extends HttpServlet {
         
         request.setAttribute("namec", course.getName());
         request.setAttribute("chapter", chapters);
+        if (errorMessage != null && !errorMessage.isEmpty()) {
+            request.setAttribute("errorMessage", errorMessage);
+        }
         request.getRequestDispatcher("/WEB-INF/jsp/test4.jsp").forward(request, response);
     }
 

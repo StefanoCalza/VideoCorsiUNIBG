@@ -61,6 +61,11 @@
         <div class="block-heading">
             <h2>${namec}</h2>
         </div>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                ${errorMessage}
+            </div>
+        </c:if>
         <div class="row align-items-center">
             <c:forEach items="${chapter}" var="ch">
                 <div class="col-md-6">
