@@ -82,13 +82,18 @@ public class CheckQuiz extends HttpServlet {
 				}
 			}
 
-			// Verifica se ha superato il test (75% o più di risposte corrette)
-			if (((float) right / questions.size()) >= 0.75) {
-				quizDao.setpassed(user.getId(), courseId, chapterId);
+			// Se >=75% va in attesa di convalida docente (passed=1), altrimenti non passato (passed=0)
+			float score = (float) right / questions.size();
+			if (score >= 0.75) {
+				quizDao.setpassed(user.getId(), courseId, chapterId); // passed=1, attesa convalida docente
+			} else {
+				// Imposta come non passato (passed=0)
+				quizDao.setnotpassed(user.getId(), courseId, chapterId); // da implementare se non esiste
 			}
 
 			request.setAttribute("right", right);
 			request.setAttribute("total", questions.size());
+			request.setAttribute("score", score);
 			request.getRequestDispatcher("/WEB-INF/jsp/risultato.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {

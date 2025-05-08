@@ -220,4 +220,22 @@ public class QuizDAO {
 
 	}
 
+	/**
+	 * set an exam as not passed
+	 * 
+	 * @param user
+	 * @param course
+	 * @param chapter
+	 * @throws SQLException
+	 */
+	public void setnotpassed(int user, int course, int chapter) throws SQLException {
+		String query = "UPDATE iscrizioni SET passed = 0 where id_User = ? and idCourse = ? and idChapter = ?;";
+		try (PreparedStatement pstatement = connection.prepareStatement(query);) {
+			pstatement.setInt(1, user);
+			pstatement.setInt(2, course);
+			pstatement.setInt(3, chapter);
+			pstatement.executeUpdate();
+		}
+	}
+
 }
