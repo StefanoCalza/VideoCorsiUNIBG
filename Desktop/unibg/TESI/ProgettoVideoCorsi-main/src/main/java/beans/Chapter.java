@@ -8,6 +8,7 @@ public class Chapter implements ImmutableChapter {
 	private String name;
 	private String description;
 	private String video;
+	private int isFinal;
 
 	public int getIdCourse() {
 		return idCourse;
@@ -47,6 +48,14 @@ public class Chapter implements ImmutableChapter {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getIsFinal() {
+		return isFinal;
+	}
+
+	public void setIsFinal(int isFinal) {
+		this.isFinal = isFinal;
 	}
 	
 	

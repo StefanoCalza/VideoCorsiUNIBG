@@ -123,6 +123,7 @@ public class Chapter_CourseDao {
 					chapter.setName(result.getString("name"));
 					chapter.setVideo(result.getString("video"));
 					chapter.setDescription(result.getString("description"));
+					chapter.setIsFinal(result.getInt("is_final"));
 					chapters.add(chapter);
 				}
 			}

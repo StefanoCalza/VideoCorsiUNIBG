@@ -45,14 +45,25 @@
                         <div class="card-body">
                             <h3 class="card-title">${chara.name}</h3>
                             <p class="card-text"><strong>${chara.description}</strong></p>
-                            <form method="post" action="gotovideo" enctype="multipart/form-data">
-                                <input type="hidden" name="CourseId" value="${chara.idCourse}">
-                                <input type="hidden" name="ChapterId" value="${chara.idChapter}">
-                                <input type="hidden" name="coursename" value="${namec}">
-                                <input type="hidden" name="video" value="${chara.video}">
-                                <input type="hidden" name="charaname" value="${chara.name}">
-                                <button type="submit" value="Submit" class="btn btn-outline-primary">VAI AL VIDEO</button>
-                            </form>
+                            <c:choose>
+                                <c:when test="${chara.isFinal == 1}">
+                                    <form method="get" action="GetQuiz">
+                                        <input type="hidden" name="CourseId" value="${chara.idCourse}">
+                                        <input type="hidden" name="ChapterId" value="${chara.idChapter}">
+                                        <button type="submit" class="btn btn-outline-success">VAI AL QUIZ</button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <form method="post" action="gotovideo" enctype="multipart/form-data">
+                                        <input type="hidden" name="CourseId" value="${chara.idCourse}">
+                                        <input type="hidden" name="ChapterId" value="${chara.idChapter}">
+                                        <input type="hidden" name="coursename" value="${namec}">
+                                        <input type="hidden" name="video" value="${chara.video}">
+                                        <input type="hidden" name="charaname" value="${chara.name}">
+                                        <button type="submit" value="Submit" class="btn btn-outline-primary">VAI AL VIDEO</button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
