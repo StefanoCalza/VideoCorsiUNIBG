@@ -50,11 +50,12 @@ public class createCourse extends HttpServlet {
 			courseDao.insertCourse(newCourseId, request.getParameter("name_course"), request.getParameter("description_corse"));
 			TransactionManager.commitTransaction(connection);
 
-			// Passo i dati del nuovo corso al form di creazione capitolo
-			request.setAttribute("id_course", maxCourseId + 1);
-			request.setAttribute("name_course", request.getParameter("Coursename"));
-			request.setAttribute("description_corse", request.getParameter("Coursedescription"));
-			request.getRequestDispatcher("/WEB-INF/jsp/Create_chapter.jsp").forward(request, response);
+			// Redirect automatico alla pagina di creazione capitolo/quiz/video
+			String redirectUrl = request.getContextPath() + "/CreateChapter?CourseId=" + newCourseId
+				+ "&name_course=" + java.net.URLEncoder.encode(request.getParameter("name_course"), "UTF-8")
+				+ "&description_corse=" + java.net.URLEncoder.encode(request.getParameter("description_corse"), "UTF-8");
+			response.sendRedirect(redirectUrl);
+			return;
 		} catch (SQLException e) {
 			TransactionManager.rollbackTransaction(connection);
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
