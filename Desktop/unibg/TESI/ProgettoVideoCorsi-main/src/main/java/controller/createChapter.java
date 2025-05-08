@@ -57,7 +57,8 @@ public class createChapter extends HttpServlet {
 		
 		try {
 			// Se manca isfinal, mostra solo la pagina di creazione capitolo/quiz/video
-			if (request.getParameter("isfinal") == null) {
+			String isFinalParam = request.getParameter("isfinal");
+			if (isFinalParam == null) {
 				request.setAttribute("id_course", request.getParameter("CourseId"));
 				request.setAttribute("name_course", request.getParameter("name_course"));
 				request.setAttribute("description_corse", request.getParameter("description_corse"));
@@ -69,14 +70,11 @@ public class createChapter extends HttpServlet {
 			
 			// Parse and validate course ID
 			int courseId = Integer.parseInt(request.getParameter("CourseId"));
-			int chapterId = courseDao.getMaxChapterIdByCourseId(courseId);
-			String isFinalParam = request.getParameter("isfinal");
-			if (isFinalParam == null) isFinalParam = "0"; // default quiz
-			System.out.println("[createChapter] isfinal ricevuto: " + isFinalParam);
+			int maxChapterId = courseDao.getMaxChapterIdByCourseId(courseId);
 			boolean isFinal = Integer.parseInt(isFinalParam) == 1;
 			
 			// Insert chapter
-			courseDao.insertChapter(courseId, chapterId, 
+			courseDao.insertChapter(courseId, maxChapterId + 1, 
 				request.getParameter("Chaptername"),
 				request.getParameter("Video"), 
 				isFinal, 
@@ -94,16 +92,18 @@ public class createChapter extends HttpServlet {
 					request.getParameter("r" + i + "4"),
 					Integer.parseInt(request.getParameter("g" + i)),
 					courseId,
-					chapterId
+					maxChapterId + 1
 				);
 			}
 			
 			TransactionManager.commitTransaction(connection);
 			
-			// Dopo l'inserimento, mostra una pagina di conferma con scelta
-			request.setAttribute("id_course", request.getParameter("CourseId"));
+			// Set attributes for the next page
 			request.setAttribute("name_course", request.getParameter("name_course"));
 			request.setAttribute("description_corse", request.getParameter("description_corse"));
+			request.setAttribute("id_course", request.getParameter("CourseId"));
+
+			// Forward a pagina di conferma
 			request.getRequestDispatcher("/WEB-INF/jsp/confirm_add_chapter.jsp").forward(request, response);
 			return;
 			

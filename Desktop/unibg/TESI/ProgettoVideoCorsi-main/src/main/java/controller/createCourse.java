@@ -49,7 +49,7 @@ public class createCourse extends HttpServlet {
 			//insert the new course
 			courseDao.insertCourse(newCourseId, request.getParameter("name_course"), request.getParameter("description_corse"));
 			TransactionManager.commitTransaction(connection);
-
+			
 			// Redirect automatico alla pagina di creazione capitolo/quiz/video
 			String redirectUrl = request.getContextPath() + "/CreateChapter?CourseId=" + newCourseId
 				+ "&name_course=" + java.net.URLEncoder.encode(request.getParameter("name_course"), "UTF-8")
@@ -61,10 +61,6 @@ public class createCourse extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
 			return;
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 	public void destroy() {
