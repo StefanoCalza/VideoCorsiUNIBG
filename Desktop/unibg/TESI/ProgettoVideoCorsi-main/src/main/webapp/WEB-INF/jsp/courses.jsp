@@ -83,11 +83,20 @@
             <h2>CORSI IN CUI SEI ISCRITTO</h2>
         </div>
         <div class="row">
-            <c:if test="${empty chapter}">
-                <div class="alert alert-info" role="alert">
-                    Non sei iscritto a nessun corso al momento.
-                </div>
-            </c:if>
+            <c:choose>
+                <c:when test="${empty chapter && empty coursesnotin}">
+                    <div class="alert alert-warning" role="alert">
+                        Non sei iscritto a nessun corso e non ci sono altri corsi disponibili al momento.
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <c:if test="${empty chapter}">
+                        <div class="alert alert-info" role="alert">
+                            Non sei iscritto a nessun corso al momento.
+                        </div>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
             <c:forEach items="${chapter}" var="chara">
                 <div class="col-md-6 mb-4">
                     <div class="card">
@@ -114,7 +123,7 @@
         <div class="row">
             <c:if test="${empty coursesnotin}">
                 <div class="alert alert-info" role="alert">
-                    Non ci sono corsi disponibili a cui iscriverti al momento.
+                    Non ci sono altri corsi disponibili a cui iscriverti al momento.
                 </div>
             </c:if>
             <c:forEach items="${coursesnotin}" var="c">
