@@ -16,35 +16,7 @@
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/index.html">
-                        <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <span class="navbar-brand logo">VideoCorsiUNIBG</span>
     </div>
 </nav>
 
