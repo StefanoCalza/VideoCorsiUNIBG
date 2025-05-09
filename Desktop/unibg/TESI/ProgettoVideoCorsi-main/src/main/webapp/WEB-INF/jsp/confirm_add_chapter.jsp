@@ -50,7 +50,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <button type="submit" class="btn btn-link nav-link">ESAMI PASSATI</button>
+                        <button type="submit" class="btn btn-link nav-link">CORSI COMPLETATI</button>
                     </form>
                 </li>
                 <li class="nav-item">

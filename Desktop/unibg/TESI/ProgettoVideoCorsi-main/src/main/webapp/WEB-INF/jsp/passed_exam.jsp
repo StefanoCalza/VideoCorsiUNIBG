@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Corsi Passati - VideoCorsi UNIBG</title>
+    <title>Corsi Completati - VideoCorsi UNIBG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
@@ -85,7 +85,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <button type="submit" class="btn btn-link nav-link active">ESAMI PASSATI</button>
+                        <button type="submit" class="btn btn-link nav-link active">CORSI COMPLETATI</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -99,7 +99,7 @@
 <main class="clean-block" style="margin-top: 80px;">
     <div class="container">
         <div class="block-heading">
-            <h2>CORSI PASSATI</h2>
+            <h2>CORSI COMPLETATI</h2>
         </div>
         <div class="row justify-content-center">
             <c:choose>

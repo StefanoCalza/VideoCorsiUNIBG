@@ -23,7 +23,7 @@
                 <ul class="navbar-nav ms-auto">
                 	<li > <form action="${pageContext.request.contextPath}/gohome" method="post"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
                		<li > <form action="${pageContext.request.contextPath}/goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li > <form action="${pageContext.request.contextPath}/goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
+                    <li > <form action="${pageContext.request.contextPath}/goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="CONVALIDA CORSI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
                    <li> <a href="${pageContext.request.contextPath}/index.jsp"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
                 </ul>
             </div>

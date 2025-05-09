@@ -38,7 +38,7 @@
                         </li>
                         <li class="nav-item">
                             <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                                <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
                             </form>
                         </li>
                     </c:when>
@@ -60,7 +60,7 @@
                         </li>
                         <li class="nav-item">
                             <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                                <input type="submit" class="btn btn-link nav-link" value="ESAMI PASSATI">
+                                <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
                             </form>
                         </li>
                     </c:when>

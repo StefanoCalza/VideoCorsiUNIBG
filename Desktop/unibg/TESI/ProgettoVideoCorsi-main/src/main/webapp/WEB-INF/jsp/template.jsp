@@ -118,7 +118,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <button type="submit" class="btn btn-link nav-link ${param.activePage == 'passed' ? 'active' : ''}">ESAMI PASSATI</button>
+                        <button type="submit" class="btn btn-link nav-link ${param.activePage == 'passed' ? 'active' : ''}">CORSI COMPLETATI</button>
                     </form>
                 </li>
                 <li class="nav-item">

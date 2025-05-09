@@ -41,7 +41,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <input type="submit" style="border:0px; background:white;" value="ESAMI PASSATI&nbsp&nbsp">
+                        <input type="submit" style="border:0px; background:white;" value="CORSI COMPLETATI&nbsp&nbsp">
                     </form>
                 </li>
                 <li class="nav-item">
