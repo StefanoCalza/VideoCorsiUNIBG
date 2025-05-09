@@ -76,6 +76,11 @@ public class gotoEsami extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/jsp/esami.jsp").forward(request, response);
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
 	public void destroy() {
 		try {
 			ConnectionHandler.closeConnection(connection);

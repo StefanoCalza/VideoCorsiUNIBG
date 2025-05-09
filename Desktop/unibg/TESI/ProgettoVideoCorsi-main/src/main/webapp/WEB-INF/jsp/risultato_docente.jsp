@@ -64,7 +64,7 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <h5 class="card-title">Punteggio</h5>
-                                <p class="card-text">Hai risposto correttamente a ${right} domande su ${total}</p>
+                                <p class="card-text">Risposte corrette: ${right} su ${total}</p>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: ${(right/total)*100}%" aria-valuenow="${(right/total)*100}" aria-valuemin="0" aria-valuemax="100">${(right/total)*100}%</div>
                                 </div>
@@ -106,19 +106,12 @@
                 </div>
                 <div class="row justify-content-center mt-5">
                     <div class="col-md-6 col-lg-4">
-                        <form method="get" action="${pageContext.request.contextPath}/GetQuiz">
+                        <form method="post" action="${pageContext.request.contextPath}/VerifyQuiz">
+                            <input type="hidden" name="UserId" value="${param.UserId}">
                             <input type="hidden" name="CourseId" value="${param.CourseId}">
                             <input type="hidden" name="ChapterId" value="${param.ChapterId}">
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-outline-primary btn-lg">RIPETI IL TEST</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <form method="get" action="${pageContext.request.contextPath}/ChapterController">
-                            <input type="hidden" name="CourseId" value="${param.CourseId}">
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-outline-primary btn-lg">PROSSIMO CAPITOLO</button>
+                                <button type="submit" class="btn btn-success btn-lg">CONVALIDA CORSO</button>
                             </div>
                         </form>
                     </div>
@@ -139,4 +132,4 @@
 <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 
 </body>
-</html>
+</html> 

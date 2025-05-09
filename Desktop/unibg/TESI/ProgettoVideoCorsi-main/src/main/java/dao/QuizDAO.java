@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import beans.Course;
 import beans.Quiz;
@@ -236,6 +238,40 @@ public class QuizDAO {
 			pstatement.setInt(3, chapter);
 			pstatement.executeUpdate();
 		}
+	}
+
+	/**
+	 * Salva la risposta data dallo studente per una domanda del quiz
+	 */
+	public void saveQuizAnswer(int userId, int courseId, int chapterId, int quizId, int rispostaData) throws SQLException {
+		String query = "INSERT INTO quiz_risposte (id_user, id_course, id_chapter, id_quiz, risposta_data) VALUES (?, ?, ?, ?, ?)";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, userId);
+			pstatement.setInt(2, courseId);
+			pstatement.setInt(3, chapterId);
+			pstatement.setInt(4, quizId);
+			pstatement.setInt(5, rispostaData);
+			pstatement.executeUpdate();
+		}
+	}
+
+	/**
+	 * Recupera tutte le risposte date da uno studente per un quiz di un capitolo
+	 */
+	public Map<Integer, Integer> getQuizAnswers(int userId, int courseId, int chapterId) throws SQLException {
+		Map<Integer, Integer> answers = new HashMap<>();
+		String query = "SELECT id_quiz, risposta_data FROM quiz_risposte WHERE id_user = ? AND id_course = ? AND id_chapter = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, userId);
+			pstatement.setInt(2, courseId);
+			pstatement.setInt(3, chapterId);
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					answers.put(result.getInt("id_quiz"), result.getInt("risposta_data"));
+				}
+			}
+		}
+		return answers;
 	}
 
 }

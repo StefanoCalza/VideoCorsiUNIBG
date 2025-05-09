@@ -98,7 +98,12 @@ public class CheckQuiz extends HttpServlet {
 			int right = 0;
 			for (ImmutableQuiz quiz : questions) {
 				String answer = request.getParameter(quiz.getIds());
-				if (answer != null && Integer.parseInt(answer) == quiz.getRisposta()) {
+				int rispostaData = (answer != null) ? Integer.parseInt(answer) : -1;
+				// Salva la risposta data solo se quiz finale
+				if (isFinal == 1) {
+					quizDao.saveQuizAnswer(user.getId(), courseId, chapterId, quiz.getIdQuiz(), rispostaData);
+				}
+				if (rispostaData == quiz.getRisposta()) {
 					right++;
 				} else {
 					Map<String, Object> wrong = new HashMap<>();
@@ -108,7 +113,7 @@ public class CheckQuiz extends HttpServlet {
 					wrong.put("third", quiz.getThird());
 					wrong.put("fourth", quiz.getFourth());
 					wrong.put("correct", quiz.getRisposta());
-					wrong.put("given", answer != null ? Integer.parseInt(answer) : -1);
+					wrong.put("given", rispostaData);
 					wrongAnswers.add(wrong);
 				}
 			}

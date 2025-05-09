@@ -110,6 +110,11 @@
         </nav>
         <main class="clean-block" style="margin-top: 80px;">
             <div class="container">
+                <c:if test="${param.success == '1'}">
+                    <div class="alert alert-success" role="alert">
+                        Corso convalidato con successo!
+                    </div>
+                </c:if>
                 <section class="clean-block clean-info dark" style="padding: 70px;">
                     <div class="container">
                         <div class="block-heading">

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -44,38 +45,72 @@ public class VerifyQuiz extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-
 			throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
-
-		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
-		QuizDAO quizDao = new QuizDAO(connection);
-		// set verifyed the exam
-		try {
-			quizDao.setverifyed(Integer.parseInt(request.getParameter("UserId")),
-					Integer.parseInt(request.getParameter("CourseId")),
-					Integer.parseInt(request.getParameter("ChapterId")));
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		List<ImmutableU_C> u_c = new ArrayList<ImmutableU_C>();
-		// get the other quiz to verify and redirect to the homepage of the teacher
-		try {
-			u_c = quizDao.quiz_to_verify();
-			if (u_c == null) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
-				return;
-			}
-		} catch (NumberFormatException | NullPointerException | SQLException e) {
-			// only for debugging e.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "db error");
+		// Mostra la pagina di riepilogo risultati per la convalida docente
+		String userIdStr = request.getParameter("UserId");
+		String courseIdStr = request.getParameter("CourseId");
+		String chapterIdStr = request.getParameter("ChapterId");
+		if (userIdStr == null || courseIdStr == null || chapterIdStr == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 			return;
 		}
-		request.setAttribute("userchapter", u_c);
-		request.getRequestDispatcher("/WEB-INF/jsp/homeDocente.jsp").forward(request, response);
+		int userId = Integer.parseInt(userIdStr);
+		int courseId = Integer.parseInt(courseIdStr);
+		int chapterId = Integer.parseInt(chapterIdStr);
+		QuizDAO quizDao = new QuizDAO(connection);
+		try {
+			List<immutablebeans.ImmutableQuiz> questions = quizDao.quiz_by_chapter_and_course(courseId, chapterId);
+			Map<Integer, Integer> answers = quizDao.getQuizAnswers(userId, courseId, chapterId);
+			int right = 0;
+			int total = questions.size();
+			List<java.util.Map<String, Object>> wrongAnswers = new java.util.ArrayList<>();
+			for (immutablebeans.ImmutableQuiz quiz : questions) {
+				int rispostaData = answers.getOrDefault(quiz.getIdQuiz(), -1);
+				if (rispostaData == quiz.getRisposta()) {
+					right++;
+				} else {
+					java.util.Map<String, Object> wrong = new java.util.HashMap<>();
+					wrong.put("question", quiz.getQuestion());
+					wrong.put("first", quiz.getFirst());
+					wrong.put("second", quiz.getSecond());
+					wrong.put("third", quiz.getThird());
+					wrong.put("fourth", quiz.getFourth());
+					wrong.put("correct", quiz.getRisposta());
+					wrong.put("given", rispostaData);
+					wrongAnswers.add(wrong);
+				}
+			}
+			request.setAttribute("right", right);
+			request.setAttribute("total", total);
+			request.setAttribute("wrongAnswers", wrongAnswers);
+			request.setAttribute("param", request.getParameterMap());
+			request.getRequestDispatcher("/WEB-INF/jsp/risultato_docente.jsp").forward(request, response);
+		} catch (Exception e) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore nel caricamento risultati quiz");
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Convalida il corso (passed=2) e reindirizza alla home docente
+		String userIdStr = request.getParameter("UserId");
+		String courseIdStr = request.getParameter("CourseId");
+		String chapterIdStr = request.getParameter("ChapterId");
+		if (userIdStr == null || courseIdStr == null || chapterIdStr == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
+			return;
+		}
+		int userId = Integer.parseInt(userIdStr);
+		int courseId = Integer.parseInt(courseIdStr);
+		int chapterId = Integer.parseInt(chapterIdStr);
+		QuizDAO quizDao = new QuizDAO(connection);
+		try {
+			quizDao.setverifyed(userId, courseId, chapterId);
+		} catch (SQLException e) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore nella convalida");
+			return;
+		}
+		response.sendRedirect(request.getContextPath() + "/goEsami?success=1");
 	}
 
 	public void destroy() {
