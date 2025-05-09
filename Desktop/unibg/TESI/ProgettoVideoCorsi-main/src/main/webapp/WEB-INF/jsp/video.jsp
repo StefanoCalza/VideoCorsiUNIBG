@@ -40,9 +40,14 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/index.html">
+                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                        <input type="submit" style="border:0px; background:white;" value="ESAMI PASSATI&nbsp&nbsp">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/index.jsp" method="get">
                         <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
-                    </a>
+                    </form>
                 </li>
             </ul>
         </div>
