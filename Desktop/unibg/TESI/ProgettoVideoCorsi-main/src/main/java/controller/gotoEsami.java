@@ -42,13 +42,31 @@ public class gotoEsami extends HttpServlet {
 
 		if (user != null && user.getRole() == 1) {
 			QuizDAO quizDao = new QuizDAO(connection);
+			Chapter_CourseDao courseDao = new Chapter_CourseDao(connection);
+			UserDAO userDao = new UserDAO(connection);
 			java.util.List<immutablebeans.ImmutableU_C> u_c = new java.util.ArrayList<>();
+			java.util.List<java.util.Map<String, Object>> userchapterWithNames = new java.util.ArrayList<>();
 			try {
 				u_c = quizDao.quiz_to_verify();
 				if (u_c == null) {
 					request.setAttribute("userchapter", null);
 				} else {
-					request.setAttribute("userchapter", u_c);
+					for (immutablebeans.ImmutableU_C item : u_c) {
+						java.util.Map<String, Object> map = new java.util.HashMap<>();
+						map.put("idcourse", item.getIdcourse());
+						map.put("iduser", item.getIduser());
+						map.put("idchapter", item.getIdchapter());
+						// Ottieni nome corso
+						String nomeCorso = "";
+						try { nomeCorso = courseDao.getCourseById(item.getIdcourse()).getName(); } catch(Exception e) {}
+						map.put("nomecorso", nomeCorso);
+						// Ottieni nome utente
+						String nomeUtente = "";
+						try { nomeUtente = userDao.getUsernameById(item.getIduser()); } catch(Exception e) {}
+						map.put("nomeutente", nomeUtente);
+						userchapterWithNames.add(map);
+					}
+					request.setAttribute("userchapter", userchapterWithNames);
 				}
 			} catch (Exception e) {
 				request.setAttribute("userchapter", null);

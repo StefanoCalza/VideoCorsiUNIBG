@@ -121,8 +121,8 @@
                                     <c:forEach items="${userchapter}" var="c">
                                         <div class="row align-items-center">
                                             <div class="getting-started-info">
-                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CORSO:&nbsp;&nbsp;${c.idcourse}</strong></p>
-                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>UTENTE:&nbsp;&nbsp;${c.iduser}</strong></p>
+                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CORSO:&nbsp;&nbsp;${c.nomecorso}</strong></p>
+                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>UTENTE:&nbsp;&nbsp;${c.nomeutente}</strong></p>
                                                 <form method="get" action="${pageContext.request.contextPath}/VerifyQuiz" enctype="multipart/form-data">
                                                     <input type="hidden" name="ChapterId" value="${c.idchapter}">
                                                     <input type="hidden" name="CourseId" value="${c.idcourse}">
