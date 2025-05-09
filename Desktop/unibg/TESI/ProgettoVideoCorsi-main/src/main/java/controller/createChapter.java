@@ -70,11 +70,11 @@ public class createChapter extends HttpServlet {
 			
 			// Parse and validate course ID
 			int courseId = Integer.parseInt(request.getParameter("CourseId"));
-			int maxChapterId = courseDao.getMaxChapterIdByCourseId(courseId);
+			int chapterId = courseDao.getMaxChapterIdByCourseId(courseId);
 			boolean isFinal = Integer.parseInt(isFinalParam) == 1;
 			
 			// Insert chapter
-			courseDao.insertChapter(courseId, maxChapterId + 1, 
+			courseDao.insertChapter(courseId, chapterId, 
 				request.getParameter("Chaptername"),
 				request.getParameter("Video"), 
 				isFinal, 
@@ -92,7 +92,7 @@ public class createChapter extends HttpServlet {
 					request.getParameter("r" + i + "4"),
 					Integer.parseInt(request.getParameter("g" + i)),
 					courseId,
-					maxChapterId + 1
+					chapterId
 				);
 			}
 			

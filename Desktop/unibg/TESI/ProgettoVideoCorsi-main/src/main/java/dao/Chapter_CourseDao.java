@@ -164,14 +164,17 @@ public class Chapter_CourseDao {
 		try (PreparedStatement pstatement = connection.prepareStatement(query);) {
 			pstatement.setInt(1, courseId);
 			try (ResultSet result = pstatement.executeQuery();) {
-				while (result.next()) {
+				if (result.next()) {
 					i = result.getInt("idchapter");
 				}
 			}
 		}
-
-		i++;
-		return i;
+		// Se non ci sono capitoli, il prossimo id deve essere 1
+		if (i == 0) {
+			return 1;
+		} else {
+			return i + 1;
+		}
 	}
 
 	/**
