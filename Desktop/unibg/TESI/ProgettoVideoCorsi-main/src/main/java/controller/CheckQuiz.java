@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -90,12 +92,24 @@ public class CheckQuiz extends HttpServlet {
 				}
 			}
 
-			// Controlla le risposte
+			// Lista per risposte sbagliate
+			List<Map<String, Object>> wrongAnswers = new ArrayList<>();
+
 			int right = 0;
 			for (ImmutableQuiz quiz : questions) {
 				String answer = request.getParameter(quiz.getIds());
 				if (answer != null && Integer.parseInt(answer) == quiz.getRisposta()) {
 					right++;
+				} else {
+					Map<String, Object> wrong = new HashMap<>();
+					wrong.put("question", quiz.getQuestion());
+					wrong.put("first", quiz.getFirst());
+					wrong.put("second", quiz.getSecond());
+					wrong.put("third", quiz.getThird());
+					wrong.put("fourth", quiz.getFourth());
+					wrong.put("correct", quiz.getRisposta());
+					wrong.put("given", answer != null ? Integer.parseInt(answer) : -1);
+					wrongAnswers.add(wrong);
 				}
 			}
 
@@ -113,6 +127,7 @@ public class CheckQuiz extends HttpServlet {
 			request.setAttribute("right", right);
 			request.setAttribute("total", questions.size());
 			request.setAttribute("score", score);
+			request.setAttribute("wrongAnswers", wrongAnswers);
 			request.getRequestDispatcher("/WEB-INF/jsp/risultato.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,6 +70,38 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-10">
+                        <c:if test="${not empty wrongAnswers}">
+                            <div class="alert alert-info text-start">
+                                <h5>Risposte sbagliate:</h5>
+                                <ul class="list-group">
+                                    <c:forEach var="wa" items="${wrongAnswers}">
+                                        <li class="list-group-item">
+                                            <strong>Domanda:</strong> ${wa.question}<br/>
+                                            <strong>Le tue risposte:</strong>
+                                            <ul>
+                                                <li <c:if test="${wa.given == 1}">style='color:red;font-weight:bold;'</c:if>>${wa.first}</li>
+                                                <li <c:if test="${wa.given == 2}">style='color:red;font-weight:bold;'</c:if>>${wa.second}</li>
+                                                <li <c:if test="${wa.given == 3}">style='color:red;font-weight:bold;'</c:if>>${wa.third}</li>
+                                                <li <c:if test="${wa.given == 4}">style='color:red;font-weight:bold;'</c:if>>${wa.fourth}</li>
+                                            </ul>
+                                            <strong>Risposta corretta:</strong>
+                                            <span style="color:green;font-weight:bold;">
+                                                <c:choose>
+                                                    <c:when test="${wa.correct == 1}">${wa.first}</c:when>
+                                                    <c:when test="${wa.correct == 2}">${wa.second}</c:when>
+                                                    <c:when test="${wa.correct == 3}">${wa.third}</c:when>
+                                                    <c:when test="${wa.correct == 4}">${wa.fourth}</c:when>
+                                                </c:choose>
+                                            </span>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-5">
