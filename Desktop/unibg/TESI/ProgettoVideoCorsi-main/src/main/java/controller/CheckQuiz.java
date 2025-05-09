@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,6 +25,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import beans.*;
 import dao.QuizDAO;
+import dao.Chapter_CourseDao;
 import immutablebeans.ImmutableQuiz;
 import immutablebeans.ImmutableUser;
 import utils.ConnectionHandler;
@@ -66,11 +69,25 @@ public class CheckQuiz extends HttpServlet {
 			int chapterId = Integer.parseInt(chapterIdStr);
 			
 			QuizDAO quizDao = new QuizDAO(connection);
+			Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
+
 			List<ImmutableQuiz> questions = quizDao.quiz_by_chapter_and_course(courseId, chapterId);
-			
 			if (questions == null || questions.isEmpty()) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "No quiz found for this chapter");
 				return;
+			}
+
+			// Recupero se il capitolo è finale
+			int isFinal = 0;
+			String query = "SELECT is_final FROM chapter WHERE course = ? AND chapter = ?";
+			try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+				pstatement.setInt(1, courseId);
+				pstatement.setInt(2, chapterId);
+				try (ResultSet result = pstatement.executeQuery()) {
+					if (result.next()) {
+						isFinal = result.getInt("is_final");
+					}
+				}
 			}
 
 			// Controlla le risposte
@@ -82,13 +99,15 @@ public class CheckQuiz extends HttpServlet {
 				}
 			}
 
-			// Se >=75% va in attesa di convalida docente (passed=1), altrimenti non passato (passed=0)
 			float score = (float) right / questions.size();
 			if (score >= 0.75) {
-				quizDao.setpassed(user.getId(), courseId, chapterId); // passed=1, attesa convalida docente
+				if (isFinal == 1) {
+					quizDao.setpassed(user.getId(), courseId, chapterId); // in attesa di convalida docente
+				} else {
+					quizDao.setverifyed(user.getId(), courseId, chapterId); // direttamente superato
+				}
 			} else {
-				// Imposta come non passato (passed=0)
-				quizDao.setnotpassed(user.getId(), courseId, chapterId); // da implementare se non esiste
+				quizDao.setnotpassed(user.getId(), courseId, chapterId); // non passato
 			}
 
 			request.setAttribute("right", right);

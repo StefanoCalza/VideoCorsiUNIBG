@@ -320,45 +320,26 @@ public class Chapter_CourseDao {
 	 * @throws SQLException
 	 */
 	public List<ImmutableCourse> exam_passed(int id_user) throws SQLException {
-		List<ImmutableCourse> courses_passed = new ArrayList<ImmutableCourse>();
-
-		try {
-			// Verifica che la connessione sia valida
-			if (connection == null || connection.isClosed()) {
-				System.out.println("Errore: connessione al database non valida");
-				throw new SQLException("Database connection is not valid");
-			}
-
-			// Query ottimizzata per PostgreSQL con più informazioni
-			String query = "SELECT DISTINCT c.idcourses, c.name, c.description " +
-			              "FROM iscrizioni i " +
-			              "JOIN courses c ON i.idCourse = c.idcourses " +
-			              "JOIN chapter ch ON ch.course = i.idCourse AND ch.chapter = i.idChapter " +
-			              "WHERE i.id_User = ? AND i.passed > 0 AND ch.is_final = 1";
-			
-			System.out.println("Executing query for user ID: " + id_user);
-			System.out.println("Query: " + query);
-			
-			try (PreparedStatement pstatement = connection.prepareStatement(query);) {
-				pstatement.setInt(1, id_user);
-				try (ResultSet result = pstatement.executeQuery();) {
-					while (result.next()) {
-						Course course = new Course();
-						course.setIdCourse(result.getInt("idcourses"));
-						course.setName(result.getString("name"));
-						course.setDescription(result.getString("description"));
-						courses_passed.add(course);
-						System.out.println("Found passed course: " + course.getName() + " (ID: " + course.getIdCourse() + ")");
-					}
+		List<ImmutableCourse> courses_passed = new ArrayList<>();
+		String query = "SELECT c.idcourses, c.name, c.description FROM courses c WHERE NOT EXISTS ("
+			+ "SELECT 1 FROM chapter ch "
+			+ "LEFT JOIN iscrizioni i ON i.idCourse = ch.course AND i.idChapter = ch.chapter AND i.id_User = ? "
+			+ "WHERE ch.course = c.idcourses AND ((ch.is_final = 0 AND (i.passed IS NULL OR i.passed <> 2)) "
+			+ "OR (ch.is_final = 1 AND (i.passed IS NULL OR i.passed <> 2)))"
+			+ ")";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, id_user);
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					Course course = new Course();
+					course.setIdCourse(result.getInt("idcourses"));
+					course.setName(result.getString("name"));
+					course.setDescription(result.getString("description"));
+					courses_passed.add(course);
 				}
 			}
-			System.out.println("Total passed courses found: " + courses_passed.size());
-			return courses_passed;
-		} catch (SQLException e) {
-			System.out.println("Errore SQL in exam_passed: " + e.getMessage());
-			e.printStackTrace();
-			throw e;
 		}
+		return courses_passed;
 	}
 
 	public List<ImmutableCourse> getCoursesNotSubscribedByUserId(int userId) throws SQLException {
