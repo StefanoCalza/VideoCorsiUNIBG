@@ -274,4 +274,17 @@ public class QuizDAO {
 		return answers;
 	}
 
+	/**
+	 * Cancella tutte le risposte date da uno studente per un quiz di un capitolo
+	 */
+	public void deleteQuizAnswers(int userId, int courseId, int chapterId) throws SQLException {
+		String query = "DELETE FROM quiz_risposte WHERE id_user = ? AND id_course = ? AND id_chapter = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, userId);
+			pstatement.setInt(2, courseId);
+			pstatement.setInt(3, chapterId);
+			pstatement.executeUpdate();
+		}
+	}
+
 }

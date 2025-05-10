@@ -106,6 +106,7 @@ public class VerifyQuiz extends HttpServlet {
 		QuizDAO quizDao = new QuizDAO(connection);
 		try {
 			quizDao.setverifyed(userId, courseId, chapterId);
+			quizDao.deleteQuizAnswers(userId, courseId, chapterId);
 		} catch (SQLException e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore nella convalida");
 			return;
