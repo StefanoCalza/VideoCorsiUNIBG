@@ -34,7 +34,7 @@ public class Chapter_CourseDao {
 	 */
 	public List<ImmutableCourse> getCoursesByUserId(int userId) throws SQLException {
 		List<ImmutableCourse> courses = new ArrayList<ImmutableCourse>();
-		String query = "SELECT DISTINCT idcourses,name,description FROM courses join iscrizioni ON iscrizioni.idCourse = courses.idcourses where id_User = ? ";
+		String query = "SELECT DISTINCT idcourses,name,description FROM courses join iscrizioni ON iscrizioni.idCourse = courses.idcourses where id_User = ? ORDER BY idcourses ASC";
 
 		try (PreparedStatement pstatement = connection.prepareStatement(query);) {
 			pstatement.setInt(1, userId);
@@ -60,7 +60,7 @@ public class Chapter_CourseDao {
 	 */
 	public List<ImmutableCourse> getCoursesNotFollowedByUserId(int userId) throws SQLException {
 		List<ImmutableCourse> courses = new ArrayList<ImmutableCourse>();
-		String query = "SELECT * FROM courses where idcourses NOT IN (select distinct idCourse from iscrizioni where id_User = ?)";
+		String query = "SELECT * FROM courses where idcourses NOT IN (select distinct idCourse from iscrizioni where id_User = ?) ORDER BY idcourses ASC";
 		try (PreparedStatement pstatement = connection.prepareStatement(query);) {
 			pstatement.setInt(1, userId);
 			try (ResultSet result = pstatement.executeQuery();) {
@@ -111,7 +111,7 @@ public class Chapter_CourseDao {
 	public List<ImmutableChapter> getChaptersByCourseId(int courseId) throws SQLException {
 		List<ImmutableChapter> chapters = new ArrayList<ImmutableChapter>();
 
-		String query = "SELECT * from chapter WHERE course = ?";
+		String query = "SELECT * from chapter WHERE course = ? ORDER BY chapter ASC";
 		try (PreparedStatement pstatement = connection.prepareStatement(query);) {
 			pstatement.setInt(1, courseId);
 
