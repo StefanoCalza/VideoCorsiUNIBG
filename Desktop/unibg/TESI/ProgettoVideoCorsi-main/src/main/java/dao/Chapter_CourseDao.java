@@ -215,7 +215,9 @@ public class Chapter_CourseDao {
 
 			try (ResultSet result = pstatement.executeQuery();) {
 				while (result.next()) {
+					c.setIdCourse(result.getInt("idcourses"));
 					c.setName(result.getString("name"));
+					c.setDescription(result.getString("description"));
 				}
 			}
 		}
@@ -412,6 +414,30 @@ public class Chapter_CourseDao {
 			}
 		}
 		return courses;
+	}
+
+	/**
+	 * Recupera un capitolo dato courseId e chapterId
+	 */
+	public ImmutableChapter getChapterByCourseAndId(int courseId, int chapterId) throws SQLException {
+		String query = "SELECT * FROM chapter WHERE course = ? AND chapter = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, courseId);
+			pstatement.setInt(2, chapterId);
+			try (ResultSet result = pstatement.executeQuery()) {
+				if (result.next()) {
+					Chapter chapter = new Chapter();
+					chapter.setIdChapter(result.getInt("chapter"));
+					chapter.setIdCourse(result.getInt("course"));
+					chapter.setName(result.getString("name"));
+					chapter.setVideo(result.getString("video"));
+					chapter.setDescription(result.getString("description"));
+					chapter.setIsFinal(result.getInt("is_final"));
+					return chapter;
+				}
+			}
+		}
+		return null;
 	}
 
 }

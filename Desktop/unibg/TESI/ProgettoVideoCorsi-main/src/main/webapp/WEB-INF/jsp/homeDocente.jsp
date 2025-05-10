@@ -48,9 +48,9 @@
                             <div class="card-body">
                                 <h3 class="card-title">${corso.name}</h3>
                                 <p class="card-text"><strong>${corso.description}</strong></p>
-                                <form method="get" action="${pageContext.request.contextPath}/ChaptersDocente">
+                                <form method="get" action="${pageContext.request.contextPath}/GestisciCorso">
                                     <input type="hidden" name="CourseId" value="${corso.idCourse}">
-                                    <button type="submit" class="btn btn-outline-primary">Gestisci capitoli</button>
+                                    <button type="submit" class="btn btn-outline-success">Gestisci corso</button>
                                 </form>
                             </div>
                         </div>
