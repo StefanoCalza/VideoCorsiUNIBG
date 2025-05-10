@@ -102,7 +102,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                         <input type="submit" value="HOME">
                     </form>
                 </li>

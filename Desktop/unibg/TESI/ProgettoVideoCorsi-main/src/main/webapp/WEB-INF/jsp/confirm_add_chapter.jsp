@@ -26,7 +26,7 @@
 <body>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="${pageContext.request.contextPath}/GetCourse">VideoCorsiUNIBG</a>
+        <a class="navbar-brand logo" href="${pageContext.request.contextPath}/HomeDocente">VideoCorsiUNIBG</a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="post">
                         <button type="submit" class="btn btn-link nav-link">HOME</button>
                     </form>
                 </li>
@@ -77,7 +77,7 @@
                                 <input type="hidden" name="description_corse" value="${description_corse}">
                                 <button type="submit" class="btn btn-primary btn-lg">Aggiungi un altro capitolo</button>
                             </form>
-                            <form method="get" action="${pageContext.request.contextPath}/GetCourse">
+                            <form method="get" action="${pageContext.request.contextPath}/HomeDocente">
                                 <button type="submit" class="btn btn-secondary btn-lg">Torna alla home docente</button>
                             </form>
                         </div>

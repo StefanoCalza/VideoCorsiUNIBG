@@ -27,7 +27,7 @@
                 <c:choose>
                     <c:when test="${user.role == 1}">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                                 <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
                             </form>
                         </li>
@@ -44,7 +44,7 @@
                     </c:when>
                     <c:when test="${user.role == 2}">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                                 <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
                             </form>
                         </li>

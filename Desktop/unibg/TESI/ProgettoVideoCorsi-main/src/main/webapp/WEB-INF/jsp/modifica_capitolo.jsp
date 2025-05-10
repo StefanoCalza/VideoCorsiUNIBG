@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li>
-                    <form action="${pageContext.request.contextPath}/gohome" method="post">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                         <input type="submit" style="border:0px; background:white;" value="HOME&nbsp;&nbsp;">
                     </form>
                 </li>

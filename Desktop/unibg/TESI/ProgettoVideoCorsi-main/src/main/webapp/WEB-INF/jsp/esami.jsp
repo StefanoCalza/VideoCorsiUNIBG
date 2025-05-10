@@ -87,7 +87,7 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                                 <button type="submit" class="btn btn-link nav-link">HOME</button>
                             </form>
                         </li>
@@ -162,7 +162,7 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                                 <button type="submit" class="btn btn-link nav-link">HOME</button>
                             </form>
                         </li>
