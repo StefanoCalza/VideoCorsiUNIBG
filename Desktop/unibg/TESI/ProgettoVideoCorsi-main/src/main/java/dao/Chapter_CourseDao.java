@@ -440,4 +440,29 @@ public class Chapter_CourseDao {
 		return null;
 	}
 
+	/**
+	 * Update a chapter in a course
+	 * 
+	 * @param courseId the course ID
+	 * @param chapterId the chapter ID
+	 * @param name the chapter name
+	 * @param video the video URL
+	 * @param isFinal whether this is a final chapter
+	 * @param description the chapter description
+	 * @throws SQLException if a database error occurs
+	 */
+	public void updateChapter(int courseId, int chapterId, String name, String video, boolean isFinal, String description)
+			throws SQLException {
+		String query = "UPDATE chapter SET name = ?, video = ?, is_final = ?, description = ? WHERE course = ? AND chapter = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setString(1, name);
+			pstatement.setString(2, video);
+			pstatement.setInt(3, isFinal ? 1 : 0);
+			pstatement.setString(4, description);
+			pstatement.setInt(5, courseId);
+			pstatement.setInt(6, chapterId);
+			pstatement.executeUpdate();
+		}
+	}
+
 }

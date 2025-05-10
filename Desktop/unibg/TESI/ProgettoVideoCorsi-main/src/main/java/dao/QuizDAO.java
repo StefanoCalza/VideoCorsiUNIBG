@@ -287,4 +287,29 @@ public class QuizDAO {
 		}
 	}
 
+	/**
+	 * Aggiorna una domanda quiz esistente
+	 * @param idquiz id della domanda
+	 * @param domanda testo domanda
+	 * @param q1 risposta 1
+	 * @param q2 risposta 2
+	 * @param q3 risposta 3
+	 * @param q4 risposta 4
+	 * @param r risposta corretta (1-4)
+	 * @throws SQLException
+	 */
+	public void updateQuiz(int idquiz, String domanda, String q1, String q2, String q3, String q4, int r) throws SQLException {
+		String query = "UPDATE quiz_provvisorio SET domanda = ?, quesito1 = ?, quesito2 = ?, quesito3 = ?, quesito4 = ?, risposta_corretta = ? WHERE idquiz_provvisorio = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setString(1, domanda);
+			pstatement.setString(2, q1);
+			pstatement.setString(3, q2);
+			pstatement.setString(4, q3);
+			pstatement.setString(5, q4);
+			pstatement.setInt(6, r);
+			pstatement.setInt(7, idquiz);
+			pstatement.executeUpdate();
+		}
+	}
+
 }

@@ -45,16 +45,21 @@
             <c:forEach items="${quizList}" var="quiz" varStatus="status">
                 <div class="mb-3 p-3 border rounded">
                     <label class="form-label">Domanda ${status.index + 1}:</label>
-                    <input type="text" class="form-control mb-2" name="quiz_question_${quiz.idQuiz}" value="${quiz.question}" readonly>
+                    <input type="text" class="form-control mb-2" name="quiz_question_${quiz.idQuiz}" value="${quiz.question}" required>
                     <label>Risposte:</label>
                     <ul>
-                        <li>A: <input type="text" class="form-control d-inline w-auto" name="quiz_a_${quiz.idQuiz}" value="${quiz.first}" readonly></li>
-                        <li>B: <input type="text" class="form-control d-inline w-auto" name="quiz_b_${quiz.idQuiz}" value="${quiz.second}" readonly></li>
-                        <li>C: <input type="text" class="form-control d-inline w-auto" name="quiz_c_${quiz.idQuiz}" value="${quiz.third}" readonly></li>
-                        <li>D: <input type="text" class="form-control d-inline w-auto" name="quiz_d_${quiz.idQuiz}" value="${quiz.fourth}" readonly></li>
+                        <li>A: <input type="text" class="form-control d-inline w-auto" name="quiz_a_${quiz.idQuiz}" value="${quiz.first}" required></li>
+                        <li>B: <input type="text" class="form-control d-inline w-auto" name="quiz_b_${quiz.idQuiz}" value="${quiz.second}" required></li>
+                        <li>C: <input type="text" class="form-control d-inline w-auto" name="quiz_c_${quiz.idQuiz}" value="${quiz.third}" required></li>
+                        <li>D: <input type="text" class="form-control d-inline w-auto" name="quiz_d_${quiz.idQuiz}" value="${quiz.fourth}" required></li>
                     </ul>
                     <label>Risposta corretta:</label>
-                    <input type="text" class="form-control w-auto d-inline" name="quiz_correct_${quiz.idQuiz}" value="${quiz.risposta}" readonly>
+                    <select class="form-select w-auto d-inline" name="quiz_correct_${quiz.idQuiz}" required>
+                        <option value="1" <c:if test="${quiz.risposta == 1}">selected</c:if>>A</option>
+                        <option value="2" <c:if test="${quiz.risposta == 2}">selected</c:if>>B</option>
+                        <option value="3" <c:if test="${quiz.risposta == 3}">selected</c:if>>C</option>
+                        <option value="4" <c:if test="${quiz.risposta == 4}">selected</c:if>>D</option>
+                    </select>
                 </div>
             </c:forEach>
             <button type="submit" class="btn btn-outline-primary">Salva modifiche</button>

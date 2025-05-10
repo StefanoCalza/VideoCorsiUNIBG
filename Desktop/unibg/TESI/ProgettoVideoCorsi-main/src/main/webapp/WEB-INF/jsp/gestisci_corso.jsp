@@ -19,6 +19,11 @@
             <h2>Gestione Capitoli - ${course.name}</h2>
             <p>${course.description}</p>
         </div>
+        <c:if test="${param.success == '1'}">
+            <div class="alert alert-success" role="alert">
+                Modifica del capitolo avvenuta con successo!
+            </div>
+        </c:if>
         <div class="row">
             <c:if test="${empty chapters}">
                 <div class="alert alert-info" role="alert">
