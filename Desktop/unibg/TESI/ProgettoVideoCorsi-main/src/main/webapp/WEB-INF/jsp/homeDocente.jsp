@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,32 @@
 <section class="clean-block clean-info dark" style="padding: 70px;">
         <div class="container">
             <div class="block-heading">
+                <h2>TUTTI I CORSI</h2>
+            </div>
+            <div class="row">
+                <c:if test="${empty allCourses}">
+                    <div class="alert alert-info" role="alert">
+                        Nessun corso disponibile al momento.
+                    </div>
+                </c:if>
+                <c:forEach items="${allCourses}" var="corso">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">${corso.name}</h3>
+                                <p class="card-text"><strong>${corso.description}</strong></p>
+                                <form method="get" action="${pageContext.request.contextPath}/ChaptersDocente">
+                                    <input type="hidden" name="CourseId" value="${corso.idCourse}">
+                                    <button type="submit" class="btn btn-outline-primary">Gestisci capitoli</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </section>
+
 <section class="clean-block clean-form dark">
                         <div class="container">
                             <div class="block-heading"></div>
@@ -45,9 +72,6 @@
 
  <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">CREA CORSO </button>
 </form>	
-</div>
-</div>        
-</section>  
 </div>
 </div>        
 </section>  

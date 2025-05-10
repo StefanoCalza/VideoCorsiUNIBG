@@ -64,22 +64,8 @@ public class CheckLogin extends HttpServlet {
 			session.setAttribute("user", user);
 			
 			if (user.getRole() == 1) {
-				QuizDAO quizDao = new QuizDAO(connection);
-				List<ImmutableU_C> u_c = new ArrayList<ImmutableU_C>();
-				try {
-					u_c = quizDao.quiz_to_verify();
-					if (u_c == null) {
-						response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
-						return;
-					}
-				} catch (NumberFormatException | NullPointerException | SQLException e) {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "db error");
-					return;
-				}
-				request.setAttribute("userchapter", u_c);
-				//request.getRequestDispatcher("homeDocente.jsp").forward(request, response);
-				//request.getRequestDispatcher("/WEB-INF/jsp/homeDocente.jsp").forward(request, response);
-				request.getRequestDispatcher("GetCourse").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/HomeDocente");
+				return;
 			} else {
 				request.getRequestDispatcher("GetCourse").forward(request, response);
 			}

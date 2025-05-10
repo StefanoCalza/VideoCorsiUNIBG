@@ -21,6 +21,7 @@ import beans.*;
 import dao.*;
 import immutablebeans.ImmutableU_C;
 import immutablebeans.ImmutableUser;
+import immutablebeans.ImmutableCourse;
 import utils.*;
 
 @WebServlet("/gohome")
@@ -47,19 +48,23 @@ public class gohome extends HttpServlet {
 		}
 		else {
 			QuizDAO quizDao = new QuizDAO(connection);
+			Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
 			List<ImmutableU_C> u_c = new ArrayList<ImmutableU_C>();
+			List<ImmutableCourse> allCourses = new ArrayList<>();
 			try {
 				u_c = quizDao.quiz_to_verify();
+				allCourses = chapterDao.getAllCourses();
+				Logger.logInfo("DEBUG: Numero corsi caricati per docente = " + allCourses.size());
 				if (u_c == null) {
 					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
 					return;
 				}
 			} catch (NumberFormatException | NullPointerException | SQLException e) {
-				
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "db error");
 				return;
 			}
 			request.setAttribute("userchapter", u_c);
+			request.setAttribute("allCourses", allCourses);
 			request.getRequestDispatcher("homeDocente.jsp").forward(request, response);
 		}
 

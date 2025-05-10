@@ -392,4 +392,26 @@ public class Chapter_CourseDao {
 		}
 	}
 
+	/**
+	 * Restituisce la lista di tutti i corsi
+	 * @return lista di tutti i corsi
+	 * @throws SQLException
+	 */
+	public List<ImmutableCourse> getAllCourses() throws SQLException {
+		List<ImmutableCourse> courses = new ArrayList<>();
+		String query = "SELECT idcourses, name, description FROM courses";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					Course course = new Course();
+					course.setIdCourse(result.getInt("idcourses"));
+					course.setName(result.getString("name"));
+					course.setDescription(result.getString("description"));
+					courses.add(course);
+				}
+			}
+		}
+		return courses;
+	}
+
 }

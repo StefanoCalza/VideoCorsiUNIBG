@@ -90,6 +90,8 @@ public class GetCourse extends HttpServlet {
 		} else {
 			QuizDAO quizDao = new QuizDAO(connection);
 			List<ImmutableU_C> u_c = new ArrayList<ImmutableU_C>();
+			request.setAttribute("chapter", courses);
+			request.setAttribute("coursesnotin", coursesNotFollowed);
 			try {
 				TransactionManager.beginTransaction(connection);
 				u_c = quizDao.quiz_to_verify();
