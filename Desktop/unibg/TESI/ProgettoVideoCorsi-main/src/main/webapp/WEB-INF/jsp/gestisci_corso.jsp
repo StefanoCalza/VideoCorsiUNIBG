@@ -9,6 +9,20 @@
     <title>Gestisci Corso</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/navbar-custom.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f6f6f6;
+        }
+        main, .main-content, .clean-block {
+            flex: 1 0 auto;
+        }
+        .page-footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
@@ -44,7 +58,7 @@
         </div>
     </div>
 </nav>
-<section class="clean-block clean-info dark" style="padding: 70px;">
+<main class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
         <div class="block-heading">
             <h2>Gestione Capitoli - ${course.name}</h2>
@@ -78,7 +92,7 @@
             </c:forEach>
         </div>
     </div>
-</section>
+</main>
 <footer class="page-footer dark">
     <div class="footer-copyright">
         <p>© VideoCorsiUNIBG Copyright 2025. All rights reserved.</p>

@@ -13,6 +13,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/vanilla-zoom.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f6f6f6;
+        }
+        main, .main-content, .clean-block {
+            flex: 1 0 auto;
+        }
+        .page-footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -51,9 +65,7 @@
     </div>
 </nav>
 
-<br><br><br><br><br>
-
-<section class="clean-block clean-info dark" style="padding: 70px;">
+<main class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
         <div class="block-heading">
             <h2>PROFILO UTENTE</h2>
@@ -98,7 +110,7 @@
             </div>
         </div>
     </div>
-</section>
+</main>
 
 <footer class="page-footer dark">
     <div class="footer-copyright">
