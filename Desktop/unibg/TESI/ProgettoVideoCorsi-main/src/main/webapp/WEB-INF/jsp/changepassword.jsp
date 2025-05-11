@@ -16,72 +16,126 @@
 </head>
 <body>
 
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f6f6f6;
+        }
+        main, .main-content, .clean-block {
+            flex: 1 0 auto;
+        }
+        .page-footer {
+            flex-shrink: 0;
+            background: #222;
+            color: #fff;
+        }
+    </style>
+
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
-            <a class="navbar-brand logo">VideoCorsiUNIBG</a>
+            <a class="navbar-brand logo" href="${pageContext.request.contextPath}/">
+                VideoCorsiUNIBG
+            </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                            <input type="submit" class="btn btn-link nav-link" value="HOME">
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                            <input type="submit" class="btn btn-link nav-link" value="PROFILO">
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                            <input type="submit" class="btn btn-link nav-link" value="ESAMI">
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
-                            <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
-                        </form>
-                    </li>
+                    <c:choose>
+                        <c:when test="${user.role == 1}">
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                                    <input type="submit" class="btn btn-link nav-link" value="HOME">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/Logout" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                                </form>
+                            </li>
+                        </c:when>
+                        <c:when test="${user.role == 2}">
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="HOME">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/GetPassedExam" method="get">
+                                    <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form action="${pageContext.request.contextPath}/Logout" method="post">
+                                    <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                                </form>
+                            </li>
+                        </c:when>
+                    </c:choose>
                 </ul>
             </div>
         </div>
     </nav>
         
-<section class="clean-block clean-form dark" style="padding: 84px;">
-        <div class="container">
-            <div class="block-heading">
-                <h2 class="text-info">Modifica Password</h2>
-                <p></p>
-            </div>
-            <form action="ChangePassword" method="POST">
-                <div class="mb-3">
-                    <label class="form-label" for="current_pwd">Password attuale</label>
-                    <input type="password" class="form-control" name="current_pwd" id="current_pwd" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="new_pwd">Nuova password</label>
-                    <input type="password" class="form-control" name="new_pwd" id="new_pwd" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="repeat_pwd">Ripeti nuova password</label>
-                    <input type="password" class="form-control" name="repeat_pwd" id="repeat_pwd" required>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-primary">Cambia password</button>
-                </div>
-                <c:if test="${not empty errorMsg}">
-                    <div class="alert alert-danger">${errorMsg}</div>
-                </c:if>
-                <c:if test="${not empty successMsg}">
-                    <div class="alert alert-success">${successMsg}</div>
-                </c:if>
-            </form>
+<main class="clean-block clean-info dark" style="padding: 70px; min-height: 80vh; background: #f6f6f6;">
+    <div class="container">
+        <div class="block-heading text-center mb-4">
+            <h2 class="fw-bold">MODIFICA PASSWORD</h2>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </section>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card shadow-sm p-4">
+                    <form action="${pageContext.request.contextPath}/ChangePassword" method="post">
+                        <div class="mb-4">
+                            <label class="form-label" for="current_pwd"><i class="fa fa-lock"></i> Password attuale</label>
+                            <input type="password" class="form-control" name="current_pwd" id="current_pwd" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="new_pwd"><i class="fa fa-key"></i> Nuova password</label>
+                            <input type="password" class="form-control" name="new_pwd" id="new_pwd" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="repeat_pwd"><i class="fa fa-key"></i> Ripeti nuova password</label>
+                            <input type="password" class="form-control" name="repeat_pwd" id="repeat_pwd" required>
+                        </div>
+                        <div class="d-grid gap-2 mb-3">
+                            <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase">CAMBIA PASSWORD</button>
+                        </div>
+                        <c:if test="${not empty errorMsg}">
+                            <div class="alert alert-danger text-center">${errorMsg}</div>
+                        </c:if>
+                        <c:if test="${not empty successMsg}">
+                            <div class="alert alert-success text-center">${successMsg}</div>
+                        </c:if>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
     
 
 <footer class="page-footer dark">

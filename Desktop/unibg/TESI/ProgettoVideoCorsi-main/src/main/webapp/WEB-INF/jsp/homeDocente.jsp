@@ -70,9 +70,13 @@
                             <div class="card-body">
                                 <h3 class="card-title">${corso.name}</h3>
                                 <p class="card-text"><strong>${corso.description}</strong></p>
-                                <form method="get" action="${pageContext.request.contextPath}/GestisciCorso">
+                                <form method="get" action="${pageContext.request.contextPath}/GestisciCorso" style="display:inline-block;">
                                     <input type="hidden" name="CourseId" value="${corso.idCourse}">
                                     <button type="submit" class="btn btn-outline-success">Gestisci corso</button>
+                                </form>
+                                <form method="post" action="${pageContext.request.contextPath}/EliminaCorso" style="display:inline-block; margin-left: 8px;">
+                                    <input type="hidden" name="CourseId" value="${corso.idCourse}">
+                                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare questo corso? Verranno eliminati anche tutti i capitoli e quiz associati. L\'operazione è irreversibile.');">Elimina corso</button>
                                 </form>
                             </div>
                         </div>
@@ -117,7 +121,11 @@
     </div>
 </section>
 
-
+<c:if test="${param.success == '2'}">
+    <div class="alert alert-success" role="alert">
+        Corso eliminato con successo!
+    </div>
+</c:if>
 
 <footer class="page-footer dark">
     <div class="footer-copyright">

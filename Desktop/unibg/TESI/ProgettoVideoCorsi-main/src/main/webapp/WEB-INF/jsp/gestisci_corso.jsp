@@ -61,12 +61,17 @@
 <main class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
         <div class="block-heading">
-            <h2>Gestione Capitoli - ${course.name}</h2>
+            <h2>${course.name}</h2>
             <p>${course.description}</p>
         </div>
         <c:if test="${param.success == '1'}">
             <div class="alert alert-success" role="alert">
                 Modifica del capitolo avvenuta con successo!
+            </div>
+        </c:if>
+        <c:if test="${param.success == '2'}">
+            <div class="alert alert-success" role="alert">
+                Capitolo eliminato con successo!
             </div>
         </c:if>
         <div class="row">
@@ -81,10 +86,15 @@
                         <div class="card-body">
                             <h4 class="card-title">${chapter.name}</h4>
                             <p class="card-text">${chapter.description}</p>
-                            <form method="get" action="${pageContext.request.contextPath}/ModificaCapitolo">
+                            <form method="get" action="${pageContext.request.contextPath}/ModificaCapitolo" style="display:inline-block;">
                                 <input type="hidden" name="CourseId" value="${course.idCourse}">
                                 <input type="hidden" name="ChapterId" value="${chapter.idChapter}">
                                 <button type="submit" class="btn btn-outline-warning">Modifica</button>
+                            </form>
+                            <form method="post" action="${pageContext.request.contextPath}/EliminaCapitolo" style="display:inline-block; margin-left: 8px;">
+                                <input type="hidden" name="CourseId" value="${course.idCourse}">
+                                <input type="hidden" name="ChapterId" value="${chapter.idChapter}">
+                                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare questo capitolo e il relativo quiz? L\'operazione è irreversibile.');">Elimina</button>
                             </form>
                         </div>
                     </div>
