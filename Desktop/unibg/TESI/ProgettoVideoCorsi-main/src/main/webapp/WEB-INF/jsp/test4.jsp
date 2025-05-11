@@ -24,49 +24,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
-                <c:choose>
-                    <c:when test="${user.role == 2}">
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="HOME">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="PROFILO">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="ESAMI">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                                <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
-                            </form>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="HOME">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="PROFILO">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                                <input type="submit" class="btn btn-link nav-link" value="ESAMI">
-                            </form>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/index.jsp" method="get">
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>

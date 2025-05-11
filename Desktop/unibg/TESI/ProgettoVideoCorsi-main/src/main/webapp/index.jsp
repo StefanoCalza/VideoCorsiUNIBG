@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>PROGETTO VIDEOCORSI</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/navbar-custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
@@ -14,24 +15,23 @@
 </head>
 <body>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container">
-            <a class="navbar-brand logo" href="${pageContext.request.contextPath}/index.jsp">VideoCorsiUNIBG</a>
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-                     <li>
-                         <form action="${pageContext.request.contextPath}/goLogin" method="post">
-                             <input type="submit" style="border:0px; background:white;" value="LOGIN&nbsp;&nbsp;">
-                             <p th:text="${errorMsg}"></p>
-                         </form>
-                     </li>
-                </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand logo" href="${pageContext.request.contextPath}/index.jsp">VideoCorsiUNIBG</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goLogin" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGIN">
+                    </form>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
         
     <main class="page landing-page">
         <section class="clean-block clean-hero" style="color: rgba(9,162,255,0);">

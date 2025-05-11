@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>PROGETTO VIDEOCORSI</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/navbar-custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
@@ -24,24 +25,24 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
-                        <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/index.html">
-                        <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
-                    </a>
+                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                    </form>
                 </li>
             </ul>
         </div>

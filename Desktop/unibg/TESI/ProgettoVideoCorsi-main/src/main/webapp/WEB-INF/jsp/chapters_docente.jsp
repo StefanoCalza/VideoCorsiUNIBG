@@ -8,32 +8,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROGETTO VIDEOCORSI - Capitoli</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/navbar-custom.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/gohome">PROGETTO VIDEOCORSI</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand logo" href="${pageContext.request.contextPath}/gohome">VideoCorsiUNIBG</a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/gohome">Home</a>
+                        <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                            <input type="submit" class="btn btn-link nav-link" value="HOME">
+                        </form>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/goProfile">Profilo</a>
+                        <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                            <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                        </form>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/goEsami">Convalida Corsi</a>
+                        <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                            <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
+                        </form>
                     </li>
-                </ul>
-                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
+                        <form action="${pageContext.request.contextPath}/Logout" method="post">
+                            <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                        </form>
                     </li>
                 </ul>
             </div>

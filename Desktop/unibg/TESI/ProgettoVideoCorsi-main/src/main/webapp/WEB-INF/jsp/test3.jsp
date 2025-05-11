@@ -17,14 +17,38 @@
 
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo">VideoCorsiUNIBG</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-             		<li > <form action="GetCourse" method="post"> <input type="submit" style="border:0px; background:white;" value="CORSI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                    </form>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
 <section class="clean-block clean-info dark" style="padding: 70px;">

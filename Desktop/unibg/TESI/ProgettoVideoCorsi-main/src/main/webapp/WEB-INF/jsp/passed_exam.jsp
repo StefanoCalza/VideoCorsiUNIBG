@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Corsi Completati - VideoCorsi UNIBG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/navbar-custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
@@ -61,7 +62,7 @@
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="#">VideoCorsiUNIBG</a>
+        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -69,36 +70,29 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <c:choose>
-                        <c:when test="${user.role == 2}">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                                <button type="submit" class="btn btn-link nav-link">HOME</button>
-                            </form>
-                        </c:when>
-                        <c:otherwise>
-                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
-                                <button type="submit" class="btn btn-link nav-link">HOME</button>
-                            </form>
-                        </c:otherwise>
-                    </c:choose>
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
+                    </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                        <button type="submit" class="btn btn-link nav-link">PROFILO</button>
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <button type="submit" class="btn btn-link nav-link">ESAMI</button>
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <button type="submit" class="btn btn-link nav-link active">CORSI COMPLETATI</button>
+                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link">LOGOUT</a>
+                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                    </form>
                 </li>
             </ul>
         </div>
