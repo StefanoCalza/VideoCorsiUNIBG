@@ -42,5 +42,4 @@ temp/
 *.sqlite
 
 # Application specific
-src/main/webapp/assets/
 src/main/webapp/WEB-INF/lib/
