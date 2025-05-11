@@ -74,10 +74,6 @@
                                     <input type="hidden" name="CourseId" value="${corso.idCourse}">
                                     <button type="submit" class="btn btn-outline-success">Gestisci corso</button>
                                 </form>
-                                <form method="post" action="${pageContext.request.contextPath}/EliminaCorso" style="display:inline-block; margin-left: 8px;">
-                                    <input type="hidden" name="CourseId" value="${corso.idCourse}">
-                                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare questo corso? Verranno eliminati anche tutti i capitoli e quiz associati. L\'operazione è irreversibile.');">Elimina corso</button>
-                                </form>
                             </div>
                         </div>
                     </div>

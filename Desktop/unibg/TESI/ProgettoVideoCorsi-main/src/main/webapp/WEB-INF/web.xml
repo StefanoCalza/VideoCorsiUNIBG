@@ -44,4 +44,15 @@
         <error-code>500</error-code>
         <location>/WEB-INF/jsp/error500.jsp</location>
     </error-page>
+
+    <!--
+    <servlet>
+        <servlet-name>EliminaCorso</servlet-name>
+        <servlet-class>controller.EliminaCorso</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminaCorso</servlet-name>
+        <url-pattern>/EliminaCorso</url-pattern>
+    </servlet-mapping>
+    -->
 </web-app> 
