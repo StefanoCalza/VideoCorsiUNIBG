@@ -23,16 +23,12 @@
             flex: 1;
         }
         .card {
-            transition: transform .2s;
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border: none;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
         .block-heading {
-            padding-bottom: 40px;
+            padding-bottom: 20px;
             text-align: center;
         }
         .block-heading h2 {
@@ -58,7 +54,6 @@
         }
         .btn-primary:hover {
             background-color: #2a7bc0;
-            transform: translateY(-2px);
         }
         .footer-copyright {
             padding: 20px 0;
@@ -92,26 +87,32 @@
 <main class="clean-block" style="margin-top: 80px;">
     <div class="container">
         <div class="block-heading">
-            <h2>ACCEDI</h2>
+            <h2 class="mb-2">ACCEDI</h2>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
+            <div class="col-md-7 col-lg-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-3">
                         <form action="${pageContext.request.contextPath}/CheckLogin" method="post">
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" id="username" name="username" required autocomplete="username">
+                                </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="pwd" required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white"><i class="fa fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" name="pwd" required autocomplete="current-password">
+                                </div>
                             </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Accedi</button>
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg">Accedi</button>
                             </div>
-                            <div class="mt-3 text-center">
-                                <p class="text-danger">${errorMsg}</p>
+                            <div class="mt-2 text-center">
+                                <p class="text-danger fw-semibold" style="min-height: 1.5em;">${errorMsg}</p>
                             </div>
                         </form>
                     </div>
