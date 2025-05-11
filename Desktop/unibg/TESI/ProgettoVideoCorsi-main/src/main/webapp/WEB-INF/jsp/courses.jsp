@@ -55,9 +55,7 @@
     </div>
 </nav>
 
-<br><br><br><br><br>
-
-<section class="clean-block clean-info dark" style="padding: 70px;">
+<section class="clean-block clean-info dark" style="padding: 70px; margin-top: 80px;">
     <div class="container">
         <div class="block-heading">
             <h2>CORSI IN CUI SEI ISCRITTO</h2>
