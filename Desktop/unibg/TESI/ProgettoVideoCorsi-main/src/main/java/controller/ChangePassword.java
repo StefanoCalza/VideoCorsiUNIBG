@@ -48,50 +48,38 @@ public class ChangePassword extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
-		String pwd = request.getParameter("pwd");
+		String currentPwd = request.getParameter("current_pwd");
+		String newPwd = request.getParameter("new_pwd");
+		String repeatPwd = request.getParameter("repeat_pwd");
 
-		if (pwd == null || pwd.isEmpty()) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			response.getWriter().println("Credentials must be not null");
+		if (currentPwd == null || newPwd == null || repeatPwd == null || currentPwd.isEmpty() || newPwd.isEmpty() || repeatPwd.isEmpty()) {
+			request.setAttribute("errorMsg", "Tutti i campi sono obbligatori.");
+			request.getRequestDispatcher("/WEB-INF/jsp/changepassword.jsp").forward(request, response);
 			return;
 		}
+
 		UserDAO userDao = new UserDAO(connection);
 		try {
-			userDao.changePass(user.getId(), pwd);
-		} catch (SQLException e) {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().println("Internal server error, retry later");
-			return;
-		}
-
-		// check if the user is saved, then redirect to the homepage for every role
-		if (user == null) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			response.getWriter().println("Incorrect credentials");
-		} else {
-			request.getSession().setAttribute("user", user);
-			request.setAttribute("me", user.getUsername());
-			if (user.getRole() == 2) {
-				request.getRequestDispatcher("GetCourse").forward(request, response);
-
-			} else {
-				QuizDAO quizDao = new QuizDAO(connection);
-				List<ImmutableU_C> u_c = new ArrayList<ImmutableU_C>();
-				try {
-					u_c = quizDao.quiz_to_verify();
-					if (u_c == null) {
-						response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
-						return;
-					}
-				} catch (NumberFormatException | NullPointerException | SQLException e) {
-					// only for debugging e.printStackTrace();
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "db error");
-					return;
-				}
-				request.setAttribute("userchapter", u_c);
-				request.getRequestDispatcher("homeDocente.jsp").forward(request, response);
+			// Verifica password attuale
+			ImmutableUser check = userDao.checkCredentials(user.getUsername(), currentPwd);
+			if (check == null) {
+				request.setAttribute("errorMsg", "La password attuale non è corretta.");
+				request.getRequestDispatcher("/WEB-INF/jsp/changepassword.jsp").forward(request, response);
+				return;
 			}
-
+			// Verifica nuova password
+			if (!newPwd.equals(repeatPwd)) {
+				request.setAttribute("errorMsg", "Le nuove password non coincidono.");
+				request.getRequestDispatcher("/WEB-INF/jsp/changepassword.jsp").forward(request, response);
+				return;
+			}
+			// Aggiorna password
+			userDao.changePass(user.getId(), newPwd);
+			response.sendRedirect(request.getContextPath() + "/goProfile?success=1");
+			return;
+		} catch (SQLException e) {
+			request.setAttribute("errorMsg", "Errore interno, riprova più tardi.");
+			request.getRequestDispatcher("/WEB-INF/jsp/changepassword.jsp").forward(request, response);
 		}
 	}
 

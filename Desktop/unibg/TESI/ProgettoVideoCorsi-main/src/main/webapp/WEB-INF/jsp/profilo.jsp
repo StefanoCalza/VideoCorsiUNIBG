@@ -108,10 +108,15 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <form action="${pageContext.request.contextPath}/ChangePassword" method="post">
+                            <form action="${pageContext.request.contextPath}/ChangePassword" method="get">
                                 <button type="submit" class="btn btn-outline-primary btn-lg">Cambia Password</button>
                             </form>
                         </div>
+                        <c:if test="${param.success == '1'}">
+                            <div class="alert alert-success text-center" role="alert">
+                                Password modificata con successo!
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

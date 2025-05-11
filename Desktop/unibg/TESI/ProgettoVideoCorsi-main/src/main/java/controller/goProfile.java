@@ -42,6 +42,11 @@ public class goProfile extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/jsp/profilo.jsp").forward(request, response);
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
 	public void destroy() {
 		try {
 			ConnectionHandler.closeConnection(connection);
