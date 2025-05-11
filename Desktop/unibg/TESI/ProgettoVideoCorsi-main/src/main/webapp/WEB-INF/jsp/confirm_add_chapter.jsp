@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/HomeDocente" method="post">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                         <input type="submit" class="btn btn-link nav-link" value="HOME">
                     </form>
                 </li>
@@ -46,16 +46,11 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                        <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>

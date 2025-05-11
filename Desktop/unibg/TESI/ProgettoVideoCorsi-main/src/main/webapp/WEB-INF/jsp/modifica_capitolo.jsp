@@ -44,57 +44,84 @@
         </div>
     </div>
 </nav>
-<section class="clean-block clean-form dark" style="padding: 70px;">
+<section class="clean-block clean-info dark" style="padding: 70px; min-height: 80vh;">
     <div class="container">
-        <div class="block-heading">
-            <h2>Modifica Capitolo</h2>
+        <div class="block-heading text-center mb-4">
+            <h2 class="fw-bold">MODIFICA CAPITOLO</h2>
         </div>
-        <form method="post" action="${pageContext.request.contextPath}/ModificaCapitolo">
-            <input type="hidden" name="CourseId" value="${CourseId}">
-            <input type="hidden" name="ChapterId" value="${chapter.idChapter}">
-            <div class="mb-3">
-                <label class="form-label" for="name">Nome Capitolo:</label>
-                <input type="text" class="form-control" name="Chaptername" value="${chapter.name}" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="description">Descrizione:</label>
-                <textarea class="form-control" name="Chapterdescription" required>${chapter.description}</textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="video">Link Video:</label>
-                <input type="text" class="form-control" name="Chaptervideo" value="${chapter.video}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Quiz finale?</label>
-                <input type="checkbox" name="isFinal" value="1" <c:if test="${chapter.isFinal == 1}">checked</c:if>>
-            </div>
-            <hr>
-            <h4>Domande Quiz</h4>
-            <c:if test="${empty quizList}">
-                <div class="alert alert-info">Nessuna domanda quiz presente per questo capitolo.</div>
-            </c:if>
-            <c:forEach items="${quizList}" var="quiz" varStatus="status">
-                <div class="mb-3 p-3 border rounded">
-                    <label class="form-label">Domanda ${status.index + 1}:</label>
-                    <input type="text" class="form-control mb-2" name="quiz_question_${quiz.idQuiz}" value="${quiz.question}" required>
-                    <label>Risposte:</label>
-                    <ul>
-                        <li>A: <input type="text" class="form-control d-inline w-auto" name="quiz_a_${quiz.idQuiz}" value="${quiz.first}" required></li>
-                        <li>B: <input type="text" class="form-control d-inline w-auto" name="quiz_b_${quiz.idQuiz}" value="${quiz.second}" required></li>
-                        <li>C: <input type="text" class="form-control d-inline w-auto" name="quiz_c_${quiz.idQuiz}" value="${quiz.third}" required></li>
-                        <li>D: <input type="text" class="form-control d-inline w-auto" name="quiz_d_${quiz.idQuiz}" value="${quiz.fourth}" required></li>
-                    </ul>
-                    <label>Risposta corretta:</label>
-                    <select class="form-select w-auto d-inline" name="quiz_correct_${quiz.idQuiz}" required>
-                        <option value="1" <c:if test="${quiz.risposta == 1}">selected</c:if>>A</option>
-                        <option value="2" <c:if test="${quiz.risposta == 2}">selected</c:if>>B</option>
-                        <option value="3" <c:if test="${quiz.risposta == 3}">selected</c:if>>C</option>
-                        <option value="4" <c:if test="${quiz.risposta == 4}">selected</c:if>>D</option>
-                    </select>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm p-4">
+                    <form method="post" action="${pageContext.request.contextPath}/ModificaCapitolo">
+                        <input type="hidden" name="CourseId" value="${CourseId}">
+                        <input type="hidden" name="ChapterId" value="${chapter.idChapter}">
+                        <div class="mb-3">
+                            <label class="form-label" for="name"><i class="fa fa-book"></i> Nome Capitolo</label>
+                            <input type="text" class="form-control" name="Chaptername" value="${chapter.name}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="description"><i class="fa fa-align-left"></i> Descrizione Capitolo</label>
+                            <input type="text" class="form-control" name="Chapterdescription" value="${chapter.description}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="video"><i class="fa fa-video-camera"></i> Link Video</label>
+                            <input type="text" class="form-control" name="Chaptervideo" value="${chapter.video}">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="isFinal" value="1" id="isFinal" <c:if test="${chapter.isFinal == 1}">checked</c:if>>
+                                <label class="form-check-label" for="isFinal">Quiz finale?</label>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="block-heading text-center mb-3">
+                            <h3 class="fw-bold">MODIFICA QUIZ</h3>
+                        </div>
+                        <div class="row">
+                            <c:if test="${empty quizList}">
+                                <div class="alert alert-info">Nessuna domanda quiz presente per questo capitolo.</div>
+                            </c:if>
+                            <c:forEach items="${quizList}" var="quiz" varStatus="status">
+                                <div class="col-12 mb-4 p-3 border rounded bg-light">
+                                    <label class="form-label fw-semibold">Domanda ${status.index + 1}:</label>
+                                    <input type="text" class="form-control mb-2" name="quiz_question_${quiz.idQuiz}" value="${quiz.question}" required>
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 1</label>
+                                            <input type="text" class="form-control" name="quiz_a_${quiz.idQuiz}" value="${quiz.first}" required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 2</label>
+                                            <input type="text" class="form-control" name="quiz_b_${quiz.idQuiz}" value="${quiz.second}" required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 3</label>
+                                            <input type="text" class="form-control" name="quiz_c_${quiz.idQuiz}" value="${quiz.third}" required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 4</label>
+                                            <input type="text" class="form-control" name="quiz_d_${quiz.idQuiz}" value="${quiz.fourth}" required>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label class="form-label">Risposta corretta</label>
+                                        <select class="form-select w-auto d-inline" name="quiz_correct_${quiz.idQuiz}" required>
+                                            <option value="1" <c:if test="${quiz.risposta == 1}">selected</c:if>>Risposta 1</option>
+                                            <option value="2" <c:if test="${quiz.risposta == 2}">selected</c:if>>Risposta 2</option>
+                                            <option value="3" <c:if test="${quiz.risposta == 3}">selected</c:if>>Risposta 3</option>
+                                            <option value="4" <c:if test="${quiz.risposta == 4}">selected</c:if>>Risposta 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-outline-primary btn-lg px-5 text-uppercase">SALVA MODIFICHE</button>
+                        </div>
+                    </form>
                 </div>
-            </c:forEach>
-            <button type="submit" class="btn btn-outline-primary">Salva modifiche</button>
-        </form>
+            </div>
+        </div>
     </div>
 </section>
 <footer class="page-footer dark">

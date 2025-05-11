@@ -83,20 +83,39 @@
     </section>
 
 <section class="clean-block clean-form dark">
-                        <div class="container">
-                            <div class="block-heading"></div>
-                            <h2>CREA CORSO</h2>
-                            <form method="get" action="${pageContext.request.contextPath}/Createcourse" enctype="multipart/form-data">
-                                <div class="mb-3"><label class="form-label" for="name">NOME CORSO:&nbsp&nbsp</label><input type="text" name="name_course" required></div>
-                                <div class="mb-3"><label class="form-label" for="subject">DESCRIZIONE CORSO:&nbsp&nbsp</label><input type="text" name="description_corse" required></div>
-                                <div class="mb-3"></div>
-                                </section>  
-
- <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">CREA CORSO </button>
-</form>	
-</div>
-</div>        
-</section>  
+    <div class="container">
+        <div class="block-heading text-center mb-4">
+            <h2 class="fw-bold">CREA CORSO</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4">
+                        <form method="get" action="${pageContext.request.contextPath}/Createcourse" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <label class="form-label" for="name_course">Nome corso</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white"><i class="fa fa-book"></i></span>
+                                    <input type="text" class="form-control" id="name_course" name="name_course" required autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="description_corse">Descrizione corso</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white"><i class="fa fa-align-left"></i></span>
+                                    <input type="text" class="form-control" id="description_corse" name="description_corse" required autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" value="Submit" class="btn btn-primary btn-lg">CREA CORSO</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 

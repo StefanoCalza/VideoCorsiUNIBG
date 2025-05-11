@@ -19,132 +19,128 @@
 
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="index.jsp">VideoCorsiUNIBG</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-                	<li > <form action="${pageContext.request.contextPath}/HomeDocente" method="get"> <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-               		<li > <form action="${pageContext.request.contextPath}/goProfile" method="post"> <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                    <li > <form action="${pageContext.request.contextPath}/goEsami" method="post"> <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp"> <p th:text=" ${errorMsg}"></p> </form> </li>
-                   <li> <a href="${pageContext.request.contextPath}/index.jsp"><input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp"></a></li>
-                </ul>
+    <div class="container">
+        <a class="navbar-brand logo" href="${pageContext.request.contextPath}/HomeDocente">VideoCorsiUNIBG</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goProfile" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/goEsami" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<section class="clean-block clean-info dark" style="padding: 70px; min-height: 80vh;">
+    <div class="container">
+        <div class="block-heading text-center mb-4">
+            <h2 class="fw-bold">AGGIUNGI CAPITOLO</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm p-4">
+                    <form method="get" action="${pageContext.request.contextPath}/CreateChapter" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label" for="name"><i class="fa fa-book"></i> Nome Capitolo</label>
+                            <input type="text" class="form-control" name="Chaptername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="description"><i class="fa fa-align-left"></i> Descrizione Capitolo</label>
+                            <input type="text" class="form-control" name="Chapterdescription" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="video"><i class="fa fa-video-camera"></i> Link Video</label>
+                            <input type="text" class="form-control" name="Video">
+                        </div>
+                        <input type="hidden" name="CourseId" value="${id_course}">
+                        <input type="hidden" name="description_corse" value="${description_corse}">
+                        <input type="hidden" name="name_course" value="${name_course}">
+                        <hr class="my-4">
+                        <div class="block-heading text-center mb-3">
+                            <h3 class="fw-bold">CREA QUIZ/ESAME</h3>
+                        </div>
+                        <div class="mb-4 text-center">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isfinal" id="finale" value="1">
+                                <label class="form-check-label" for="finale">Esame Finale</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isfinal" id="quiz" value="0">
+                                <label class="form-check-label" for="quiz">Quiz</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="fw-semibold mt-3">Domande e Risposte</h5>
+                            </div>
+                            <!-- Domande quiz -->
+                            <c:forEach var="i" begin="1" end="4">
+                                <div class="col-12 mb-4 p-3 border rounded bg-light">
+                                    <label class="form-label fw-semibold">Domanda ${i}:</label>
+                                    <input type="text" class="form-control mb-2" name="d${i}" required>
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 1</label>
+                                            <input type="text" class="form-control" name="r${i}1" required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 2</label>
+                                            <input type="text" class="form-control" name="r${i}2" required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 3</label>
+                                            <input type="text" class="form-control" name="r${i}3" required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <label class="form-label">Risposta 4</label>
+                                            <input type="text" class="form-control" name="r${i}4" required>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label class="form-label">Risposta corretta</label>
+                                        <select class="form-select w-auto d-inline" name="g${i}" required>
+                                            <option value="1">Risposta 1</option>
+                                            <option value="2">Risposta 2</option>
+                                            <option value="3">Risposta 3</option>
+                                            <option value="4">Risposta 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-outline-primary btn-lg px-5 text-uppercase">CREA CAPITOLO</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
 
 
-<section class="clean-block clean-info dark" style="padding: 70px;">
-        <div class="container">
-            <div class="block-heading">
-                       <section class="clean-block clean-form dark">
-                        <div class="container">
-                            <div class="block-heading"></div>
-                            <h2>AGGIUNGI CAPITOLO</h2>
-                            <form method="get" action="${pageContext.request.contextPath}/CreateChapter" enctype="multipart/form-data">
-                                <div class="mb-3"><label class="form-label" for="name">NOME CAPITOLO:&nbsp&nbsp</label><input type="text" name="Chaptername"></div>
-                                <div class="mb-3"><label class="form-label" for="subject">DESCRIZIONE CAPITOLO:&nbsp&nbsp</label><input type="text" name="Chapterdescription"></div>
-                                <div class="mb-3"><label class="form-label" for="subject">LINK VIDEO:&nbsp&nbsp</label><input type="text" name="Video"></div>
-                                <div class="mb-3"></div> 
-                            
-                                <input type="hidden" name="CourseId" value="${id_course}">
-								<input type="hidden" name="description_corse" value="${description_corse}" >
-								<input type="hidden" name="name_course" value="${name_course}" >
-				<br><br>
-							<section class="clean-block clean-form dark">
-		                        <div class="container">
-		                            <div class="block-heading"></div>
-								<h2>ESAME</h2>
-								
-								  FINALE <input type="radio" name="isfinal" value="1" >
-								  QUIZ <input type="radio" name="isfinal" value="0" ><br><br>
-								  
-								  <div class="mb-3"><label class="form-label" for="name">PRIMA DOMANDA:&nbsp&nbsp</label><input type="text" name="d1"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA1:&nbsp&nbsp</label><input type="text" name="r11"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA2:&nbsp&nbsp</label><input type="text" name="r12"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA3:&nbsp&nbsp</label><input type="text" name="r13"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA4:&nbsp&nbsp</label><input type="text" name="r14"></div>
-								  RISPOSTA GIUSTA: <select name="g1">
-								    <option value="1">RISPOSTA1</option>
-								    <option value="2">RISPOSTA2</option>
-								    <option value="3">RISPOSTA3</option>
-								    <option value="4">RISPOSTA4</option>
-								    </select>	
-								  <br><br><br><br>	
-								  
-								  <div class="mb-3"><label class="form-label" for="name">SECONDA DOMANDA:&nbsp&nbsp</label><input type="text" name="d2"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA1:&nbsp&nbsp</label><input type="text" name="r21"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA2:&nbsp&nbsp</label><input type="text" name="r22"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA3:&nbsp&nbsp</label><input type="text" name="r23"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA4:&nbsp&nbsp</label><input type="text" name="r24"></div>
-								  RISPOSTA GIUSTA: <select name="g2">
-								    <option value="1">RISPOSTA1</option>
-								    <option value="2">RISPOSTA2</option>
-								    <option value="3">RISPOSTA3</option>
-								    <option value="4">RISPOSTA4</option>
-								    </select>	
-								  <br><br><br><br>	
-								  
-								  <div class="mb-3"><label class="form-label" for="name">TERZA DOMANDA:&nbsp&nbsp</label><input type="text" name="d3"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA1:&nbsp&nbsp</label><input type="text" name="r31"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA2:&nbsp&nbsp</label><input type="text" name="r32"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA3:&nbsp&nbsp</label><input type="text" name="r33"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA4:&nbsp&nbsp</label><input type="text" name="r34"></div>
-								  RISPOSTA GIUSTA: <select name="g3">
-								    <option value="1">RISPOSTA1</option>
-								    <option value="2">RISPOSTA2</option>
-								    <option value="3">RISPOSTA3</option>
-								    <option value="4">RISPOSTA4</option>
-								    </select>	
-								  <br><br><br><br>	
-								  
-								  <div class="mb-3"><label class="form-label" for="name">QUARTA DOMANDA:&nbsp&nbsp</label><input type="text" name="d4"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA1:&nbsp&nbsp</label><input type="text" name="r41"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA2:&nbsp&nbsp</label><input type="text" name="r42"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA3:&nbsp&nbsp</label><input type="text" name="r43"></div>
-								  <div class="mb-3"><label class="form-label" for="name">RISPOSTA4:&nbsp&nbsp</label><input type="text" name="r44"></div>
-								  RISPOSTA GIUSTA: <select name="g4">
-								    <option value="1">RISPOSTA1</option>
-								    <option value="2">RISPOSTA2</option>
-								    <option value="3">RISPOSTA3</option>
-								    <option value="4">RISPOSTA4</option>
-								    </select>	
-								  <br><br><br><br><br><br>
-
-								   <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">CREA CAPITOLO </button>
-									</form>	
-									</div>
-									</div>        
-									</section>  
-									</section> 
-
-	
-<!--
-	<ul>
-	<c:forEach items="${userchapter}" var="c">
-	<li>
-	
-	 numero del corso ->   ${c.idcourse}   <br>
-	 numero del capitolo ->  ${c.idchapter} <br>
-	 numero dell'utente ->  ${c.iduser} <br> 
-<form method="get" action="VerifyQuiz" enctype="multipart/form-data"> 
- <input type="hidden" name="ChapterId" value="${c.idchapter}"><br><br>
-  <input type="hidden" name="CourseId" value="${c.idcourse}"><br><br>
-  <input type="hidden" name="UserId" value="${c.iduser}"><br><br>
-  <button type="submit" value="Submit">passare esame </button>
-</form> </li>----------------------------------------------------------------------------------------------------------------------------
-	</c:forEach>
-	</ul>
-	
-	crea corso
-<form method="get" action="Createcourse" enctype="multipart/form-data">
-nome corso: <input type="text" name="name_course" required> <br>
-descrizione corso: <input type="text" name="description_corse" required> <br>
-<br>
-<h2>quiz finale</h2> <br>
- <button type="submit" value="Submit">crea esame </button>
-</form>	
-	-->
-	
-	
 <footer class="page-footer dark">
     <div class="footer-copyright">
         <p>© VideoCorsiUNIBG Copyright 2025. All rights reserved.</p>
