@@ -58,6 +58,11 @@
             <div class="block-heading">
                 <h2>TUTTI I CORSI</h2>
             </div>
+            <c:if test="${param.success == '3'}">
+                <div class="alert alert-success" role="alert">
+                    Corso eliminato con successo!
+                </div>
+            </c:if>
             <div class="row">
                 <c:if test="${empty allCourses}">
                     <div class="alert alert-info" role="alert">
@@ -73,6 +78,10 @@
                                 <form method="get" action="${pageContext.request.contextPath}/GestisciCorso" style="display:inline-block;">
                                     <input type="hidden" name="CourseId" value="${corso.idCourse}">
                                     <button type="submit" class="btn btn-outline-success">Gestisci corso</button>
+                                </form>
+                                <form method="post" action="${pageContext.request.contextPath}/EliminaCorso" style="display:inline-block; margin-left: 8px;">
+                                    <input type="hidden" name="CourseId" value="${corso.idCourse}">
+                                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Sei sicuro di voler eliminare questo corso, tutti i capitoli e i quiz associati? L\'operazione è irreversibile.');">Elimina corso</button>
                                 </form>
                             </div>
                         </div>
@@ -116,12 +125,6 @@
         </div>
     </div>
 </section>
-
-<c:if test="${param.success == '2'}">
-    <div class="alert alert-success" role="alert">
-        Corso eliminato con successo!
-    </div>
-</c:if>
 
 <footer class="page-footer dark">
     <div class="footer-copyright">

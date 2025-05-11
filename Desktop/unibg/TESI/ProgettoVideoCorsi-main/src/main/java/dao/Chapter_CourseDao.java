@@ -465,4 +465,42 @@ public class Chapter_CourseDao {
 		}
 	}
 
+	/**
+	 * Elimina un corso e tutte le sue dipendenze (capitoli, quiz, iscrizioni, risposte quiz)
+	 * @param courseId l'id del corso da eliminare
+	 * @throws SQLException
+	 */
+	public void deleteCourseAndDependencies(int courseId) throws SQLException {
+		// Elimina tutte le risposte ai quiz del corso
+		String deleteQuizRisposte = "DELETE FROM quiz_risposte WHERE id_course = ?";
+		try (PreparedStatement ps = connection.prepareStatement(deleteQuizRisposte)) {
+			ps.setInt(1, courseId);
+			ps.executeUpdate();
+		}
+		// Elimina tutti i quiz del corso
+		String deleteQuiz = "DELETE FROM quiz_provvisorio WHERE idcourse = ?";
+		try (PreparedStatement ps = connection.prepareStatement(deleteQuiz)) {
+			ps.setInt(1, courseId);
+			ps.executeUpdate();
+		}
+		// Elimina tutte le iscrizioni degli studenti a questo corso
+		String deleteIscrizioni = "DELETE FROM iscrizioni WHERE idCourse = ?";
+		try (PreparedStatement ps = connection.prepareStatement(deleteIscrizioni)) {
+			ps.setInt(1, courseId);
+			ps.executeUpdate();
+		}
+		// Elimina tutti i capitoli del corso
+		String deleteChapters = "DELETE FROM chapter WHERE course = ?";
+		try (PreparedStatement ps = connection.prepareStatement(deleteChapters)) {
+			ps.setInt(1, courseId);
+			ps.executeUpdate();
+		}
+		// Elimina il corso
+		String deleteCourse = "DELETE FROM courses WHERE idcourses = ?";
+		try (PreparedStatement ps = connection.prepareStatement(deleteCourse)) {
+			ps.setInt(1, courseId);
+			ps.executeUpdate();
+		}
+	}
+
 }
