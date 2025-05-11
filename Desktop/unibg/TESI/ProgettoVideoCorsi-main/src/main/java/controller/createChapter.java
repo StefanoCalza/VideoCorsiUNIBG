@@ -103,8 +103,8 @@ public class createChapter extends HttpServlet {
 			request.setAttribute("description_corse", request.getParameter("description_corse"));
 			request.setAttribute("id_course", request.getParameter("CourseId"));
 
-			// Forward a pagina di conferma
-			request.getRequestDispatcher("/WEB-INF/jsp/confirm_add_chapter.jsp").forward(request, response);
+			// Redirect a pagina gestione corso con messaggio di successo
+			response.sendRedirect(request.getContextPath() + "/GestisciCorso?CourseId=" + request.getParameter("CourseId") + "&success=1");
 			return;
 			
 		} catch (NumberFormatException e) {

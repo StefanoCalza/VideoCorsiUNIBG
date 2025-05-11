@@ -101,6 +101,11 @@
                 </div>
             </c:forEach>
         </div>
+        <div class="text-center mt-4">
+            <a href="${pageContext.request.contextPath}/CreateChapter?CourseId=${course.idCourse}&name_course=${course.name}&description_corse=${course.description}" class="btn btn-primary btn-lg">
+                <i class="fa fa-plus"></i> Aggiungi capitolo
+            </a>
+        </div>
     </div>
 </main>
 <footer class="page-footer dark">
