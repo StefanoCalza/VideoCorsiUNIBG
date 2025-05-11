@@ -60,7 +60,7 @@
 </div>
 <footer class="page-footer dark mt-auto">
     <div class="footer-copyright">
-        <p>© 2023 Copyright Text</p>
+        <p>© VideoCorsiUNIBG Copyright 2025. All rights reserved.</p>
     </div>
 </footer>
 <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>

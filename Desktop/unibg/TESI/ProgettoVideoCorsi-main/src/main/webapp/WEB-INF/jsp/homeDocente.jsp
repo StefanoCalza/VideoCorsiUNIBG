@@ -101,10 +101,10 @@
 
 
 <footer class="page-footer dark">
-        <div class="footer-copyright">
-            <p> 2023 Copyright Text</p>
-        </div>
-    </footer>
+    <div class="footer-copyright">
+        <p>© VideoCorsiUNIBG Copyright 2025. All rights reserved.</p>
+    </div>
+</footer>
     <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/vanilla-zoom.js"></script>
