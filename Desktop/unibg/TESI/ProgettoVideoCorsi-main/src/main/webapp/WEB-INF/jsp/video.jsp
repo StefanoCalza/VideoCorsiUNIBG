@@ -26,37 +26,28 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <c:choose>
-                        <c:when test="${user.role == 2}">
-                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
-                                <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
-                            </form>
-                        </c:when>
-                        <c:otherwise>
-                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
-                                <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
-                            </form>
-                        </c:otherwise>
-                    </c:choose>
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="HOME">
+                    </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goProfile" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="PROFILO&nbsp&nbsp">
+                        <input type="submit" class="btn btn-link nav-link" value="PROFILO">
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" style="border:0px; background:white;" value="ESAMI&nbsp&nbsp">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
                     </form>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <input type="submit" style="border:0px; background:white;" value="CORSI COMPLETATI&nbsp&nbsp">
+                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/index.jsp" method="get">
-                        <input type="submit" style="border:0px; background:white;" value="LOGOUT&nbsp&nbsp">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
+                        <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>
             </ul>

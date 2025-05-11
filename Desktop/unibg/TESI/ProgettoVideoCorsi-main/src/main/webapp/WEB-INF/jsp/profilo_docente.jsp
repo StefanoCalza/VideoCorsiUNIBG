@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,7 @@
 </head>
 <body>
 
+<!-- NAVBAR DOCENTE -->
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
         <a class="navbar-brand logo">VideoCorsiUNIBG</a>
@@ -26,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                         <input type="submit" class="btn btn-link nav-link" value="HOME">
                     </form>
                 </li>
@@ -37,12 +38,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
+                        <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
                     </form>
                 </li>
                 <li class="nav-item">
@@ -60,66 +56,46 @@
 <section class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
         <div class="block-heading">
-            <h2>CORSI IN CUI SEI ISCRITTO</h2>
+            <h2>PROFILO UTENTE</h2>
         </div>
-        <div class="row">
-            <c:choose>
-                <c:when test="${empty chapter && empty coursesnotin}">
-                    <div class="alert alert-warning" role="alert">
-                        Non sei iscritto a nessun corso e non ci sono altri corsi disponibili al momento.
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <img src="${pageContext.request.contextPath}/assets/img/profilo.jpg" class="img-fluid rounded-circle mb-3" style="max-width: 200px;" alt="Profilo">
                     </div>
-                </c:when>
-                <c:otherwise>
-                    <c:if test="${empty chapter}">
-                        <div class="alert alert-info" role="alert">
-                            Non sei iscritto a nessun corso al momento.
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h4 class="card-title">Informazioni Personali</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-3"><strong>Nome:</strong> ${user.name}</p>
+                                    <p class="mb-3"><strong>Cognome:</strong> ${me.cognome}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-3"><strong>Email:</strong> ${user.email}</p>
+                                    <p class="mb-3"><strong>Skills Card:</strong> ${user.skillscard}</p>
+                                </div>
+                            </div>
                         </div>
-                    </c:if>
-                </c:otherwise>
-            </c:choose>
-            <c:forEach items="${chapter}" var="chara">
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">${chara.name}</h3>
-                            <p class="card-text"><strong>${chara.description}</strong></p>
-                            <form method="get" action="${pageContext.request.contextPath}/ChapterController">
-                                <input type="hidden" name="CourseId" value="${chara.idCourse}">
-                                <button type="submit" class="btn btn-outline-primary">VAI AL CORSO</button>
+                        <div class="text-center">
+                            <form action="${pageContext.request.contextPath}/ChangePassword" method="get">
+                                <button type="submit" class="btn btn-outline-primary btn-lg">Cambia Password</button>
                             </form>
                         </div>
+                        <c:if test="${param.success == '1'}">
+                            <div class="alert alert-success text-center" role="alert">
+                                Password modificata con successo!
+                            </div>
+                        </c:if>
                     </div>
                 </div>
-            </c:forEach>
-        </div>
-    </div>
-</section>
-
-<section class="clean-block clean-info dark" style="padding: 70px;">
-    <div class="container">
-        <div class="block-heading">
-            <h2>CORSI DISPONIBILI</h2>
-        </div>
-        <div class="row">
-            <c:if test="${empty coursesnotin}">
-                <div class="alert alert-info" role="alert">
-                    Non ci sono altri corsi disponibili a cui iscriverti al momento.
-                </div>
-            </c:if>
-            <c:forEach items="${coursesnotin}" var="c">
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">${c.name}</h3>
-                            <p class="card-text"><strong>${c.description}</strong></p>
-                            <form method="get" action="${pageContext.request.contextPath}/SubscribeCourse">
-                                <input type="hidden" name="CourseId" value="${c.idCourse}">
-                                <button type="submit" class="btn btn-outline-primary">ISCRIVITI</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
+            </div>
         </div>
     </div>
 </section>
@@ -136,4 +112,4 @@
 <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 
 </body>
-</html>
+</html> 

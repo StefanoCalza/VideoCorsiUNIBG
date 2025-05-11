@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="${pageContext.request.contextPath}/HomeDocente">VideoCorsiUNIBG</a>
+        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="HOME">
                     </form>
                 </li>
@@ -37,7 +37,12 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
+                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
                     </form>
                 </li>
                 <li class="nav-item">

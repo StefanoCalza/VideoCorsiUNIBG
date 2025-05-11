@@ -64,10 +64,15 @@
                                 <input type="submit" class="btn btn-link nav-link" value="ESAMI">
                             </form>
                         </li>
+                        <li class="nav-item">
+                            <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                                <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
+                            </form>
+                        </li>
                     </c:otherwise>
                 </c:choose>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/index.jsp" method="get">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>

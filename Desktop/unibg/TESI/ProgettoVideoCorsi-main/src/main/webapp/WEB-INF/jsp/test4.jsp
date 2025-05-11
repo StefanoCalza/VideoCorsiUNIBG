@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>PROGETTO VIDEOCORSI</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/navbar-custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
@@ -40,7 +41,12 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
+                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>

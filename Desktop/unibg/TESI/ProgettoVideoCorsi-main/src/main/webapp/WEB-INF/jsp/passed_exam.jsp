@@ -90,7 +90,7 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>
