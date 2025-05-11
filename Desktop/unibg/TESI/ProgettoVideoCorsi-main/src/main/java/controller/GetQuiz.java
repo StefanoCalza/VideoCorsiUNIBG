@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jakarta.servlet.ServletContext;
@@ -69,6 +70,9 @@ public class GetQuiz extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "No quiz found for this chapter");
 				return;
 			}
+
+			// Randomizza l'ordine delle domande
+			Collections.shuffle(questions);
 
 			// Capitolo 1: accesso sempre consentito
 			if (chapterId > 1) {
