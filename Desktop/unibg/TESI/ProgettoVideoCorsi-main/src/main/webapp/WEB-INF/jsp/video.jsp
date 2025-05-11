@@ -25,9 +25,18 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
-                        <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
-                    </form>
+                    <c:choose>
+                        <c:when test="${user.role == 2}">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                                <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goProfile" method="post">

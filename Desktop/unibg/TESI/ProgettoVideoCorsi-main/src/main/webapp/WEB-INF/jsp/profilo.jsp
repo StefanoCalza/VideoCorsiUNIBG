@@ -44,7 +44,7 @@
                     </c:when>
                     <c:when test="${user.role == 2}">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
                                 <input type="submit" style="border:0px; background:white;" value="HOME&nbsp&nbsp">
                             </form>
                         </li>

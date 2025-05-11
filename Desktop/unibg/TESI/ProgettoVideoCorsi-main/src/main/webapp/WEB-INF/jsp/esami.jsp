@@ -162,9 +162,18 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
-                                <button type="submit" class="btn btn-link nav-link">HOME</button>
-                            </form>
+                            <c:choose>
+                                <c:when test="${user.role == 2}">
+                                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                        <button type="submit" class="btn btn-link nav-link">HOME</button>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                                        <button type="submit" class="btn btn-link nav-link">HOME</button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                         <li class="nav-item">
                             <form action="${pageContext.request.contextPath}/goProfile" method="post">
@@ -197,12 +206,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="getting-started-info">
-                            <h3>ATLAS POSTAZIONE STUDENTE</h3>
+                            <h3>ATLAS ONLINE POSTAZIONE STUDENTE</h3>
                             <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;">
-                                <strong>Per eseguire l'esame bisogna utilizzare la piattaforma "ATLAS POSTAZIONE STUDENTI" da installare su ogni PC nelle sedi di esame autorizzate e con la certificazione "Test Center ECDL". In questo modo si apre una piattaforma sicura che permette di poter rilasciare la certificazione in caso di superamento dell'esame.</strong>
+                                ATLAS Online consente di sostenere gli esami direttamente via Internet, utilizzando un browser web, senza la necessità di installare alcun software dedicato o di sincronizzare i risultati finali.<br>
+                                Sono disponibili tutti i 7 esami della ICDL Full Standard con i relativi esami di rinnovo.<br>
+                                In ATLAS Online la Postazione Studente è disponibile tramite il pulsante "ACCEDI" sottostante. Il candidato potrà accedere alla piattaforma tramite userid (indirizzo email univoco e attivo) e password, che potrà modificare contestualmente al primo accesso e che lo accompagneranno per tutta la durata del percorso di certificazione.
                             </p>
                             <div class="text-center mt-4">
-                                <a href="https://download-atlas.aicanet.it/00home/home.html" class="btn btn-primary btn-lg">SCARICA QUI</a>
+                                <a href="https://atlas-online.icdl.it/" class="btn btn-outline-primary btn-lg" target="_blank">ACCEDI</a>
                             </div>
                         </div>
                     </div>

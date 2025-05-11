@@ -44,7 +44,7 @@
                     </c:when>
                     <c:when test="${user.role == 2}">
                         <li class="nav-item">
-                            <form action="${pageContext.request.contextPath}/ChapterController" method="get">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
                                 <input type="submit" class="btn btn-link nav-link" value="HOME">
                             </form>
                         </li>

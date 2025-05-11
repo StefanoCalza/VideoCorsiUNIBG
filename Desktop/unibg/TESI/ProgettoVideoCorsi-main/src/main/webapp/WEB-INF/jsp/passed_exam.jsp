@@ -69,9 +69,18 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
-                        <button type="submit" class="btn btn-link nav-link">HOME</button>
-                    </form>
+                    <c:choose>
+                        <c:when test="${user.role == 2}">
+                            <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                                <button type="submit" class="btn btn-link nav-link">HOME</button>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
+                                <button type="submit" class="btn btn-link nav-link">HOME</button>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goProfile" method="post">
