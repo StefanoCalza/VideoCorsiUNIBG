@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/vanilla-zoom.min.css">
+    <style>
+        .modulo-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
@@ -34,23 +43,36 @@
 </nav>
         
     <main class="page landing-page">
-        <section class="clean-block clean-hero" style="color: rgba(9,162,255,0);">
-            <img src="${pageContext.request.contextPath}/assets/img/home.jpg" style="width: 2042px;">
+        <section class="clean-block clean-hero" style="color: rgba(9,162,255,0);padding:0;background:transparent;min-height:auto;height:auto;">
+            <img src="${pageContext.request.contextPath}/assets/img/wide_icdl.png" class="img-fluid" style="width: 100%; height: auto; display: block;">
         </section>
         <section class="clean-block clean-info dark" style="margin-bottom: -121px;">
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">CORSI</h2>
-                    <p style="width: 444px;">I&nbsp;<strong>Corsi ECDL/ICDL&nbsp;</strong>A-Sapiens sono soluzioni efficaci per il conseguimento immediato della&nbsp;<strong>Patente Europea del Computer.&nbsp;</strong>A differenza degli altri, &nbsp;noi ti diamo la possibilità di superar el'esame subito, grazie al corso ECDL e al simulatore di esame. tutto compreso nel pacchetto ECDL!</p>
                 </div>
                 <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <img src="${pageContext.request.contextPath}/assets/img/ECDL_IT-Security.png" style="width: 303px;margin: 36px;padding: -125px;margin-left: 199px;">
+                    <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+                        <img src="${pageContext.request.contextPath}/assets/img/icdl_fullStandard.jpeg" class="img-fluid rounded shadow" style="width: 350px; max-width: 100%; height: auto;">
                     </div>
-                    <div class="col-md-6">
-                        <h3>IT security</h3>
-                        <div class="getting-started-info">
-                            <p><strong>La sicurezza informatica è un argomento di vasta portata, che tocca molti aspetti dell'attività individuale in ambito ICT. IT Security aiuta a fornire alle persone le competenze necessarie per identificare e trattare le minacce associate all'uso delle tecnologie informatiche, migliorando la loro capacità di gestire in modo sicuro i propri dati ed i dati delle organizzazioni per cui lavorano.</strong></p>
+                    <div class="col-md-7">
+                        <div class="getting-started-info p-4" style="background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <p style="font-size: 1.1rem; margin-bottom: 0;">
+                                La certificazione ICDL è composta da 7 moduli:<br>
+                                <span class="modulo-title">ICDL Base:</span> copre le competenze digitali fondamentali e comprende quattro moduli:
+                                <ul style="margin-bottom: 0.5rem;">
+                                    <li>Computer Essentials (concetti di base e uso del computer)</li>
+                                    <li>Online Essentials (navigazione e comunicazione su internet)</li>
+                                    <li>Word Processing (videoscrittura)</li>
+                                    <li>Spreadsheets (fogli di calcolo)</li>
+                                </ul>
+                                <span class="modulo-title">ICDL Standard:</span> copre competenze più avanzate o specifiche, come:
+                                <ul style="margin-bottom: 0;">
+                                    <li>Presentation (creazione di presentazioni)</li>
+                                    <li>IT Security (sicurezza informatica)</li>
+                                    <li>Online Collaboration (strumenti di collaborazione online)</li>
+                                </ul>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -63,11 +85,13 @@
                 </div>
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <img src="${pageContext.request.contextPath}/assets/img/test_ceneter.jpg" style="width: 586px;">
+                        <img src="${pageContext.request.contextPath}/assets/img/TestCenter-icdl.png" style="width: 586px;">
                     </div>
                     <div class="col-md-6">
                         <div class="getting-started-info">
-                            <p style="width: 667px;font-size: 21px;">La&nbsp;<strong>Patente Europea ECDL/ICDL</strong>è un titolo riconosciuto dal&nbsp;<strong>Ministero della Pubblica Istruzione</strong>&nbsp;ed è inoltre riconosciuta nei Protocolli di Intesa stipulati con le Amministrazioni Pubbliche.</p>
+                            <p style="width: 667px;font-size: 21px;">
+                                La Patente ICDL (International Certification of Digital Literacy), è una certificazione riconosciuta a livello internazionale che attesta le competenze informatiche di base e avanzate di una persona ed è inoltre riconosciuta nei Protocolli di Intesa stipulati con le Amministrazioni Pubbliche.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -84,16 +108,7 @@
                             <img class="card-img-top w-100 d-block" src="${pageContext.request.contextPath}/assets/img/avatars/avatar2.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Stefano Calzà</h4>
-                                <p class="card-text">IT Security</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card text-center clean-card">
-                            <img class="card-img-top w-100 d-block" src="${pageContext.request.contextPath}/assets/img/avatars/avatar1.jpg">
-                            <div class="card-body info">
-                                <h4 class="card-title">Lorenzo Longaretti</h4>
-                                <p class="card-text">Computer Essential, Online Essential, Online Collaboration</p>
+                                <p class="card-text">IT Security, Computer Essential, Online Essential, Online Collaboration</p>
                             </div>
                         </div>
                     </div>
@@ -102,7 +117,7 @@
                             <img class="card-img-top w-100 d-block" src="${pageContext.request.contextPath}/assets/img/avatars/avatar3.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Martina Rasmo</h4>
-                                <p class="card-text">Microsoft Office: Word, Power Point, Excell</p>
+                                <p class="card-text">Microsoft Office:<br>Word, Power Point, Excell</p>
                             </div>
                         </div>
                     </div>

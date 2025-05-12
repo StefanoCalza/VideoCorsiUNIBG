@@ -204,7 +204,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <img src="${pageContext.request.contextPath}/assets/img/test_ceneter.jpg" class="img-fluid rounded shadow" alt="Test Center">
+                        <img src="${pageContext.request.contextPath}/assets/img/TestCenter-icdl.png" class="img-fluid rounded shadow" alt="Test Center">
                     </div>
                     <div class="col-md-6">
                         <div class="getting-started-info">
