@@ -44,7 +44,15 @@ public class GetCourse extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
+		// Salvo l'utente in sessione (già presente)
+		// Redirect su GET per evitare ERR_CACHE_MISS
+		response.sendRedirect(request.getContextPath() + "/GetCourse");
+	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 
@@ -56,20 +64,15 @@ public class GetCourse extends HttpServlet {
 		Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
 		List<ImmutableCourse> courses = new ArrayList<ImmutableCourse>();
 		List<ImmutableCourse> coursesNotFollowed = new ArrayList<ImmutableCourse>();
-		
 		try {
 			TransactionManager.beginTransaction(connection);
-			
-			// get the list of course followed and not followed by the user
 			courses = chapterDao.getCoursesByUserId(user.getId());
 			coursesNotFollowed = chapterDao.getCoursesNotFollowedByUserId(user.getId());
-			
 			if (courses == null || coursesNotFollowed == null) {
 				TransactionManager.rollbackTransaction(connection);
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
 				return;
 			}
-			
 			TransactionManager.commitTransaction(connection);
 		} catch (SQLException e) {
 			TransactionManager.rollbackTransaction(connection);
@@ -95,13 +98,11 @@ public class GetCourse extends HttpServlet {
 			try {
 				TransactionManager.beginTransaction(connection);
 				u_c = quizDao.quiz_to_verify();
-				
 				if (u_c == null) {
 					TransactionManager.rollbackTransaction(connection);
 					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
 					return;
 				}
-				
 				TransactionManager.commitTransaction(connection);
 			} catch (SQLException e) {
 				TransactionManager.rollbackTransaction(connection);
@@ -117,11 +118,6 @@ public class GetCourse extends HttpServlet {
 			request.setAttribute("userchapter", u_c);
 			request.getRequestDispatcher("/WEB-INF/jsp/homeDocente.jsp").forward(request, response);
 		}
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
 	}
 	
 

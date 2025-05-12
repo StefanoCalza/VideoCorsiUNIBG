@@ -42,6 +42,15 @@ public class gohome extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
+		// Salvo l'utente in sessione (già presente)
+		// Redirect su GET per evitare ERR_CACHE_MISS
+		response.sendRedirect(request.getContextPath() + "/gohome");
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 		if (user.getRole() == 1) {
 			request.setAttribute("me", user.getUsername());
 			request.getRequestDispatcher("GetCourse").forward(request, response);
@@ -67,11 +76,6 @@ public class gohome extends HttpServlet {
 			request.setAttribute("allCourses", allCourses);
 			request.getRequestDispatcher("homeDocente.jsp").forward(request, response);
 		}
-
-	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
 	}
 	
 	public void destroy() {

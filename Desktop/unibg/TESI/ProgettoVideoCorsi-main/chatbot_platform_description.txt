@@ -1,0 +1,113 @@
+VideoCorsi UNIBG – Descrizione dettagliata della piattaforma
+
+Cos'è VideoCorsi UNIBG
+VideoCorsi UNIBG è una piattaforma di e-learning sviluppata per l'Università degli Studi di Bergamo, pensata per la gestione e la fruizione di corsi online da parte di studenti e docenti. La piattaforma offre funzionalità avanzate di gestione corsi, capitoli, quiz, iscrizioni e tracciamento dei progressi.
+
+Utenti e Ruoli
+- Studente: può iscriversi ai corsi, seguire i capitoli, svolgere quiz, visualizzare i risultati e lo storico degli esami.
+- Docente: può creare, modificare ed eliminare corsi e capitoli, gestire quiz, convalidare esami, visualizzare l'elenco degli studenti iscritti e i risultati.
+
+Funzionalità principali
+1. Autenticazione e gestione sessione
+- Login tramite username e password.
+- Ruolo utente determinato al login (studente o docente).
+- Gestione sicura della sessione utente.
+- Logout disponibile in ogni pagina.
+
+2. Interfaccia Docente
+Home Docente
+- Visualizza tutti i corsi creati dal docente.
+- Per ogni corso sono disponibili:
+  - Gestisci corso: accede alla pagina di gestione dei capitoli e quiz del corso selezionato.
+  - Elimina corso: elimina il corso selezionato, tutti i suoi capitoli, quiz e iscrizioni degli studenti (operazione irreversibile).
+- Pulsante "Crea corso" per aggiungere un nuovo corso tramite form (nome e descrizione).
+
+Gestione Corso
+- Visualizza la lista dei capitoli del corso selezionato.
+- Per ogni capitolo sono disponibili:
+  - Modifica: modifica nome, descrizione, video, quiz associati.
+  - Elimina: elimina il capitolo e tutti i quiz associati (operazione irreversibile).
+- Pulsante "Aggiungi capitolo" per creare un nuovo capitolo (nome, descrizione, video, quiz).
+- Visualizzazione dettagliata dei quiz associati a ciascun capitolo.
+
+Gestione Quiz
+- Ogni capitolo può avere uno o più quiz associati.
+- I quiz sono composti da domande a risposta multipla.
+- Il docente può creare, modificare o eliminare quiz per ogni capitolo.
+
+Convalida Esami
+- Sezione dedicata alla correzione e convalida dei quiz svolti dagli studenti.
+- Visualizzazione degli esami da correggere e possibilità di segnare come "convalidato".
+
+Gestione Profilo
+- Visualizzazione e modifica dei dati personali.
+- Cambio password.
+
+3. Interfaccia Studente
+Home Studente
+- Visualizza i corsi a cui è iscritto e quelli disponibili.
+- Per ogni corso disponibile:
+  - Iscriviti: iscrive lo studente al corso selezionato.
+- Per ogni corso iscritto:
+  - Vai al corso: accede alla lista dei capitoli e quiz del corso.
+
+Visualizzazione Capitoli e Video
+- Ogni corso è suddiviso in capitoli.
+- Ogni capitolo può contenere un video didattico e una descrizione.
+- Accesso sequenziale o libero ai capitoli, a seconda delle impostazioni del corso.
+
+Quiz e Valutazioni
+- Ogni capitolo può avere uno o più quiz.
+- I quiz sono a risposta multipla, con feedback immediato o differito.
+- Visualizzazione dei risultati dei quiz svolti.
+- Tracciamento dei progressi e degli esami superati.
+
+Storico Esami
+- Sezione dedicata alla visualizzazione degli esami e quiz superati.
+- Dettaglio dei risultati ottenuti.
+
+Gestione Profilo
+- Visualizzazione e modifica dei dati personali.
+- Cambio password.
+
+Navigazione e struttura delle pagine
+- Login: Pagina di accesso per studenti e docenti.
+- Home docente: Elenco corsi, gestione, creazione, eliminazione.
+- Home studente: Elenco corsi disponibili e iscritti, iscrizione, accesso ai capitoli.
+- Gestione corso (docente): Elenco capitoli, gestione quiz, aggiunta/eliminazione capitoli.
+- Gestione capitolo (docente): Modifica dettagli capitolo, gestione quiz.
+- Visualizzazione corso (studente): Elenco capitoli, accesso ai video e quiz.
+- Quiz: Pagina di svolgimento quiz, feedback, risultati.
+- Esami: Storico esami e quiz superati.
+- Profilo: Visualizzazione e modifica dati personali, cambio password.
+
+Azioni tipiche e tutorial
+- Come creare un corso:
+  1. Accedi come docente.
+  2. Vai in home docente e clicca su "Crea corso".
+  3. Inserisci nome e descrizione, conferma.
+  4. Dopo la creazione, aggiungi capitoli e quiz.
+- Come eliminare un corso:
+  1. Accedi come docente.
+  2. In home docente, individua il corso da eliminare.
+  3. Clicca su "Elimina corso" (attenzione: l'operazione è irreversibile).
+- Come iscriversi a un corso:
+  1. Accedi come studente.
+  2. In home studente, cerca tra i corsi disponibili.
+  3. Clicca su "Iscriviti" per il corso desiderato.
+- Come svolgere un quiz:
+  1. Accedi al corso e al capitolo desiderato.
+  2. Clicca su "Quiz" e rispondi alle domande.
+  3. Visualizza il risultato e il feedback.
+- Come vedere i risultati degli esami:
+  1. Accedi come studente.
+  2. Vai nella sezione "Esami" o "Storico esami".
+  3. Visualizza i risultati dei quiz e degli esami superati.
+
+Sicurezza e limiti
+- Il chatbot non può modificare dati, iscrivere utenti, eliminare corsi o capitoli.
+- Il bot può solo fornire informazioni, tutorial, spiegazioni e guidare l'utente nei passaggi.
+- Tutte le operazioni di modifica sono riservate agli utenti autenticati con ruolo appropriato.
+
+Messaggio di benvenuto suggerito
+Ciao! Sono il bot di supporto della piattaforma VideoCorsi UNIBG. Posso guidarti passo passo nell'uso della piattaforma: chiedimi come creare corsi, iscriversi, svolgere quiz, visualizzare risultati o qualsiasi altra funzionalità! 

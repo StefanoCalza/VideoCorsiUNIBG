@@ -38,17 +38,21 @@ public class goProfile extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
+		// Salvo l'utente in sessione (già presente)
+		// Redirect su GET per evitare ERR_CACHE_MISS
+		response.sendRedirect(request.getContextPath() + "/goProfile");
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		ImmutableUser user = (ImmutableUser) session.getAttribute("user");
 		request.setAttribute("me", user);
 		if (user != null && user.getRole() == 1) {
 			request.getRequestDispatcher("WEB-INF/jsp/profilo_docente.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("WEB-INF/jsp/profilo.jsp").forward(request, response);
 		}
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	public void destroy() {
