@@ -26,12 +26,8 @@
             flex: 1;
         }
         .card {
-            transition: transform .2s;
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .card:hover {
-            transform: translateY(-5px);
         }
         .block-heading {
             padding-bottom: 40px;
@@ -114,43 +110,44 @@
         <main class="clean-block" style="margin-top: 80px;">
             <div class="container">
                 <c:if test="${param.success == '1'}">
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success mt-4" role="alert">
                         Corso convalidato con successo!
                     </div>
                 </c:if>
-                <section class="clean-block clean-info dark" style="padding: 70px;">
-                    <div class="container">
-                        <div class="block-heading">
-                            <h2>CONVALIDA CORSI</h2>
-                        </div>
-                        <c:choose>
-                            <c:when test="${not empty userchapter}">
-                                <ul>
-                                    <c:forEach items="${userchapter}" var="c">
-                                        <div class="row align-items-center">
-                                            <div class="getting-started-info">
-                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>CORSO:&nbsp;&nbsp;${c.nomecorso}</strong></p>
-                                                <p style="color: var(--bs-dark);font-size: 18px;font-family: Montserrat, sans-serif;text-align: left;"><strong>UTENTE:&nbsp;&nbsp;${c.nomeutente}</strong></p>
-                                                <form method="get" action="${pageContext.request.contextPath}/VerifyQuiz" enctype="multipart/form-data">
-                                                    <input type="hidden" name="ChapterId" value="${c.idchapter}">
-                                                    <input type="hidden" name="CourseId" value="${c.idcourse}">
-                                                    <input type="hidden" name="UserId" value="${c.iduser}">
-                                                    <button type="submit" value="Submit" class="btn btn-outline-primary btn-lg">CONVALIDA CORSO </button>
-                                                </form>
-                                                <br><br><br><br>
-                                            </div>
+                <div class="block-heading">
+                    <h2>CONVALIDA CORSI</h2>
+                </div>
+                <div class="row">
+                    <c:choose>
+                        <c:when test="${not empty userchapter}">
+                            <c:forEach items="${userchapter}" var="c">
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card shadow-sm h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-2">${c.nomecorso}</h5>
+                                            <p class="card-text text-muted mb-3">
+                                                <i class="fa fa-user"></i> ${c.nomeutente}
+                                            </p>
+                                            <form method="get" action="${pageContext.request.contextPath}/VerifyQuiz">
+                                                <input type="hidden" name="ChapterId" value="${c.idchapter}">
+                                                <input type="hidden" name="CourseId" value="${c.idcourse}">
+                                                <input type="hidden" name="UserId" value="${c.iduser}">
+                                                <button type="submit" class="btn btn-outline-primary w-100">Convalida corso</button>
+                                            </form>
                                         </div>
-                                    </c:forEach>
-                                </ul>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="alert alert-warning" role="alert">
-                                    Nessun esame da convalidare trovato o errore di caricamento dati.
+                                    </div>
                                 </div>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </section>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="col-12">
+                                <div class="alert alert-warning" role="alert">
+                                    Nessun esame da convalidare trovato
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
         </main>
     </c:when>
