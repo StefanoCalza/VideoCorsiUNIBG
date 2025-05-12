@@ -60,6 +60,11 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
+                <c:if test="${param.error == 'final_already_exists'}">
+                    <div class="alert alert-danger" role="alert">
+                        Esiste già un test finale per questo corso. Può esserci solo un capitolo con test finale per corso.
+                    </div>
+                </c:if>
                 <div class="card shadow-sm p-4">
                     <form method="get" action="${pageContext.request.contextPath}/CreateChapter" enctype="multipart/form-data">
                         <div class="mb-3">

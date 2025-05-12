@@ -256,6 +256,18 @@ public class Chapter_CourseDao {
 	 */
 	public void insertChapter(int courseId, int chapterId, String name, String video, boolean isFinal, String description)
 			throws SQLException {
+		if (isFinal) {
+			// Controllo se esiste già un capitolo finale per questo corso
+			String checkQuery = "SELECT COUNT(*) as count FROM chapter WHERE course = ? AND is_final = 1";
+			try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+				checkStmt.setInt(1, courseId);
+				try (ResultSet rs = checkStmt.executeQuery()) {
+					if (rs.next() && rs.getInt("count") > 0) {
+						throw new SQLException("Esiste già un test finale per questo corso. Può esserci solo un capitolo con test finale per corso.");
+					}
+				}
+			}
+		}
 		String query = "INSERT INTO chapter (course, chapter, name, video, is_final, description) VALUES (?,?,?,?,0,?)";
 		String query2 = "INSERT INTO chapter (course, chapter, name, is_final,description) VALUES (?,?,?,1,?)";
 

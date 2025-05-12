@@ -113,8 +113,18 @@ public class createChapter extends HttpServlet {
 			return;
 		} catch (SQLException e) {
 			TransactionManager.rollbackTransaction(connection);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error: " + e.getMessage());
-			return;
+			if (e.getMessage() != null && e.getMessage().contains("Esiste già un test finale")) {
+				// Reindirizza alla pagina di creazione capitolo con messaggio di errore
+				String redirectUrl = request.getContextPath() + "/CreateChapter?CourseId=" + request.getParameter("CourseId") +
+					"&name_course=" + request.getParameter("name_course") +
+					"&description_corse=" + request.getParameter("description_corse") +
+					"&error=final_already_exists";
+				response.sendRedirect(redirectUrl);
+				return;
+			} else {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error: " + e.getMessage());
+				return;
+			}
 		} catch (Exception e) {
 			TransactionManager.rollbackTransaction(connection);
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unexpected error: " + e.getMessage());
