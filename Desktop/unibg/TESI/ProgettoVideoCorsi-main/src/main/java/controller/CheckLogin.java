@@ -59,11 +59,13 @@ public class CheckLogin extends HttpServlet {
 				return;
 			}
 			
+			// Ricarico l'utente dal DB per avere sempre il profilo aggiornato (inclusa l'immagine)
+			ImmutableUser freshUser = userDao.getUserById(user.getId());
 			System.out.println("Login riuscito per l'utente: " + username);
 			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
+			session.setAttribute("user", freshUser);
 			
-			if (user.getRole() == 1) {
+			if (freshUser.getRole() == 1) {
 				response.sendRedirect(request.getContextPath() + "/HomeDocente");
 				return;
 			} else {

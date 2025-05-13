@@ -39,7 +39,8 @@ public class UserDAO {
 						result.getString("nome"),
 						result.getString("cognome"),
 						result.getString("email"),
-						result.getString("skillscard")
+						result.getString("skillscard"),
+						result.getString("profile_image")
 					);
 					return user;
 				}
@@ -76,5 +77,43 @@ public class UserDAO {
 			}
 		}
 		return username;
+	}
+
+	/**
+	 * Aggiorna il percorso dell'immagine di profilo per un utente
+	 */
+	public void updateProfileImage(int userId, String profileImagePath) throws SQLException {
+		String query = "UPDATE \"user\" SET profile_image = ? WHERE id = ?;";
+		try (PreparedStatement pstatement = con.prepareStatement(query)) {
+			pstatement.setString(1, profileImagePath);
+			pstatement.setInt(2, userId);
+			pstatement.executeUpdate();
+		}
+	}
+
+	/**
+	 * Restituisce l'utente dato l'id
+	 */
+	public ImmutableUser getUserById(int id) throws SQLException {
+		String query = "SELECT * FROM \"user\" WHERE id = ?";
+		try (PreparedStatement pstatement = con.prepareStatement(query)) {
+			pstatement.setInt(1, id);
+			try (ResultSet result = pstatement.executeQuery()) {
+				if (result.next()) {
+					User user = new User(
+						result.getInt("id"),
+						result.getString("username"),
+						result.getInt("role"),
+						result.getString("nome"),
+						result.getString("cognome"),
+						result.getString("email"),
+						result.getString("skillscard"),
+						result.getString("profile_image")
+					);
+					return user;
+				}
+			}
+		}
+		return null;
 	}
 }

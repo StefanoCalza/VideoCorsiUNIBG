@@ -18,6 +18,7 @@ public class ImmutableUser {
 	private final String cognome;
 	private final String email;
 	private final String skillscard;
+	private final String profileImage;
 
 	/**
 	 * Creates a new user with basic information.
@@ -28,7 +29,7 @@ public class ImmutableUser {
 	 * @throws IllegalArgumentException if any parameter is invalid
 	 */
 	public ImmutableUser(int id, String username, int role) {
-		this(id, username, role, null, null, null, null);
+		this(id, username, role, null, null, null, null, null);
 	}
 
 	/**
@@ -41,9 +42,10 @@ public class ImmutableUser {
 	 * @param cognome    The user's last name (optional)
 	 * @param email      The user's email address (optional)
 	 * @param skillscard The user's skills card identifier (optional)
+	 * @param profileImage The user's profile image (optional)
 	 * @throws IllegalArgumentException if id is not positive, username is null/empty, or role is invalid
 	 */
-	public ImmutableUser(int id, String username, int role, String name, String cognome, String email, String skillscard) {
+	public ImmutableUser(int id, String username, int role, String name, String cognome, String email, String skillscard, String profileImage) {
 		if (id <= 0) {
 			throw new IllegalArgumentException("ID must be positive");
 		}
@@ -61,6 +63,7 @@ public class ImmutableUser {
 		this.cognome = cognome != null ? cognome.trim() : null;
 		this.email = email != null ? email.trim() : null;
 		this.skillscard = skillscard != null ? skillscard.trim() : null;
+		this.profileImage = profileImage != null ? profileImage.trim() : null;
 	}
 
 	/**
@@ -113,6 +116,13 @@ public class ImmutableUser {
 	}
 
 	/**
+	 * @return The user's profile image, or null if not set
+	 */
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	/**
 	 * Compares this user with another object for equality.
 	 * Two users are considered equal if they have the same id, username, role,
 	 * and all other fields are either both null or equal.
@@ -132,7 +142,8 @@ public class ImmutableUser {
 			   (name == null ? other.name == null : name.equals(other.name)) &&
 			   (cognome == null ? other.cognome == null : cognome.equals(other.cognome)) &&
 			   (email == null ? other.email == null : email.equals(other.email)) &&
-			   (skillscard == null ? other.skillscard == null : skillscard.equals(other.skillscard));
+			   (skillscard == null ? other.skillscard == null : skillscard.equals(other.skillscard)) &&
+			   (profileImage == null ? other.profileImage == null : profileImage.equals(other.profileImage));
 	}
 
 	/**
@@ -151,6 +162,7 @@ public class ImmutableUser {
 		result = 31 * result + (cognome != null ? cognome.hashCode() : 0);
 		result = 31 * result + (email != null ? email.hashCode() : 0);
 		result = 31 * result + (skillscard != null ? skillscard.hashCode() : 0);
+		result = 31 * result + (profileImage != null ? profileImage.hashCode() : 0);
 		return result;
 	}
 
@@ -170,6 +182,7 @@ public class ImmutableUser {
 			   ", cognome='" + cognome + '\'' +
 			   ", email='" + email + '\'' +
 			   ", skillscard='" + skillscard + '\'' +
+			   ", profileImage='" + profileImage + '\'' +
 			   '}';
 	}
 }

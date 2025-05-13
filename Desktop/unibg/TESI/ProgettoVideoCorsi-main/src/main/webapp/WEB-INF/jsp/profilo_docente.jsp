@@ -67,19 +67,23 @@
 
 <main class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
-        <div class="block-heading">
+        <div class="block-heading mb-4">
             <h2>PROFILO UTENTE</h2>
         </div>
         <div class="row align-items-center">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="${pageContext.request.contextPath}/assets/img/profilo.jpg" class="img-fluid rounded-circle mb-3" style="max-width: 200px;" alt="Profilo">
+                        <img src="${not empty user.profileImage ? pageContext.request.contextPath.concat(user.profileImage) : pageContext.request.contextPath.concat('/assets/img/default_profile.png')}" alt="Immagine profilo" class="rounded-circle shadow mb-3" style="width: 180px; height: 180px; object-fit: cover; border: 3px solid #007bff;">
+                        <form id="profileImageForm" action="${pageContext.request.contextPath}/UploadProfileImage" method="post" enctype="multipart/form-data" class="mt-3">
+                            <input type="file" name="profileImage" accept="image/*" id="profileImageInput" style="display:none;" required onchange="handleProfileImageChange(event)">
+                            <button type="button" class="btn btn-outline-primary btn-lg px-4 py-2" style="font-size:1.2em;" onclick="document.getElementById('profileImageInput').click()">Cambia immagine</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="card">
+            <div class="col-md-8 d-flex align-items-center" style="min-height: 180px;">
+                <div class="card h-100 w-100 d-flex flex-column justify-content-center" style="min-height: 180px;">
                     <div class="card-body">
                         <div class="mb-4">
                             <h4 class="card-title">Informazioni Personali</h4>
@@ -87,7 +91,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <p class="mb-3"><strong>Nome:</strong> ${user.name}</p>
-                                    <p class="mb-3"><strong>Cognome:</strong> ${me.cognome}</p>
+                                    <p class="mb-3"><strong>Cognome:</strong> ${user.cognome}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3"><strong>Email:</strong> ${user.email}</p>
@@ -106,6 +110,9 @@
                                 Password modificata con successo!
                             </div>
                         </c:if>
+                        <div id="profileImageError" class="alert alert-danger text-center" role="alert" style="display:none; margin-top:10px;">
+                            L'immagine è troppo grande. Il limite massimo è 2MB.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,6 +132,20 @@
 <script src="${pageContext.request.contextPath}/assets/js/theme.js"></script>
 <script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="QMOmt8V4IC-Q9QzLK9-Zl";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+function handleProfileImageChange(event) {
+    const file = event.target.files[0];
+    const errorDiv = document.getElementById('profileImageError');
+    if (file && file.size > 2 * 1024 * 1024) {
+        errorDiv.style.display = 'block';
+        event.target.value = '';
+    } else if (file) {
+        errorDiv.style.display = 'none';
+        document.getElementById('profileImageForm').submit();
+    } else {
+        errorDiv.style.display = 'none';
+    }
+}
 </script>
 </body>
 </html> 

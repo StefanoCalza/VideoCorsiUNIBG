@@ -11,7 +11,7 @@ public class UserTest {
     @Test
     public void testImmutableUserValidation() {
         // Test valid construction
-        ImmutableUser validUser = new ImmutableUser(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123");
+        ImmutableUser validUser = new ImmutableUser(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123", null);
         assertEquals(1, validUser.getId());
         assertEquals("testuser", validUser.getUsername());
         assertEquals(2, validUser.getRole());
@@ -34,7 +34,7 @@ public class UserTest {
 
     @Test
     public void testUserSetters() {
-        User user = new User(1, "testuser", 2);
+        User user = new User(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123", null);
         
         // Test name setter
         user.setName("  John  ");
@@ -58,9 +58,9 @@ public class UserTest {
 
     @Test
     public void testEqualsAndHashCode() {
-        ImmutableUser user1 = new ImmutableUser(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123");
-        ImmutableUser user2 = new ImmutableUser(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123");
-        ImmutableUser user3 = new ImmutableUser(2, "testuser", 2, "John", "Doe", "john@example.com", "CARD123");
+        ImmutableUser user1 = new ImmutableUser(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123", null);
+        ImmutableUser user2 = new ImmutableUser(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123", null);
+        ImmutableUser user3 = new ImmutableUser(2, "testuser", 2, "John", "Doe", "john@example.com", "CARD123", null);
         
         // Test equals
         assertEquals(user1, user2);
@@ -73,7 +73,7 @@ public class UserTest {
 
     @Test
     public void testToString() {
-        User user = new User(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123");
+        User user = new User(1, "testuser", 2, "John", "Doe", "john@example.com", "CARD123", null);
         String toString = user.toString();
         
         assertTrue(toString.contains("id=1"));

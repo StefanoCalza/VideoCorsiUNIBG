@@ -20,6 +20,7 @@ public class User extends ImmutableUser {
 	private String cognome;
 	private String email;
 	private String skillscard;
+	private String profileImage;
 
 	/**
 	 * Creates a new user with basic information.
@@ -43,14 +44,16 @@ public class User extends ImmutableUser {
 	 * @param cognome    The user's last name
 	 * @param email      The user's email address
 	 * @param skillscard The user's skills card identifier
+	 * @param profileImage The user's profile image
 	 * @throws IllegalArgumentException if any required parameter is invalid (inherited from {@link ImmutableUser})
 	 */
-	public User(int id, String username, int role, String name, String cognome, String email, String skillscard) {
-		super(id, username, role, name, cognome, email, skillscard);
+	public User(int id, String username, int role, String name, String cognome, String email, String skillscard, String profileImage) {
+		super(id, username, role, name, cognome, email, skillscard, profileImage);
 		this.name = name;
 		this.cognome = cognome;
 		this.email = email;
 		this.skillscard = skillscard;
+		this.profileImage = profileImage;
 	}
 
 	@Override
@@ -122,6 +125,14 @@ public class User extends ImmutableUser {
 		this.skillscard = skillscard != null ? skillscard.trim() : null;
 	}
 
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage != null ? profileImage.trim() : null;
+	}
+
 	/**
 	 * Returns a string representation of this user.
 	 * The string contains all fields in a human-readable format.
@@ -138,6 +149,7 @@ public class User extends ImmutableUser {
 			   ", cognome='" + cognome + '\'' +
 			   ", email='" + email + '\'' +
 			   ", skillscard='" + skillscard + '\'' +
+			   ", profileImage='" + profileImage + '\'' +
 			   '}';
 	}
 
