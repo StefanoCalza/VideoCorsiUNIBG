@@ -91,7 +91,7 @@
                                     <form method="get" action="GetQuiz">
                                         <input type="hidden" name="CourseId" value="${chara.idCourse}">
                                         <input type="hidden" name="ChapterId" value="${chara.idChapter}">
-                                        <button type="submit" class="btn btn-outline-success">VAI AL QUIZ</button>
+                                        <button type="submit" class="btn btn-outline-success">VAI AL TEST</button>
                                     </form>
                                 </c:when>
                                 <c:otherwise>

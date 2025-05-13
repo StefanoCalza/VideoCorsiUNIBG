@@ -88,7 +88,7 @@
         <section class="clean-block clean-info dark" style="padding: 70px;">
             <div class="container">
                 <div class="block-heading text-center mb-5">
-                    <h2>RISULTATO QUIZ</h2>
+                    <h2>RISULTATO</h2>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6">
@@ -97,7 +97,17 @@
                                 <h5 class="card-title">Punteggio</h5>
                                 <p class="card-text">Hai risposto correttamente a ${right} domande su ${total}</p>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: ${(right/total)*100}%" aria-valuenow="${(right/total)*100}" aria-valuemin="0" aria-valuemax="100">${(right/total)*100}%</div>
+                                    <div class="progress-bar
+                                        <c:choose>
+                                            <c:when test="${(right/total) ge 0.75}">bg-success</c:when>
+                                            <c:otherwise>bg-danger</c:otherwise>
+                                        </c:choose>"
+                                        role="progressbar"
+                                        style="width: ${(right/total)*100}%"
+                                        aria-valuenow="${(right/total)*100}"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        ${(right/total)*100}%
+                                    </div>
                                 </div>
                                 <c:if test="${(right/total) lt 0.75}">
                                     <div class="alert alert-danger mt-4" role="alert">
@@ -151,7 +161,7 @@
                             <input type="hidden" name="CourseId" value="${param.CourseId}">
                             <input type="hidden" name="ChapterId" value="${param.ChapterId}">
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-outline-primary btn-lg">RIPETI IL TEST</button>
+                                <button type="submit" class="btn btn-outline-primary btn-lg">RIPETI</button>
                             </div>
                         </form>
                     </div>
@@ -159,7 +169,14 @@
                         <form method="get" action="${pageContext.request.contextPath}/ChapterController">
                             <input type="hidden" name="CourseId" value="${param.CourseId}">
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-outline-primary btn-lg">PROSSIMO CAPITOLO</button>
+                                <c:choose>
+                                    <c:when test="${is_final eq 1}">
+                                        <button type="submit" class="btn btn-outline-primary btn-lg">TORNA AL CORSO</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button type="submit" class="btn btn-outline-primary btn-lg">PROSSIMO CAPITOLO</button>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </form>
                     </div>
