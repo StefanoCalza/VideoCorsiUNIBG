@@ -73,6 +73,25 @@ public class GetCourse extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
 				return;
 			}
+
+			// Filtro: mostro solo i corsi con almeno un capitolo
+			List<ImmutableCourse> filteredCourses = new ArrayList<>();
+			for (ImmutableCourse course : courses) {
+				if (!chapterDao.getChaptersByCourseId(course.getIdCourse()).isEmpty()) {
+					filteredCourses.add(course);
+				}
+			}
+			courses = filteredCourses;
+
+			// Filtro anche per i corsi disponibili (non seguiti)
+			List<ImmutableCourse> filteredCoursesNotFollowed = new ArrayList<>();
+			for (ImmutableCourse course : coursesNotFollowed) {
+				if (!chapterDao.getChaptersByCourseId(course.getIdCourse()).isEmpty()) {
+					filteredCoursesNotFollowed.add(course);
+				}
+			}
+			coursesNotFollowed = filteredCoursesNotFollowed;
+
 			TransactionManager.commitTransaction(connection);
 		} catch (SQLException e) {
 			TransactionManager.rollbackTransaction(connection);
