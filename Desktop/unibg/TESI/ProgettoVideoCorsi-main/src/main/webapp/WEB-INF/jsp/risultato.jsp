@@ -30,9 +30,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
         .progress {
             height: 1.5rem;
             margin-top: 1rem;
@@ -102,6 +99,16 @@
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: ${(right/total)*100}%" aria-valuenow="${(right/total)*100}" aria-valuemin="0" aria-valuemax="100">${(right/total)*100}%</div>
                                 </div>
+                                <c:if test="${(right/total) lt 0.75}">
+                                    <div class="alert alert-danger mt-4" role="alert">
+                                        Non hai raggiunto il punteggio minimo del 75%. Devi ripetere il test.
+                                    </div>
+                                </c:if>
+                                <c:if test="${is_final eq 1 and (right/total) ge 0.75}">
+                                    <div class="alert alert-success mt-4" role="alert">
+                                        Corso terminato! Ora attendi la convalida da parte del docente per poter sostenere l'esame.
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>

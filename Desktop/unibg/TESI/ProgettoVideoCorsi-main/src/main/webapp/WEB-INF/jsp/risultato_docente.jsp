@@ -30,9 +30,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
         .progress {
             height: 1.5rem;
             margin-top: 1rem;
@@ -50,7 +47,7 @@
 
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo">VideoCorsiUNIBG</a>
+        <span class="navbar-brand logo">VideoCorsiUNIBG</span>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -58,7 +55,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetCourse" method="post">
+                    <form action="${pageContext.request.contextPath}/HomeDocente" method="get">
                         <input type="submit" class="btn btn-link nav-link" value="HOME">
                     </form>
                 </li>
@@ -69,16 +66,11 @@
                 </li>
                 <li class="nav-item">
                     <form action="${pageContext.request.contextPath}/goEsami" method="post">
-                        <input type="submit" class="btn btn-link nav-link" value="ESAMI">
+                        <input type="submit" class="btn btn-link nav-link" value="CONVALIDA CORSI">
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/GetPassedExam" method="GET">
-                        <input type="submit" class="btn btn-link nav-link" value="CORSI COMPLETATI">
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form action="${pageContext.request.contextPath}/logout.jsp" method="post">
+                    <form action="${pageContext.request.contextPath}/Logout" method="post">
                         <input type="submit" class="btn btn-link nav-link" value="LOGOUT">
                     </form>
                 </li>
@@ -156,7 +148,7 @@
 
 <footer class="page-footer dark mt-auto">
     <div class="footer-copyright">
-        <p>© 2023 Copyright Text</p>
+        <p>© VideoCorsiUNIBG Copyright 2025. All rights reserved.</p>
     </div>
 </footer>
 

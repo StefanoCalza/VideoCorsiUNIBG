@@ -29,9 +29,6 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
         .alert {
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }

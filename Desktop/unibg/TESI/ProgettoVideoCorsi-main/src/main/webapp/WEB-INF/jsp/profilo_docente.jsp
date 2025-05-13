@@ -100,6 +100,7 @@
                                 <button type="submit" class="btn btn-outline-primary btn-lg">Cambia Password</button>
                             </form>
                         </div>
+                        <div style="margin-bottom: 18px;"></div>
                         <c:if test="${param.success == '1'}">
                             <div class="alert alert-success text-center" role="alert">
                                 Password modificata con successo!

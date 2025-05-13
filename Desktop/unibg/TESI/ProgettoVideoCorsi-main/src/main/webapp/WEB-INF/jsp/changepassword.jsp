@@ -122,6 +122,7 @@
                         <div class="d-grid gap-2 mb-3">
                             <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase">CAMBIA PASSWORD</button>
                         </div>
+                        <div style="margin-bottom: 12px;"></div>
                         <c:if test="${not empty errorMsg}">
                             <div class="alert alert-danger text-center">${errorMsg}</div>
                         </c:if>

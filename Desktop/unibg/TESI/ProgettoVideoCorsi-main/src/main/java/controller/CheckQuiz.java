@@ -133,6 +133,7 @@ public class CheckQuiz extends HttpServlet {
 			request.setAttribute("total", questions.size());
 			request.setAttribute("score", score);
 			request.setAttribute("wrongAnswers", wrongAnswers);
+			request.setAttribute("is_final", isFinal);
 			request.getRequestDispatcher("/WEB-INF/jsp/risultato.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {
