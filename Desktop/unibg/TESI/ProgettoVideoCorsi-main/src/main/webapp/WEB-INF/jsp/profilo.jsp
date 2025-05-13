@@ -78,7 +78,7 @@
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="${not empty user.profileImage ? pageContext.request.contextPath.concat(user.profileImage) : pageContext.request.contextPath.concat('/assets/img/default_profile.png')}" alt="Immagine profilo" class="rounded-circle shadow mb-3" style="width: 180px; height: 180px; object-fit: cover; border: 3px solid #007bff;">
+                        <img src="${not empty user.profileImage ? pageContext.request.contextPath.concat(user.profileImage) : pageContext.request.contextPath.concat('/assets/img/profilo.jpg')}" alt="Immagine profilo" class="rounded-circle shadow mb-3" style="width: 180px; height: 180px; object-fit: cover; border: 3px solid #007bff;">
                         <form id="profileImageForm" action="${pageContext.request.contextPath}/UploadProfileImage" method="post" enctype="multipart/form-data" class="mt-3">
                             <input type="file" name="profileImage" accept="image/*" id="profileImageInput" style="display:none;" required onchange="handleProfileImageChange(event)">
                             <button type="button" class="btn btn-outline-primary btn-lg px-4 py-2" style="font-size:1.2em;" onclick="document.getElementById('profileImageInput').click()">Cambia immagine</button>
