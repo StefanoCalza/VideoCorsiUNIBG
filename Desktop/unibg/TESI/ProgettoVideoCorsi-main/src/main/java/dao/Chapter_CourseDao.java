@@ -338,12 +338,14 @@ public class Chapter_CourseDao {
 	 */
 	public List<ImmutableCourse> exam_passed(int id_user) throws SQLException {
 		List<ImmutableCourse> courses_passed = new ArrayList<>();
-		String query = "SELECT c.idcourses, c.name, c.description FROM courses c WHERE NOT EXISTS ("
-			+ "SELECT 1 FROM chapter ch "
-			+ "LEFT JOIN iscrizioni i ON i.idCourse = ch.course AND i.idChapter = ch.chapter AND i.id_User = ? "
-			+ "WHERE ch.course = c.idcourses AND ((ch.is_final = 0 AND (i.passed IS NULL OR i.passed <> 2)) "
-			+ "OR (ch.is_final = 1 AND (i.passed IS NULL OR i.passed <> 2)))"
-			+ ")";
+		String query = "SELECT c.idcourses, c.name, c.description FROM courses c WHERE " +
+				"EXISTS (SELECT 1 FROM chapter ch2 WHERE ch2.course = c.idcourses) AND " +
+				"NOT EXISTS (" +
+				"SELECT 1 FROM chapter ch " +
+				"LEFT JOIN iscrizioni i ON i.idCourse = ch.course AND i.idChapter = ch.chapter AND i.id_User = ? " +
+				"WHERE ch.course = c.idcourses AND ((ch.is_final = 0 AND (i.passed IS NULL OR i.passed <> 2)) " +
+				"OR (ch.is_final = 1 AND (i.passed IS NULL OR i.passed <> 2)))" +
+				")";
 		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
 			pstatement.setInt(1, id_user);
 			try (ResultSet result = pstatement.executeQuery()) {
