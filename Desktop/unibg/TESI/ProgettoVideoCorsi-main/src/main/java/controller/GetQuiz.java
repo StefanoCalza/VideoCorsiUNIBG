@@ -64,8 +64,19 @@ public class GetQuiz extends HttpServlet {
 			int chapterId = Integer.parseInt(chapterIdStr);
 			
 			QuizDAO quizDao = new QuizDAO(connection);
+			Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
+
+			// Verifica se il corso è già completato dallo studente
+			boolean isCoursePassed = false;
+			List<immutablebeans.ImmutableCourse> passedCourses = chapterDao.exam_passed(user.getId());
+			for (immutablebeans.ImmutableCourse c : passedCourses) {
+				if (c.getIdCourse() == courseId) {
+					isCoursePassed = true;
+					break;
+				}
+			}
+
 			List<ImmutableQuiz> questions = quizDao.quiz_by_chapter_and_course(courseId, chapterId);
-			
 			if (questions == null || questions.isEmpty()) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "No quiz found for this chapter");
 				return;
@@ -88,7 +99,7 @@ public class GetQuiz extends HttpServlet {
 			Collections.shuffle(questions);
 
 			// Capitolo 1: accesso sempre consentito
-			if (chapterId > 1) {
+			if (!isCoursePassed && chapterId > 1) {
 				int previousChapterStatus = quizDao.quiz_passed(user.getId(), courseId, chapterId - 1);
 				if (previousChapterStatus != 2) {
 					String redirectUrl = request.getContextPath() + "/ChapterController?CourseId=" + courseId + "&errorMessage=" + java.net.URLEncoder.encode("Devi prima superare il quiz del capitolo precedente per accedere a questo quiz.", "UTF-8");

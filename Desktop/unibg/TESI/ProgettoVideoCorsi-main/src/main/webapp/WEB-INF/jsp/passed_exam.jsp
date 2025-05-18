@@ -121,6 +121,10 @@
                                         <i class="fa fa-check-circle text-success fa-3x"></i>
                                     </div>
                                     <p class="card-text">Hai superato con successo questo corso!</p>
+                                    <form action="${pageContext.request.contextPath}/ChapterController" method="get" class="mt-2">
+                                        <input type="hidden" name="CourseId" value="${course.idCourse}" />
+                                        <button type="submit" class="btn btn-outline-primary">VAI AL CORSO</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

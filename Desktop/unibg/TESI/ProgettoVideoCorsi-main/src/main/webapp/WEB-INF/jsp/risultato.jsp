@@ -125,7 +125,7 @@
                                         Non hai raggiunto il punteggio minimo del 75%. Devi ripetere il test.
                                     </div>
                                 </c:if>
-                                <c:if test="${is_final eq 1 and (right/total) ge 0.75}">
+                                <c:if test="${is_final eq 1 and (right/total) ge 0.75 and not isCoursePassed}">
                                     <div class="alert alert-success mt-4" role="alert">
                                         Corso terminato! Ora attendi la convalida da parte del docente per poter sostenere l'esame.
                                     </div>

@@ -68,6 +68,8 @@ public class GetCourse extends HttpServlet {
 			TransactionManager.beginTransaction(connection);
 			courses = chapterDao.getCoursesByUserId(user.getId());
 			coursesNotFollowed = chapterDao.getCoursesNotFollowedByUserId(user.getId());
+			// Filtro i corsi completati
+			List<ImmutableCourse> passedCourses = chapterDao.exam_passed(user.getId());
 			if (courses == null || coursesNotFollowed == null) {
 				TransactionManager.rollbackTransaction(connection);
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource not found");
@@ -75,10 +77,14 @@ public class GetCourse extends HttpServlet {
 			}
 
 			// Filtro: mostro solo i corsi con almeno un capitolo
+			List<Integer> passedIds = new ArrayList<>();
+			for (ImmutableCourse c : passedCourses) {
+				passedIds.add(c.getIdCourse());
+			}
 			List<ImmutableCourse> filteredCourses = new ArrayList<>();
-			for (ImmutableCourse course : courses) {
-				if (!chapterDao.getChaptersByCourseId(course.getIdCourse()).isEmpty()) {
-					filteredCourses.add(course);
+			for (ImmutableCourse c : courses) {
+				if (!passedIds.contains(c.getIdCourse())) {
+					filteredCourses.add(c);
 				}
 			}
 			courses = filteredCourses;

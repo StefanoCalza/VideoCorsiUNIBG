@@ -73,6 +73,16 @@ public class CheckQuiz extends HttpServlet {
 			QuizDAO quizDao = new QuizDAO(connection);
 			Chapter_CourseDao chapterDao = new Chapter_CourseDao(connection);
 
+			// Verifica se il corso è già completato dallo studente
+			boolean isCoursePassed = false;
+			List<immutablebeans.ImmutableCourse> passedCourses = chapterDao.exam_passed(user.getId());
+			for (immutablebeans.ImmutableCourse c : passedCourses) {
+				if (c.getIdCourse() == courseId) {
+					isCoursePassed = true;
+					break;
+				}
+			}
+
 			List<ImmutableQuiz> questions = quizDao.quiz_by_chapter_and_course(courseId, chapterId);
 			if (questions == null || questions.isEmpty()) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "No quiz found for this chapter");
@@ -99,8 +109,8 @@ public class CheckQuiz extends HttpServlet {
 			for (ImmutableQuiz quiz : questions) {
 				String answer = request.getParameter(quiz.getIds());
 				int rispostaData = (answer != null) ? Integer.parseInt(answer) : -1;
-				// Salva la risposta data solo se quiz finale
-				if (isFinal == 1) {
+				// Salva la risposta data solo se quiz finale e il corso NON è già completato
+				if (isFinal == 1 && !isCoursePassed) {
 					quizDao.saveQuizAnswer(user.getId(), courseId, chapterId, quiz.getIdQuiz(), rispostaData);
 				}
 				if (rispostaData == quiz.getRisposta()) {
@@ -119,14 +129,16 @@ public class CheckQuiz extends HttpServlet {
 			}
 
 			float score = (float) right / questions.size();
-			if (score >= 0.75) {
-				if (isFinal == 1) {
-					quizDao.setpassed(user.getId(), courseId, chapterId); // in attesa di convalida docente
+			if (!isCoursePassed) {
+				if (score >= 0.75) {
+					if (isFinal == 1) {
+						quizDao.setpassed(user.getId(), courseId, chapterId); // in attesa di convalida docente
+					} else {
+						quizDao.setverifyed(user.getId(), courseId, chapterId); // direttamente superato
+					}
 				} else {
-					quizDao.setverifyed(user.getId(), courseId, chapterId); // direttamente superato
+					quizDao.setnotpassed(user.getId(), courseId, chapterId); // non passato
 				}
-			} else {
-				quizDao.setnotpassed(user.getId(), courseId, chapterId); // non passato
 			}
 
 			request.setAttribute("right", right);
@@ -134,6 +146,7 @@ public class CheckQuiz extends HttpServlet {
 			request.setAttribute("score", score);
 			request.setAttribute("wrongAnswers", wrongAnswers);
 			request.setAttribute("is_final", isFinal);
+			request.setAttribute("isCoursePassed", isCoursePassed);
 			request.getRequestDispatcher("/WEB-INF/jsp/risultato.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {
