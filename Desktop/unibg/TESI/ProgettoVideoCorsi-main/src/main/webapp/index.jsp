@@ -59,14 +59,14 @@
                         <div class="getting-started-info p-4" style="background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                             <p style="font-size: 1.1rem; margin-bottom: 0;">
                                 La certificazione ICDL è composta da 7 moduli:<br>
-                                <span class="modulo-title">ICDL Base:</span> copre le competenze digitali fondamentali e comprende quattro moduli:
+                                <span class="modulo-title">ICDL Base:</span> copre le competenze digitali fondamentali:
                                 <ul style="margin-bottom: 0.5rem;">
                                     <li>Computer Essentials (concetti di base e uso del computer)</li>
                                     <li>Online Essentials (navigazione e comunicazione su internet)</li>
                                     <li>Word Processing (videoscrittura)</li>
                                     <li>Spreadsheets (fogli di calcolo)</li>
                                 </ul>
-                                <span class="modulo-title">ICDL Standard:</span> copre competenze più avanzate o specifiche, come:
+                                <span class="modulo-title">ICDL Standard:</span> copre competenze più avanzate e specifiche:
                                 <ul style="margin-bottom: 0;">
                                     <li>Presentation (creazione di presentazioni)</li>
                                     <li>IT Security (sicurezza informatica)</li>

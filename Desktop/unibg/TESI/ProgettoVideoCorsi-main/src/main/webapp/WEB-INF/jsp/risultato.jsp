@@ -95,7 +95,18 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <h5 class="card-title">Punteggio</h5>
-                                <p class="card-text">Hai risposto correttamente a ${right} domande su ${total}</p>
+                                <p class="card-text">
+                                    Hai risposto correttamente a ${right} 
+                                    <c:choose>
+                                        <c:when test="${right == 1}">domanda</c:when>
+                                        <c:otherwise>domande</c:otherwise>
+                                    </c:choose>
+                                    su ${total}
+                                    <c:choose>
+                                        <c:when test="${total == 1}">domanda</c:when>
+                                        <c:otherwise>domande</c:otherwise>
+                                    </c:choose>
+                                </p>
                                 <div class="progress">
                                     <div class="progress-bar
                                         <c:choose>
@@ -132,7 +143,7 @@
                                     <c:forEach var="wa" items="${wrongAnswers}">
                                         <li class="list-group-item">
                                             <strong>Domanda:</strong> ${wa.question}<br/>
-                                            <strong>Le risposte date:</strong>
+                                            <strong>Risposta data:</strong>
                                             <ul>
                                                 <li <c:if test="${wa.given == 1}">style='color:red;font-weight:bold;'</c:if>>${wa.first}</li>
                                                 <li <c:if test="${wa.given == 2}">style='color:red;font-weight:bold;'</c:if>>${wa.second}</li>
