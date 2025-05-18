@@ -71,6 +71,19 @@ public class GetQuiz extends HttpServlet {
 				return;
 			}
 
+			// Recupero se il capitolo è finale
+			int isFinal = 0;
+			String query = "SELECT is_final FROM chapter WHERE course = ? AND chapter = ?";
+			try (java.sql.PreparedStatement pstatement = connection.prepareStatement(query)) {
+				pstatement.setInt(1, courseId);
+				pstatement.setInt(2, chapterId);
+				try (java.sql.ResultSet result = pstatement.executeQuery()) {
+					if (result.next()) {
+						isFinal = result.getInt("is_final");
+					}
+				}
+			}
+
 			// Randomizza l'ordine delle domande
 			Collections.shuffle(questions);
 
@@ -85,6 +98,7 @@ public class GetQuiz extends HttpServlet {
 			}
 
 			request.setAttribute("quiz", questions);
+			request.setAttribute("is_final", isFinal);
 			request.getRequestDispatcher("/WEB-INF/jsp/quiz.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {

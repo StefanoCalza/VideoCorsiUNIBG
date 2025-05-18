@@ -25,7 +25,14 @@
 <section class="clean-block clean-info dark" style="padding: 70px;">
     <div class="container">
         <div class="block-heading">
-            <h2>Quiz</h2>
+            <c:choose>
+                <c:when test="${is_final == 1}">
+                    <h2>TEST FINALE</h2>
+                </c:when>
+                <c:otherwise>
+                    <h2>Quiz</h2>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
