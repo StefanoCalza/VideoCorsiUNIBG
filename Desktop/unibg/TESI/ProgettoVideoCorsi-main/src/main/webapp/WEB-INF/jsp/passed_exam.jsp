@@ -107,7 +107,7 @@
                     <div class="col-md-8">
                         <div class="alert alert-info text-center" role="alert">
                             <h4 class="alert-heading mb-3">Nessun corso completato</h4>
-                            <p class="mb-0">Non hai ancora superato nessun corso. Continua a studiare e completare i quiz finali per vedere qui i tuoi successi!</p>
+                            <p class="mb-0">Continua a studiare, completa i quiz alla fine di ogni capitolo e il test finale per vedere qui i tuoi successi.</p>
                         </div>
                     </div>
                 </c:when>
