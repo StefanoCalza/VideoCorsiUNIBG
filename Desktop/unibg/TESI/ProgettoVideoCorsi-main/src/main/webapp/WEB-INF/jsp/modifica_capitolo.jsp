@@ -70,12 +70,12 @@
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isFinal" value="1" id="isFinal" <c:if test="${chapter.isFinal == 1}">checked</c:if>>
-                                <label class="form-check-label" for="isFinal">Quiz finale?</label>
+                                <label class="form-check-label" for="isFinal">Test finale?</label>
                             </div>
                         </div>
                         <hr class="my-4">
                         <div class="block-heading text-center mb-3">
-                            <h3 class="fw-bold">MODIFICA QUIZ</h3>
+                            <h3 class="fw-bold">MODIFICA DOMANDE</h3>
                         </div>
                         <div class="row">
                             <c:if test="${empty quizList}">

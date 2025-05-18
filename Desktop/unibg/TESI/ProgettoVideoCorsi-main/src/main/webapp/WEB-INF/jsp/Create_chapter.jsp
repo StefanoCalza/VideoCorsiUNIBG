@@ -84,16 +84,16 @@
                         <input type="hidden" name="name_course" value="${name_course}">
                         <hr class="my-4">
                         <div class="block-heading text-center mb-3">
-                            <h3 class="fw-bold">CREA QUIZ/ESAME</h3>
+                            <h3 class="fw-bold">CREA QUIZ O TEST FINALE</h3>
                         </div>
                         <div class="mb-4 text-center">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="isfinal" id="finale" value="1">
-                                <label class="form-check-label" for="finale">Esame Finale</label>
-                            </div>
-                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="isfinal" id="quiz" value="0">
                                 <label class="form-check-label" for="quiz">Quiz</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isfinal" id="finale" value="1">
+                                <label class="form-check-label" for="finale">Test finale</label>
                             </div>
                         </div>
                         <div class="row">

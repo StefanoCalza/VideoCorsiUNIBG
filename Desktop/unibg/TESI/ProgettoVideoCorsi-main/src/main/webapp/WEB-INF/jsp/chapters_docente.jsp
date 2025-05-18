@@ -76,7 +76,7 @@
                                             <p class="card-text text-muted">${chapter.description}</p>
                                             <c:if test="${chapter.isFinal}">
                                                 <span class="badge bg-warning text-dark">
-                                                    <i class="fas fa-star"></i> Quiz Finale
+                                                    <i class="fas fa-star"></i> Test Finale
                                                 </span>
                                             </c:if>
                                         </div>

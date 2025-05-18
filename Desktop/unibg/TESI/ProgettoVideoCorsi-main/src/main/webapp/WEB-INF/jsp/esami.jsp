@@ -142,7 +142,7 @@
                         <c:otherwise>
                             <div class="col-12">
                                 <div class="alert alert-warning" role="alert">
-                                    Nessun esame da convalidare trovato
+                                    Nessun corso da convalidare trovato.
                                 </div>
                             </div>
                         </c:otherwise>
