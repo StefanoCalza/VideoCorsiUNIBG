@@ -26,6 +26,22 @@
         .page-footer {
             flex-shrink: 0;
         }
+        .profile-row {
+            display: flex;
+            align-items: stretch;
+        }
+        .profile-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .profile-info-body {
+            padding: 2rem 2.5rem 2rem 2.5rem;
+            width: 100%;
+            text-align: left;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -74,10 +90,10 @@
         <div class="block-heading mb-4">
             <h2>PROFILO UTENTE</h2>
         </div>
-        <div class="row align-items-center">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
+        <div class="row align-items-stretch profile-row" style="min-height: 100%;">
+            <div class="col-md-4 d-flex align-items-stretch align-items-center justify-content-center">
+                <div class="card mb-4 profile-card w-100 h-100">
+                    <div class="card-body text-center d-flex flex-column justify-content-center align-items-center h-100">
                         <img src="${not empty user.profileImage ? pageContext.request.contextPath.concat(user.profileImage) : pageContext.request.contextPath.concat('/assets/img/profilo_2.jpg')}" alt="Immagine profilo" class="rounded-circle shadow mb-2" style="width: 180px; height: 180px; object-fit: cover; border: 3px solid #ccc;">
                         <form id="profileImageForm" action="${pageContext.request.contextPath}/UploadProfileImage" method="post" enctype="multipart/form-data" class="mt-3">
                             <input type="file" name="profileImage" accept="image/*" id="profileImageInput" style="display:none;" required onchange="handleProfileImageChange(event)">
@@ -86,9 +102,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 d-flex align-items-center" style="min-height: 180px;">
-                <div class="card h-100 w-100 d-flex flex-column justify-content-center" style="min-height: 180px;">
-                    <div class="card-body">
+            <div class="col-md-8 d-flex align-items-stretch">
+                <div class="card profile-card w-100 h-100">
+                    <div class="profile-info-body">
                         <div class="mb-4">
                             <h4 class="card-title">Informazioni Personali</h4>
                             <hr>
@@ -104,7 +120,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <form action="${pageContext.request.contextPath}/ChangePassword" method="get">
+                            <form action="${pageContext.request.contextPath}/ChangePassword" method="post">
                                 <button type="submit" class="btn btn-outline-primary btn-lg">Cambia Password</button>
                             </form>
                         </div>
