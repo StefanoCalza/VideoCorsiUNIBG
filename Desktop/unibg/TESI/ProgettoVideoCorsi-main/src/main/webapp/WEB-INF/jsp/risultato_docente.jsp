@@ -83,7 +83,7 @@
         <section class="clean-block clean-info dark" style="padding: 70px;">
             <div class="container">
                 <div class="block-heading text-center mb-5">
-                    <h2>RISULTATO QUIZ</h2>
+                    <h2>RISULTATO</h2>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6">
